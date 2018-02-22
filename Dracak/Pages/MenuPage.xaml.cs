@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dracak.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,17 +17,28 @@ using System.Windows.Shapes;
 namespace Dracak
 {
     /// <summary>
-    /// Interakční logika pro MainWindow.xaml
+    /// Interakční logika pro MainGame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuPage : Page
     {
-        public MainWindow()
+        public MenuPage()
         {
             InitializeComponent();
         }
-        private void Main_Initialized(object sender, EventArgs e)
+
+        private void Click_NewGame(object sender, RoutedEventArgs e)
         {
-            Main.NavigationService.Navigate(new MenuPage());
+            this.NavigationService.Navigate(new StoryPage());
+        }
+
+        private void Click_ContinueGame(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Click_ExitGame(object sender, RoutedEventArgs e)
+        {
+           Application.Current.Shutdown();
         }
     }
 }

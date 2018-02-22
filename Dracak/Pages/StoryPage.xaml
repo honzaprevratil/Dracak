@@ -1,0 +1,35 @@
+﻿<Page x:Class="Dracak.Pages.StoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Dracak="clr-namespace:Dracak"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dracak.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="StoryPage">
+
+    <Grid Background="Black">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image x:Name="StoryImage" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Stretch="UniformToFill" HorizontalAlignment="Center" Source="/Dracak;component/Images/shipstorm.jpg"/>
+        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="#7FA49C15"/>
+
+        <Label x:Name="StoryHeader" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Osudová plavba"/>
+        <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Grid.ColumnSpan="2" Margin="130,0" Padding="20,10" Style="{StaticResource QuidQuoFont}" Foreground="Black" FontSize="36"  TextWrapping="Wrap" TextAlignment="Left" Text=""/>
+        <Button Click="Click_Skip" Panel.ZIndex="3" Grid.Column="0" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" Margin="150,0,0,0" HorizontalAlignment="Left" Height="60" Width="220">
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Přeskočit"/>
+        </Button>
+        <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="1" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0,0,150,0" HorizontalAlignment="Right" Height="60" Width="220" >
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" />
+        </Button>
+    </Grid>
+</Page>

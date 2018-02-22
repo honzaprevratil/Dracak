@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dracak.Classes.Locations;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,18 @@ namespace Dracak
     /// </summary>
     public partial class App : Application
     {
+        private static GameLocations _GameLocations;
+
+        public static GameLocations GameLocations
+        {
+            get
+            {
+                if (_GameLocations == null)
+                {
+                    _GameLocations = new GameLocations();
+                }
+                return _GameLocations;
+            }
+        }
     }
 }

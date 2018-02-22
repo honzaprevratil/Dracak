@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -48,12 +54,61 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.15\lib\net\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Items\AItem.cs" />
+    <Compile Include="Classes\Locations\Creature.cs" />
+    <Compile Include="Classes\Items\Armor.cs" />
+    <Compile Include="Classes\Items\ItemInfo.cs" />
+    <Compile Include="Classes\Items\Weapon.cs" />
+    <Compile Include="Classes\Locations\GameLocations.cs" />
+    <Compile Include="Classes\Locations\Location.cs" />
+    <Compile Include="Classes\Items\Material.cs" />
+    <Compile Include="Classes\Items\Tool.cs" />
+    <Compile Include="Pages\GameFrames\SearchFrame.xaml.cs">
+      <DependentUpon>SearchFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameFrames\MoveFrame.xaml.cs">
+      <DependentUpon>MoveFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameFrames\Actions.xaml.cs">
+      <DependentUpon>Actions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\SlowWriter.cs" />
+    <Page Include="Pages\GameFrames\SearchFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameFrames\MoveFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameFrames\Actions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -61,6 +116,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Pages\StoryPage.xaml.cs">
+      <DependentUpon>StoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -85,6 +146,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Connie-Regular.ttf" />
+    <Resource Include="Fonts\Hothead-Regular.ttf" />
+    <Resource Include="Fonts\QuidProQuo.ttf" />
+    <Resource Include="Fonts\Bulgaria-Moderna-V3.otf" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +160,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flame.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\shipstorm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\castaway.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\beach1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pergamen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
