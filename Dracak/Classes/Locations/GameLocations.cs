@@ -1,37 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Dracak.Classes.Locations
 {
-    public class GameLocations : INotifyPropertyChanged
+    public class GameLocations
     {
         public Location[] Locations = new Location[10];
         public Dictionary<int, string> LocationsDict = new Dictionary<int, string>();
-        private int LocationId;
-
-        public int ActualId
-        {
-            get { return LocationId; }
-            set
-            {
-                LocationId = value;
-                OnPropertyChanged("ActualId");
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
+        public int ActualId { get; set; } = 1;
 
         public void FillLocations()
         {
