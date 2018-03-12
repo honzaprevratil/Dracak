@@ -1,4 +1,6 @@
-﻿using Dracak.Classes.Locations;
+﻿using Dracak.Classes;
+using Dracak.Classes.Creatures;
+using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,17 +16,56 @@ namespace Dracak
     /// </summary>
     public partial class App : Application
     {
-        private static GameLocations _GameLocations;
+        private static GameActions _GameActions;
 
-        public static GameLocations GameLocations
+        public static GameActions GameActions
         {
             get
             {
-                if (_GameLocations == null)
+                if (_GameActions == null)
                 {
-                    _GameLocations = new GameLocations();
+                    _GameActions = new GameActions();
                 }
-                return _GameLocations;
+                return _GameActions;
+            }
+        }
+        private static PlayerViewModel _PlayerViewModel;
+
+        public static PlayerViewModel PlayerViewModel
+        {
+            get
+            {
+                if (_PlayerViewModel == null)
+                {
+                    _PlayerViewModel = new PlayerViewModel();
+                }
+                return _PlayerViewModel;
+            }
+        }
+        private static LocationViewModel _LocationViewModel;
+
+        public static LocationViewModel LocationViewModel
+        {
+            get
+            {
+                if (_LocationViewModel == null)
+                {
+                    _LocationViewModel = new LocationViewModel();
+                }
+                return _LocationViewModel;
+            }
+        }
+
+        private static SlowWriter _SlowWriter;
+        public static SlowWriter SlowWriter
+        {
+            get
+            {
+                if (_SlowWriter == null)
+                {
+                    _SlowWriter = new SlowWriter();
+                }
+                return _SlowWriter;
             }
         }
     }

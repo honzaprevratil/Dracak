@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Dracak.Classes.Locations
 {
     public class GameLocations
     {
+        /* 
+         * Z TOHODLE UDĚLAT DATABÁZI (DBhelper)
+         */
         public Location[] Locations = new Location[10];
         public Dictionary<int, string> LocationsDict = new Dictionary<int, string>();
-        public int ActualId { get; set; } = 1;
 
         public void FillLocations()
         {
@@ -40,7 +44,6 @@ namespace Dracak.Classes.Locations
             };
 
             LocationsDict.Add(3, "Severní les");
-
         }
     }
 }

@@ -23,17 +23,17 @@
         </Grid.ColumnDefinitions>
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Prohledat"/>
-        <Button ToolTip="Akce: 1h, Energie: 1" Click="Button_Click_1" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="140" >
+        <Button ToolTip="Akce: 1h, Energie: 1" Click="Click_Fast" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="140" >
             <!-- &#x0a;Nejpomalejší způsob přesunu do jiné&#x0a;lokace, který je nejméně náročný. -->
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Rychle" />
         </Button>
 
-        <Button ToolTip="Akce: 3h, Energie: 3" Click="Button_Click_2" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="170" >
+        <Button ToolTip="Akce: 3h, Energie: 3" Click="Click_Slow" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="170" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Důkladně" />
         </Button>
 
-        <Button Click="Button_Click_6" Grid.Column="1" Grid.Row="3" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="125" >
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Zpět" />
+        <Button Click="Click_GoBack" Grid.Column="1" Grid.Row="3" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="125" >
+            <Label Foreground="#FFBF0303" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Zpět" />
         </Button>
     </Grid>
 </Page>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dracak.Classes.Creatures;
+using Dracak.Classes.Locations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,35 +26,21 @@ namespace Dracak.Pages
         {
             InitializeComponent();
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Click_Fast(object sender, RoutedEventArgs e)
         {
-
+            App.GameActions.Search(SearchOptions.FastSearch);
+            this.NavigationService.GoBack();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Click_Slow(object sender, RoutedEventArgs e)
         {
-
+            App.GameActions.Search(SearchOptions.SlowSearch);
+            this.NavigationService.GoBack();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_6(object sender, RoutedEventArgs e)
+        private void Click_GoBack(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
-
         }
     }
 }

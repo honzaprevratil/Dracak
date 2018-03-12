@@ -20,8 +20,8 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="StoryImage" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Stretch="UniformToFill" HorizontalAlignment="Center" Source="/Dracak;component/Images/beach1.png"/>
-        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#4CA49C15"/>
+        <Image x:Name="StoryImage" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Stretch="UniformToFill" HorizontalAlignment="Center" Source="/Dracak;component/Images/Locations/severni-les.jpg"/>
+        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#66A49C15"/>
 
         <Label x:Name="StoryHeader" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Severní Pláž"/>
 
@@ -39,15 +39,50 @@
             <Frame x:Name="GameFrame" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" Initialized="GameFrame_Initialized"/>
 
         </Grid>
+        <Grid Panel.ZIndex="3" Grid.Column="0" Grid.Row="2">
 
-        <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="0" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="220">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" />
-        </Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Button Click="Click_Menu" Panel.ZIndex="3" Grid.Column="1" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="240">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Hlavní menu" />
-        </Button>
-        <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Padding="30,15" Style="{StaticResource QuidQuoFont}" Foreground="Black" FontSize="36"  TextWrapping="Wrap" TextAlignment="Left" Text=""/>
+
+            <Button Click="Click_Menu" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="240">
+                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Hlavní menu" />
+            </Button>
+
+            <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="220">
+                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" />
+            </Button>
+
+        </Grid>
+
+
+        <Grid Panel.ZIndex="3" Grid.Column="1" Grid.Row="2" Margin="15,0,18,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.4*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ProgressBar x:Name="HealthBar" Foreground="#FF0A9129" Background="#7FFFF7F0" BorderBrush="#FF0A9129" BorderThickness="5" Panel.ZIndex="4" Height="25"  Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="100" Value="75" Width="267" HorizontalAlignment="Right" ToolTip="Životy" />
+            <ProgressBar x:Name="EnergyBar" Foreground="#FF91910A" Background="#7FF0F8FF" BorderBrush="#FF91910A" BorderThickness="2" Panel.ZIndex="4" Height="12"  Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="100" Value="21" Width="227" HorizontalAlignment="Right" ToolTip="Energie" />
+            <ProgressBar x:Name="HungerBar" Foreground="#FF910A0A" Background="#7FF0F8FF" BorderBrush="#FF910A0A" BorderThickness="2" Panel.ZIndex="4" Height="12"  Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="100" Value="60" Width="227" HorizontalAlignment="Right" ToolTip="Hlad" />
+            <ProgressBar x:Name="ThirstBar" Foreground="#FF0A5491" Background="#7FF0F8FF" BorderBrush="#FF0A5491" BorderThickness="2" Panel.ZIndex="4" Height="12"  Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="100" Value="68" Width="227" HorizontalAlignment="Right" ToolTip="Žízeň" />
+
+        </Grid>
+
+
+
+
+        <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Padding="30,15" Style="{StaticResource QuidQuoFont}" Foreground="Black" FontSize="36"  TextWrapping="Wrap" TextAlignment="Left" Text="Stojíš na severním moři"/>
 
     </Grid>
 </Page>

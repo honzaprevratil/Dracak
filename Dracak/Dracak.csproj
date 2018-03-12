@@ -13,6 +13,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,6 +42,27 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\netstandard1.1\SQLite-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteNetExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLiteNetExtensions.2.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\net45\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.5\lib\net45\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.net45.1.1.5\lib\net45\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -63,28 +86,73 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Creatures\Player.cs" />
+    <Compile Include="Classes\Creatures\PlayerViewModel.cs" />
+    <Compile Include="Classes\Creatures\PrimaryStats.cs" />
+    <Compile Include="Classes\DB\ATable.cs" />
+    <Compile Include="Classes\DB\FileHelper.cs" />
+    <Compile Include="Classes\GameActions.cs" />
     <Compile Include="Classes\Items\AItem.cs" />
-    <Compile Include="Classes\Locations\Creature.cs" />
+    <Compile Include="Classes\Creatures\Creature.cs" />
     <Compile Include="Classes\Items\Armor.cs" />
+    <Compile Include="Classes\Creatures\Inventory.cs" />
     <Compile Include="Classes\Items\ItemInfo.cs" />
     <Compile Include="Classes\Items\Weapon.cs" />
-    <Compile Include="Classes\Locations\GameLocations.cs" />
+    <Compile Include="Classes\Locations\Actions.cs" />
+    <Compile Include="Classes\Locations\LocationViewModel.cs" />
+    <Compile Include="Classes\DB\DBhelper.cs" />
     <Compile Include="Classes\Locations\Location.cs" />
-    <Compile Include="Classes\Items\Material.cs" />
-    <Compile Include="Classes\Items\Tool.cs" />
+    <Compile Include="Classes\Items\Consumable.cs" />
+    <Compile Include="Classes\Locations\LocationBind.cs" />
+    <Compile Include="Classes\Locations\ActionEnums.cs" />
+    <Compile Include="Pages\GameFrames\InventorySummaryFrame.xaml.cs">
+      <DependentUpon>InventorySummaryFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameFrames\CharacterFrame.xaml.cs">
+      <DependentUpon>CharacterFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameFrames\ItemListFrame.xaml.cs">
+      <DependentUpon>ItemListFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameFrames\SleepFrame.xaml.cs">
+      <DependentUpon>SleepFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameFrames\MoveFrameSelect.xaml.cs">
+      <DependentUpon>MoveFrameSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GameFrames\SearchFrame.xaml.cs">
       <DependentUpon>SearchFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GameFrames\MoveFrame.xaml.cs">
       <DependentUpon>MoveFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GameFrames\Actions.xaml.cs">
-      <DependentUpon>Actions.xaml</DependentUpon>
+    <Compile Include="Pages\GameFrames\ActionsFrame.xaml.cs">
+      <DependentUpon>ActionsFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\SlowWriter.cs" />
+    <Page Include="Pages\GameFrames\InventorySummaryFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameFrames\CharacterFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameFrames\ItemListFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameFrames\SleepFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameFrames\MoveFrameSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\GameFrames\SearchFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,7 +161,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\GameFrames\Actions.xaml">
+    <Page Include="Pages\GameFrames\ActionsFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,6 +218,9 @@
     <Resource Include="Fonts\Hothead-Regular.ttf" />
     <Resource Include="Fonts\QuidProQuo.ttf" />
     <Resource Include="Fonts\Bulgaria-Moderna-V3.otf" />
+    <Resource Include="Fonts\akaDora.ttf" />
+    <Resource Include="Fonts\XalTerion.ttf" />
+    <Resource Include="Fonts\Linus.TTF" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -171,10 +242,33 @@
     <Resource Include="Images\castaway.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\beach1.png" />
+    <Resource Include="Images\Locations\severni-plaz.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\pergamen.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\zapadni-les.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\stonehange.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\severni-les.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\severni-more.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Tenhle projekt odkazuje na balíčky NuGet, které nejsou v tomhle počítači k dispozici. Když je chcete stáhnout, použijte funkci obnovení balíčků NuGet.  Další informace najdete na adrese http://go.microsoft.com/fwlink/?LinkID=322105. Chybějícím souborem je soubor {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets'))" />
+  </Target>
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" />
 </Project>

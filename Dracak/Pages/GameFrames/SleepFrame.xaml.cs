@@ -19,25 +19,17 @@ namespace Dracak.Pages
     /// <summary>
     /// Interakční logika pro Actions.xaml
     /// </summary>
-    public partial class MoveFrame : Page
+    public partial class SleepFrame : Page
     {
-        public MoveFrame()
+        public SleepFrame()
         {
             InitializeComponent();
         }
-        private void Click_Walk(object sender, RoutedEventArgs e)
+        private void Click_SleepHours(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MoveFrameSelect(MoveOptions.Walk));
-        }
-
-        private void Click_March(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new MoveFrameSelect(MoveOptions.March));
-        }
-
-        private void Click_Run(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new MoveFrameSelect(MoveOptions.Run));
+            var param = (sender as Button).CommandParameter;
+            int.TryParse(param.ToString(), out int hours);
+            App.GameActions.Sleep(hours);
         }
 
         private void Click_GoBack(object sender, RoutedEventArgs e)

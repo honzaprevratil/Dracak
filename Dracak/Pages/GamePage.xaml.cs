@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dracak.Classes.Creatures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,26 +21,76 @@ namespace Dracak.Pages
     /// </summary>
     public partial class GamePage : Page
     {
-        SlowWriter writer = new SlowWriter();
         public GamePage()
         {
             InitializeComponent();
-
-            writer.Target = StoryBlock;
-            writer.StoryFull = "Stojíš na severní pláži. Všude kolem Tebe písek, palmy, kameny a moře. Nehostinné podmínky ostrova na Tebe volají ze všech stran. Co se rozhodneš udělat?";
-            writer.StartWriting();
         }
+        public GamePage BindData()
+        {
+            App.SlowWriter.Target = StoryBlock;
+            /* LOCATION NAME */
+            Binding BindingName = new Binding("CurrentLocationName")
+            {
+                Source = App.LocationViewModel
+            };
+            StoryHeader.SetBinding(ContentControl.ContentProperty, BindingName);
+            /* LOCATION IMAGE */
+            Binding BindingImage = new Binding("CurrentLocationImage")
+            {
+                Source = App.LocationViewModel
+            };
+            StoryImage.SetBinding(Image.SourceProperty, BindingImage);
+            /* LOCATION FILTER */
+            Binding BindingFilter = new Binding("CurrentLocationFilter")
+            {
+                Source = App.LocationViewModel
+            };
+            Filter.SetBinding(BackgroundProperty, BindingFilter);
+
+
+            /* PLAYER'S HEALTH BAR */
+            Binding BindingHealth = new Binding("HealthBarValue")
+            {
+                Source = App.PlayerViewModel
+            };
+            HealthBar.SetBinding(ProgressBar.ValueProperty, BindingHealth);
+            /* PLAYER'S ENERGY BAR */
+            Binding BindingEnergy = new Binding("EnergyBarValue")
+            {
+                Source = App.PlayerViewModel
+            };
+            EnergyBar.SetBinding(ProgressBar.ValueProperty, BindingEnergy);
+            /* PLAYER'S HUNGER BAR */
+            Binding BindingHunger = new Binding("HungerBarValue")
+            {
+                Source = App.PlayerViewModel
+            };
+            HungerBar.SetBinding(ProgressBar.ValueProperty, BindingHunger);
+            /* PLAYER'S THIRST BAR */
+            Binding BindingThirst = new Binding("ThirstBarValue")
+            {
+                Source = App.PlayerViewModel
+            };
+            ThirstBar.SetBinding(ProgressBar.ValueProperty, BindingThirst);
+            return this;
+        }
+        public GamePage StartWriting()
+        {
+            App.SlowWriter.StartWriting();
+            return this;
+        }
+
 
         private void GameFrame_Initialized(object sender, EventArgs e)
         {
-            GameFrame.NavigationService.Navigate(new Actions());
+            GameFrame.NavigationService.Navigate(new ActionsFrame());
         }
 
         private void Click_Next(object sender, RoutedEventArgs e)
         {
-            if (writer.IsWriting())
+            if (App.SlowWriter.IsWriting())
             {
-                writer.StopWriting();
+                App.SlowWriter.StopWriting();
             }
         }
 

@@ -6,14 +6,32 @@ using System.Threading.Tasks;
 
 namespace Dracak.Classes.Items
 {
-    class Weapon : Tool
+    public class Weapon : AItem
     {
-        public int Speed { get; set; }
         public int Damage { get; set; }
         public WeaponType Type { get; set; }
+
+        public Weapon (string name, int damage, int speed, WeaponType weaponType, string description, int findChance, bool visiblity, int locationId, int inventoryId)
+            : base(name, speed, description, findChance, visiblity, locationId, inventoryId)
+        {
+            this.Damage = damage;
+            this.Type = weaponType;
+        }
+        public Weapon ()
+        {
+
+        }
+        public override string GetName()
+        {
+            return Name + " [ " + Damage + "/" + Speed + " ]" ;
+        }
+        public string GetStats()
+        {
+            return Damage+"/"+Speed;
+        }
     }
 
-    enum WeaponType
+    public enum WeaponType
     {
         Melee, Ranged
     }

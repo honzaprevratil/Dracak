@@ -6,9 +6,26 @@ using System.Threading.Tasks;
 
 namespace Dracak.Classes.Items
 {
-    class Armor
+    public class Armor : AItem
     {
-        public int Speed { get; set; }
         public int Defense { get; set; }
+
+        public Armor(string name, int defense, int speed, string description, int findChance, bool visiblity, int locationId, int inventoryId)
+            : base(name, speed, description, findChance, visiblity, locationId, inventoryId)
+        {
+            this.Defense = defense;
+        }
+        public Armor()
+        {
+
+        }
+        public override string GetName()
+        {
+            return Name;
+        }
+        public string GetStats()
+        {
+            return Defense + "/" + Speed;
+        }
     }
 }

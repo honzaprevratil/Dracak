@@ -15,12 +15,25 @@ namespace Dracak
 
         public int MsTimeMin { get; set; } = 5;
         public int MsTimeMax { get; set; } = 10;
-        public string StoryFull { get; set; }
         public TextBlock Target { get; set; }
+        public string StoryFull
+        {
+            get
+            {
+                return storyFull;
+            }
+            set
+            {
+                StopWriting(false);
+                storyFull = value;
+                StartWriting();
+            }
+        }
 
         private int Letter { get; set; } = 0;
         private bool Writing { get; set; } = true;
         private string StoryTemp { get; set; }
+        private string storyFull { get; set; }
 
         public SlowWriter()
         {
@@ -36,10 +49,10 @@ namespace Dracak
         private void InitTimer()
         {
             timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-            timer.Tick += (sender, args) => { WriteIt(); };
+            timer.Tick += (sender, args) => { WriteStory(); };
         }
 
-        private void WriteIt()
+        private void WriteStory()
         {
             timer.Interval = new TimeSpan(0, 0, 0, 0, randInt.Next(MsTimeMin, MsTimeMax));
 
@@ -55,11 +68,16 @@ namespace Dracak
             }
 
         }
-        public void StopWriting()
+        public void StopWriting(bool SetFullStory = true)
         {
-            Target.Text = StoryFull;
             timer.Stop();
             Writing = false;
+
+            Target.Text = SetFullStory ? StoryFull : "";
+            ResetValues();
+        }
+        public void ResetValues()
+        {
             StoryTemp = "";
             Letter = 0;
         }
