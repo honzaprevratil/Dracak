@@ -27,7 +27,7 @@ namespace Dracak.Classes.Items
         }
         public string GetStats()
         {
-            return Damage+"/"+Speed;
+            return Damage + "/" + Speed;
         }
     }
 

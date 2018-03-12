@@ -105,6 +105,9 @@
     <Compile Include="Classes\Items\Consumable.cs" />
     <Compile Include="Classes\Locations\LocationBind.cs" />
     <Compile Include="Classes\Locations\ActionEnums.cs" />
+    <Compile Include="Pages\GameFrames\ItemDetailWeaponFrame.xaml.cs">
+      <DependentUpon>ItemDetailWeaponFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GameFrames\InventorySummaryFrame.xaml.cs">
       <DependentUpon>InventorySummaryFrame.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\SlowWriter.cs" />
+    <Page Include="Pages\GameFrames\ItemDetailWeaponFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\GameFrames\InventorySummaryFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

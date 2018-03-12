@@ -27,13 +27,13 @@
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Výstroj"/>
 
-        <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Zbraň" Padding="15,0,15,0" ToolTip="Určuje sílu poškození a množství energie."/>
+        <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Zbraň" Padding="15,0,15,0"/>
         <Label x:Name="WeaponName" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Meč" Padding="15,0,15,0"/>
-        <Label x:Name="WeaponDamage" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="30" Content="1/1" Padding="15,0,15,0"/>
+        <Label x:Name="WeaponDamage" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="30" Content="1/1" Padding="15,0,15,0" ToolTip="Poškození / Rychlost"/>
 
-        <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Brnění" Padding="15,0,15,0" ToolTip="Zvyšuje počet životů, energii a dobu vydržení bez základních potřeb (hladu, žéízně)." />
+        <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Brnění" Padding="15,0,15,0" />
         <Label x:Name="ArmorName" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Kožené" Padding="15,0,15,0"/>
-        <Label x:Name="ArmorDefence" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="1/2" Padding="15,0,15,0"/>
+        <Label x:Name="ArmorDefence" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="1/2" Padding="15,0,15,0" ToolTip="Absorbace / Rychlost"/>
 
 
 
@@ -50,9 +50,9 @@
             </Grid.ColumnDefinitions>
 
 
-            <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Útok" Padding="15,0,15,0" ToolTip="Určuje sílu poškození a množství energie."/>
-            <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Obrana" Padding="15,0,15,0" ToolTip="Určuje sílu poškození a množství energie."/>
-            <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Rychlost" Padding="15,0,15,0" ToolTip="Určuje sílu poškození a množství energie."/>
+            <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Útok" Padding="15,0,15,0" />
+            <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Obrana" Padding="15,0,15,0" />
+            <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Rychlost" Padding="15,0,15,0" />
 
             <Label x:Name="Damage" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource BulgariaFont}" FontSize="35" Content="5-11 (~8)" Padding="15,0,15,0"/>
             <Label x:Name="Defense" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="35" Content="9" Padding="15,0,15,0"/>

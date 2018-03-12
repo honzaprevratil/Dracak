@@ -1,5 +1,6 @@
 ﻿using Dracak.Classes;
 using Dracak.Classes.Creatures;
+using Dracak.Classes.Items;
 using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
@@ -105,10 +106,11 @@ namespace Dracak.Pages
         }
         private void ItemClick(int buttonIndex)
         {
+            var param = buttons[buttonIndex].CommandParameter;
+            int.TryParse(param.ToString(), out int itemIndex);
+
             if (HeaderText == "Sebrat")
             {
-                var param = buttons[buttonIndex].CommandParameter;
-                int.TryParse(param.ToString(), out int itemIndex);
                 App.GameActions.PickUpItem(ItemList[itemIndex]);
 
                 if (MaxPage == OnPage)
@@ -129,7 +131,10 @@ namespace Dracak.Pages
             }
             else if (HeaderText == "Předměty")
             {
-
+                if (ItemList[itemIndex] is Weapon)
+                {
+                    this.NavigationService.Navigate(new ItemDetailWeaponFrame((Weapon)ItemList[itemIndex]));
+                }
             }
         }
         private void Swap_Page()
