@@ -39,6 +39,21 @@ namespace Dracak.Pages
             ItemListHeader.Content = header;
             HeaderText = header;
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (HeaderText == "Sebrat")
+            {
+                ItemList = MakeVisibleItemList(App.LocationViewModel.CurrentLocation.ItemList);
+            }
+            else if (HeaderText == "Předměty")
+            {
+                ItemList = MakeVisibleItemList(App.PlayerViewModel.Player.Inventory.ItemList);
+            }
+
+            OnPage = 1;
+            ItemCounter = 0;
+            RenderButtons();
+        }
         private List<AItem> MakeVisibleItemList(List<AItem> MixedVisiblityList)
         {
             List<AItem> VisibleItems = new List<AItem>();
@@ -197,22 +212,6 @@ namespace Dracak.Pages
         private void Click_Item10(object sender, RoutedEventArgs e)
         {
             ItemClick(9);
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (HeaderText == "Sebrat")
-            {
-                ItemList = MakeVisibleItemList(App.LocationViewModel.CurrentLocation.ItemList);
-            }
-            else if (HeaderText == "Předměty")
-            {
-                ItemList = MakeVisibleItemList(App.PlayerViewModel.Player.Inventory.ItemList);
-            }
-
-            OnPage = 1;
-            ItemCounter = 0;
-            RenderButtons();
         }
     }
 }

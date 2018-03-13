@@ -52,6 +52,7 @@ namespace Dracak.Classes.Locations
 
                 /* CREATURES TABLES */
                 db.CreateTable<Creature>();
+                db.CreateTable<Enemy>();
                 db.CreateTable<PrimaryStats>();
                 db.CreateTable<Inventory>();
                 db.CreateTable<Player>();
@@ -106,7 +107,6 @@ namespace Dracak.Classes.Locations
                     break;
                 }
             }
-            Player.RefreshMaximumValues();
 
             return Player;
         }
@@ -197,18 +197,20 @@ namespace Dracak.Classes.Locations
             };
             this.InsertWithChildren(PlayerStats);
 
-            var Player = new Player(4, 4, 4, 4, 4)
+            var Player = new Player()
             {
                 Id = 1,
                 InLocationId = 1,
                 Inventory = PlayerInventory,
                 PrimaryStats = PlayerStats,
             };
+            Player.DefaultData(10);
             this.InsertWithChildren(Player);
         }
         public void FillLocationsToDB()
         {
             Random randInt = new Random();
+
 
             this.InsertWithChildren(new Location
             {
@@ -217,10 +219,10 @@ namespace Dracak.Classes.Locations
                 Image = @"/Dracak;component/Images/Locations/severni-plaz.png",
                 Filter = "#4CA49C15",
                 Description = "Stojíš na severní pláži. Všude kolem Tebe písek, palmy, kameny a moře. Nehostinné podmínky ostrova na Tebe volají ze všech stran. Co se rozhodneš udělat?",
-                FastSearchText = "Rychle jsi prohledal Severní pláž",
-                SlowSearchText = "Důkladně prohledáváš Severní pláž",
+                FastSearchText = "Rychle jsi prohledal Severní pláž.",
+                SlowSearchText = "Důkladně prohledáváš Severní pláž.",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(1, 2), new LocationBind(1, 3) },
-                ItemList =  new List<AItem> {
+                ItemList = new List<AItem> {
                     new Weapon("Meč", 1, 3, WeaponType.Melee,"Klasický meč, nijak zvlášť ostrý.", randInt.Next(4,8), false, 1001, 1001),
                     new Weapon("Šavle", 2, 3, WeaponType.Melee,"Nabroušený zahnutý meč, ideální pro sekání hlav.", randInt.Next(8,15), false, 1001, 1001),
                     new Weapon("Ubodávač", 3, 4, WeaponType.Melee, "Jak s ním hodáš zabít svého nepřítele? Správně.. (Ubodat)", randInt.Next(15,21), false, 1001, 1001),
@@ -231,6 +233,10 @@ namespace Dracak.Classes.Locations
                     new Consumable("Zlaté Jablko",5,true,5,"Zlaté šťavnaté jablíčko, plné magické energie. Co se asi stane, když ho sníš?",randInt.Next(8,15), false, 1001, 1001, 10, 3, 6, 10),
                 },
             });
+            this.InsertWithChildren(new Enemy("Vlk", 30, 6, 10, 6, 5, "Zrovna sis začínal říkat, že je ideální čas na to, tohle místo opustit.. Když v tom uslyšíš zašustění křoví a do Tvých zad na Tebe skáče zuřivý vlk!.. Utečeš nebo budeš bojovat?") { LocationId = 1 });
+
+
+
             this.InsertWithChildren(new Location
             {
                 Id = 2,
@@ -238,8 +244,8 @@ namespace Dracak.Classes.Locations
                 Image = @"/Dracak;component/Images/Locations/severni-more.jpg",
                 Filter = "#4CA49C15",
                 Description = "Rozhodl ses plavit mořem.",
-                FastSearchText = "Rychle jsi prohledal Severní moře",
-                SlowSearchText = "Důkladně prohledáváš Severní moře",
+                FastSearchText = "Rychle jsi prohledal Severní moře.",
+                SlowSearchText = "Důkladně prohledáváš Severní moře.",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(2, 1)},
             });
             this.InsertWithChildren(new Location
@@ -248,9 +254,9 @@ namespace Dracak.Classes.Locations
                 Name = "Severní les",
                 Image = @"/Dracak;component/Images/Locations/severni-les.jpg",
                 Filter = "#7FA49C15",
-                Description = "Rozhodl jít lesem",
-                FastSearchText = "Rychle jsi prohledal Severní les",
-                SlowSearchText = "Důkladně prohledáváš Severní les",
+                Description = "Rozhodl ses jít lesem.",
+                FastSearchText = "Rychle jsi prohledal Severní les.",
+                SlowSearchText = "Důkladně prohledáváš Severní les.",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(3, 1) },
             });
             /*

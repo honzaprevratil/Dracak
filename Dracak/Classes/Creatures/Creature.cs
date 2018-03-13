@@ -1,4 +1,5 @@
 ﻿using Dracak.Classes;
+using Dracak.Classes.Battle;
 using Dracak.Classes.Creatures;
 using Dracak.Classes.Items;
 using SQLiteNetExtensions.Attributes;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Dracak
 {
-    public class Creature : ATable
+    public class Creature : ATable, IBattleMethods
     {
         public Creature(PrimaryStats primaryStats, Inventory inventory)
         {
@@ -19,12 +20,12 @@ namespace Dracak
 
             currentHealth = SetAndReturnMaxHealth();
         }
+        public Creature()
+        {
 
-        [ForeignKey(typeof(Location))]
-        public int LocationId { get; set; }
+        }
 
         private PrimaryStats primaryStats;
-
         [OneToOne]
         public PrimaryStats PrimaryStats
         {
@@ -39,21 +40,14 @@ namespace Dracak
             }
         }
         /* MAX HEALTH */
-        private double maxHealth;
-        public double MaxHealth
-        {
-            get
-            {
-                return maxHealth;
-            }
-        }
+        public double MaxHealth { get; set; }
         public double SetAndReturnMaxHealth()
         {
-            return maxHealth = 5 * PrimaryStats.Stamina;
+            return MaxHealth = 5 * PrimaryStats.Stamina;
         }
 
         /* CURRENT HEALTH + IS ALIVE */
-        private double currentHealth;
+        public double currentHealth;
         public bool IsAlive;
         public double CurrentHealth
         {
@@ -62,6 +56,8 @@ namespace Dracak
                 return currentHealth;
             } set
             {
+                currentHealth = value;
+
                 currentHealth = currentHealth > 0 ? value : 0;
                 currentHealth = currentHealth < MaxHealth ? currentHealth : MaxHealth;
 
@@ -89,7 +85,7 @@ namespace Dracak
         {
             return PrimaryStats.Swiftness + Inventory.UsingArmor.Speed + Inventory.UsingWeapon.Speed;
         }
-        public double GetDamage()
+        public double DealDamage()
         {
             Random randInt = new Random();
             return PrimaryStats.Strength + Inventory.UsingWeapon.Damage + randInt.Next(1,7);
@@ -111,13 +107,11 @@ namespace Dracak
             {
                 double Absorption = GetDefense();
                 if (Damage > Absorption)
-                {
                     CurrentHealth -= Damage - Absorption;
-                }
+                else
+                    CurrentHealth -= 1;
             } else
-            {
                 CurrentHealth -= Damage;
-            }
         }
     }
 }

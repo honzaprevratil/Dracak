@@ -10,22 +10,22 @@ namespace Dracak.Classes.Creatures
 {
     public class Player : Creature
     {
-        public Player (int strngth = 4, int stamina = 4, int dextirity = 4, int inteligence = 4, int swiftness = 4, int statsPoints = 15)
+        public Player (int strngth = 4, int stamina = 4, int dextirity = 4, int inteligence = 4, int swiftness = 4)
             : base(new PrimaryStats(strngth, stamina, dextirity, inteligence, swiftness), new Inventory())
         {
-            DefaultData(statsPoints);
+
         }
-        public Player()
-            : base(new PrimaryStats(4, 4, 4, 4, 4), new Inventory())
+        public Player() : base()
         {
-            DefaultData();
+
         }
-        private void DefaultData(int statsPoints = 15)
+        public void DefaultData(int statsPoints = 15)
         {
+            RefreshMaximumValues();
             currentHunger = SetAndReturnMaxHunger();
             currentThirst = SetAndReturnMaxThirst();
             currentEnergy = SetAndReturnMaxEnergy();
-            CurrentHealth = SetAndReturnMaxHealth();
+            currentHealth = SetAndReturnMaxHealth();
             StatsPoints = statsPoints;
         }
 
@@ -34,113 +34,92 @@ namespace Dracak.Classes.Creatures
 
         /* H U N G E R */
         /* CURRENT HUNGER */
-        private double currentHunger;
-        public double CurrentHunger
+        public double CurrentHunger { get; set; }
+        private double currentHunger
         {
             get
             {
-                return currentHunger;
+                return CurrentHunger;
             }
             set
             {
-                currentHunger = value;
-                if (currentHunger < 0)
+                CurrentHunger = value;
+                if (CurrentHunger < 0)
                 {
-                    this.TakeDamage(currentHunger/3, false);
+                    this.TakeDamage(CurrentHunger / 3, false);
                 }
-                currentHunger = currentHunger > 0 ? value : 0;
-                currentHunger = currentHunger < MaxHunger ? currentHunger : MaxHunger;
+                CurrentHunger = CurrentHunger > 0 ? value : 0;
+                CurrentHunger = CurrentHunger < MaxHunger ? CurrentHunger : MaxHunger;
             }
         }
         /* MAX HUNGER*/
-        private double maxHunger;
-        public double MaxHunger
-        {
-            get
-            {
-                return maxHunger;
-            }
-        }
+        public double MaxHunger { get; set; }
         private double SetAndReturnMaxHunger()
         {
-            return maxHunger = PrimaryStats.Stamina;
+            return MaxHunger = PrimaryStats.Stamina;
         }
 
         /* T H I R S T */
         /* CURRENT THIRST */
-        private double currentThirst;
-        public double CurrentThirst
+        public double CurrentThirst { get; set; }
+        private double currentThirst
         {
             get
             {
-                return currentThirst;
+                return CurrentThirst;
             }
             set
             {
-                currentThirst = value;
-                if (currentThirst < 0)
+                CurrentThirst = value;
+                if (CurrentThirst < 0)
                 {
-                    this.TakeDamage(currentThirst/2, false);
+                    this.TakeDamage(CurrentThirst / 2, false);
                 }
-                currentThirst = currentThirst > 0 ? value : 0;
-                currentThirst = currentThirst < MaxThirst ? currentThirst : MaxThirst;
+                CurrentThirst = CurrentThirst > 0 ? value : 0;
+                CurrentThirst = CurrentThirst < MaxThirst ? CurrentThirst : MaxThirst;
             }
         }
         /* MAX THIRST*/
-        private double maxThirst;
-        public double MaxThirst
-        {
-            get
-            {
-                return maxThirst;
-            }
-        }
+        public double MaxThirst { get; set; }
         private double SetAndReturnMaxThirst()
         {
-            return maxThirst = 2 * PrimaryStats.Stamina / 3;
+            return MaxThirst = 2 * PrimaryStats.Stamina / 3;
         }
 
         /* E N E R G Y */
         /* CURRENT ENERGY */
-        private double currentEnergy;
-        public double CurrentEnergy
+        public double CurrentEnergy { get; set; }
+        private double currentEnergy
         {
             get
             {
-                return currentEnergy;
+                return CurrentEnergy;
             }
             set
             {
-                currentEnergy = value;
-                if (currentEnergy < 0)
+                CurrentEnergy = value;
+                if (CurrentEnergy < 0)
                 {
-                    this.TakeDamage(currentEnergy / 1.5, false);
+                    this.TakeDamage(CurrentEnergy / 1.5, false);
                 }
-                currentEnergy = currentEnergy > 0 ? value : 0;
-                currentEnergy = currentEnergy < MaxEnergy ? currentEnergy : MaxEnergy;
+                CurrentEnergy = CurrentEnergy > 0 ? value : 0;
+                CurrentEnergy = CurrentEnergy < MaxEnergy ? CurrentEnergy : MaxEnergy;
             }
         }
         /* MAX ENERGY*/
-        private double maxEnergy;
-        public double MaxEnergy
-        {
-            get
-            {
-                return maxEnergy;
-            }
-        }
+        public double MaxEnergy { get; set; }
         private double SetAndReturnMaxEnergy()
         {
-            return maxEnergy = 2 * PrimaryStats.Stamina + PrimaryStats.Strength;
+            return MaxEnergy = 2 * PrimaryStats.Stamina + PrimaryStats.Strength;
         }
 
         public void DoAction(int ActionCost, int EnergyCost)
         {
             // max swiftness - 15 ==> all actions cost 50% less
             double TrueActionCost = ActionCost - ((double)PrimaryStats.Swiftness / 30) * ActionCost;
-            CurrentThirst -= TrueActionCost;
-            CurrentHunger -= TrueActionCost;
-            CurrentEnergy -= EnergyCost;
+            currentThirst -= TrueActionCost;
+            currentHunger -= TrueActionCost;
+            currentEnergy -= EnergyCost;
         }
         public void Sleep(int hours)
         {
@@ -148,32 +127,32 @@ namespace Dracak.Classes.Creatures
             switch (hours)
             {
                 case 2:
-                    CurrentEnergy += MaxEnergy * 0.20;
-                    CurrentHealth += MaxHealth * (0.10 * (CurrentHunger > 0 ? 1 : 0) + 0.10 * (CurrentThirst > 0 ? 1 : 0));
+                    currentEnergy += MaxEnergy * 0.20;
+                    currentHealth += MaxHealth * (0.10 * (currentHunger > 0 ? 1 : 0) + 0.10 * (currentThirst > 0 ? 1 : 0));
                     break;
 
                 case 4:
-                    CurrentEnergy += MaxEnergy * 0.45;
-                    CurrentHealth += MaxHealth * (0.225 * (CurrentHunger > 0 ? 1 : 0) + 0.225 * (CurrentThirst > 0 ? 1 : 0));
+                    currentEnergy += MaxEnergy * 0.45;
+                    currentHealth += MaxHealth * (0.225 * (currentHunger > 0 ? 1 : 0) + 0.225 * (currentThirst > 0 ? 1 : 0));
                     break;
 
                 case 6:
-                    CurrentEnergy += MaxEnergy * 0.75;
-                    CurrentHealth += MaxHealth * (0.375 * (CurrentHunger > 0 ? 1 : 0) + 0.375 * (CurrentThirst > 0 ? 1 : 0));
+                    currentEnergy += MaxEnergy * 0.75;
+                    currentHealth += MaxHealth * (0.375 * (currentHunger > 0 ? 1 : 0) + 0.375 * (currentThirst > 0 ? 1 : 0));
                     break;
 
                 case 8:
-                    CurrentEnergy = MaxEnergy;
-                    CurrentHealth += MaxHealth * (0.5 * (CurrentHunger > 0 ? 1 : 0) + 0.5 * (CurrentThirst > 0 ? 1 : 0));
+                    currentEnergy = MaxEnergy;
+                    currentHealth += MaxHealth * (0.5 * (currentHunger > 0 ? 1 : 0) + 0.5 * (currentThirst > 0 ? 1 : 0));
                     break;
             }
         }
         public void Eat(Consumable consumable)
         {
-            CurrentHealth += consumable.HealthGain;
-            CurrentThirst += consumable.ThirstGain;
-            CurrentHunger += consumable.HungerGain;
-            CurrentEnergy += consumable.EnergyGain;
+            currentHealth += consumable.HealthGain;
+            currentThirst += consumable.ThirstGain;
+            currentHunger += consumable.HungerGain;
+            currentEnergy += consumable.EnergyGain;
         }
         public void ChangePrimaryStats(PrimaryStats primaryStats)
         {

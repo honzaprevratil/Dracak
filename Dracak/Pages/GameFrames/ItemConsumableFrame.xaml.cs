@@ -75,15 +75,13 @@ namespace Dracak.Pages
         }
         private void Click_Eat(object sender, RoutedEventArgs e)
         {
-            App.GameActions.EatConsumable(viewedItem);
             if (viewedItem.Amount <= 1)
             {
                 this.NavigationService.GoBack();
-            } else
-            {
-                viewedItem.Amount -= 1;
-                Amount.Content = viewedItem.Amount;
             }
+            viewedItem.Amount -= 1;
+            Amount.Content = viewedItem.Amount;
+            App.GameActions.EatConsumable(viewedItem);
         }
         private void Click_Throw(object sender, RoutedEventArgs e)
         {

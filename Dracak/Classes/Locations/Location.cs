@@ -1,4 +1,5 @@
 ﻿using Dracak.Classes;
+using Dracak.Classes.Creatures;
 using Dracak.Classes.Locations;
 using SQLiteNetExtensions.Attributes;
 using System;
@@ -25,6 +26,6 @@ namespace Dracak
         public List<AItem> ItemList { get; set; }
 
         [OneToOne]
-        public Creature Creature { get; set; }
+        public Enemy Enemy { get; set; }
     }
 }

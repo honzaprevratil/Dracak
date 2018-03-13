@@ -50,9 +50,12 @@ namespace Dracak.Pages
             int.TryParse(param.ToString(), out int AdjacentLocationId);
             
             /* MOVE */
-            App.GameActions.Move(SelectedMoveOption, AdjacentLocationId);
+            bool Ambushed = App.GameActions.Move(SelectedMoveOption, AdjacentLocationId);
             this.NavigationService.GoBack();
             this.NavigationService.GoBack();
+
+            if (Ambushed)
+                this.NavigationService.Navigate(new FightFrame());
         }
         private void Click_GoBack(object sender, RoutedEventArgs e)
         {
