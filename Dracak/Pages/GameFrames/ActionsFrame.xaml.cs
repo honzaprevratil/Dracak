@@ -46,7 +46,7 @@ namespace Dracak.Pages
 
         private void Click_PickUp(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ItemListFrame(App.LocationViewModel.CurrentLocation.ItemList, "Sebrat"));
+            this.NavigationService.Navigate(new ItemListFrame("Sebrat"));
         }
 
         private void Click_Sleep(object sender, RoutedEventArgs e)

@@ -32,18 +32,12 @@ namespace Dracak.Pages
         private Button[] buttons;
         private List<AItem> ItemList;
 
-        public ItemListFrame(List<AItem> itemList, string header)
+        public ItemListFrame(string header)
         {
             InitializeComponent();
-            OnPage = 1;
-            ItemCounter = 0;
             buttons = new Button[] { But1, But2, But3, But4, But5, But6, But7, But8, But9, But10 };
-
-            ItemList = MakeVisibleItemList(itemList);
             ItemListHeader.Content = header;
             HeaderText = header;
-
-            RenderButtons();
         }
         private List<AItem> MakeVisibleItemList(List<AItem> MixedVisiblityList)
         {
@@ -131,9 +125,13 @@ namespace Dracak.Pages
             }
             else if (HeaderText == "Předměty")
             {
-                if (ItemList[itemIndex] is Weapon)
+                if (ItemList[itemIndex] is Weapon || ItemList[itemIndex] is Armor)
                 {
-                    this.NavigationService.Navigate(new ItemDetailWeaponFrame((Weapon)ItemList[itemIndex]));
+                    this.NavigationService.Navigate(new ItemWeaponArmorFrame(ItemList[itemIndex]));
+                }
+                else if (ItemList[itemIndex] is Consumable)
+                {
+                    this.NavigationService.Navigate(new ItemConsumableFrame((Consumable)ItemList[itemIndex]));
                 }
             }
         }
@@ -199,6 +197,22 @@ namespace Dracak.Pages
         private void Click_Item10(object sender, RoutedEventArgs e)
         {
             ItemClick(9);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (HeaderText == "Sebrat")
+            {
+                ItemList = MakeVisibleItemList(App.LocationViewModel.CurrentLocation.ItemList);
+            }
+            else if (HeaderText == "Předměty")
+            {
+                ItemList = MakeVisibleItemList(App.PlayerViewModel.Player.Inventory.ItemList);
+            }
+
+            OnPage = 1;
+            ItemCounter = 0;
+            RenderButtons();
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Dracak
             /* EXISTS SAVE? */
             if (File.Exists(fileHelper.GetDBfilePath()))
             {
-                MessageBoxResult result = MessageBox.Show("To start a new game, current saves will be deleted. Do wish to continue?", "Delete old progress", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Abyste mohl začít novou hru, aktuální postup hry musí být smazán." + "\n\n" + "Přejete si smazat herní postup?" + "\n\n" + "VAROVÁNÍ: Herní progres bude smazán TRVALE!", "Začít novou hru", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 
                 /* WANT TO DELETE SAVE? */
                 if (result == MessageBoxResult.Yes)
@@ -50,7 +50,7 @@ namespace Dracak
                     else
                     {
                         /* CAN NOT DELETE, WISH TO RESTART? */
-                        result = MessageBox.Show("To start a new game, the game must be restarted. Do wish to restart now?", "Restart game", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        result = MessageBox.Show("Abyste mohl začít novou hru, hru je nejprve nutno restartovat." + "\n\n" + "Přeje si restarotvat hru?", "Restart game", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                             Application.Current.Shutdown();
                     }

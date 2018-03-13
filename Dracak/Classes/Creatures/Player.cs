@@ -10,7 +10,7 @@ namespace Dracak.Classes.Creatures
 {
     public class Player : Creature
     {
-        public Player (int strngth = 4, int stamina = 4, int dextirity = 4, int inteligence = 4, int swiftness = 4, int statsPoints = 10)
+        public Player (int strngth = 4, int stamina = 4, int dextirity = 4, int inteligence = 4, int swiftness = 4, int statsPoints = 15)
             : base(new PrimaryStats(strngth, stamina, dextirity, inteligence, swiftness), new Inventory())
         {
             DefaultData(statsPoints);
@@ -20,7 +20,7 @@ namespace Dracak.Classes.Creatures
         {
             DefaultData();
         }
-        private void DefaultData(int statsPoints = 10)
+        private void DefaultData(int statsPoints = 15)
         {
             currentHunger = SetAndReturnMaxHunger();
             currentThirst = SetAndReturnMaxThirst();
@@ -144,25 +144,36 @@ namespace Dracak.Classes.Creatures
         }
         public void Sleep(int hours)
         {
+            DoAction(hours / 2, 0);
             switch (hours)
             {
                 case 2:
                     CurrentEnergy += MaxEnergy * 0.20;
+                    CurrentHealth += MaxHealth * (0.10 * (CurrentHunger > 0 ? 1 : 0) + 0.10 * (CurrentThirst > 0 ? 1 : 0));
                     break;
 
                 case 4:
                     CurrentEnergy += MaxEnergy * 0.45;
+                    CurrentHealth += MaxHealth * (0.225 * (CurrentHunger > 0 ? 1 : 0) + 0.225 * (CurrentThirst > 0 ? 1 : 0));
                     break;
 
                 case 6:
                     CurrentEnergy += MaxEnergy * 0.75;
+                    CurrentHealth += MaxHealth * (0.375 * (CurrentHunger > 0 ? 1 : 0) + 0.375 * (CurrentThirst > 0 ? 1 : 0));
                     break;
 
                 case 8:
                     CurrentEnergy = MaxEnergy;
+                    CurrentHealth += MaxHealth * (0.5 * (CurrentHunger > 0 ? 1 : 0) + 0.5 * (CurrentThirst > 0 ? 1 : 0));
                     break;
             }
-            DoAction(hours / 2, 0);
+        }
+        public void Eat(Consumable consumable)
+        {
+            CurrentHealth += consumable.HealthGain;
+            CurrentThirst += consumable.ThirstGain;
+            CurrentHunger += consumable.HungerGain;
+            CurrentEnergy += consumable.EnergyGain;
         }
         public void ChangePrimaryStats(PrimaryStats primaryStats)
         {

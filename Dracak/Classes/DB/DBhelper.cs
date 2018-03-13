@@ -88,17 +88,23 @@ namespace Dracak.Classes.Locations
             /* LocationId = 9999 ==>> item in player's inventory */
             /* InventoryId = 1 ==>> equpiped item */
 
-            var PlayerWeapon = db.Table<Weapon>().Where(v => v.LocationId == 9999 && v.InventoryId == 1);
-            foreach (Weapon weapon in PlayerWeapon)
+            var PlayerWeapon = Player.Inventory.ItemList.Where(v => v.InventoryId == 1);
+            foreach (AItem weapon in PlayerWeapon)
             {
-                Player.Inventory.UsingWeapon = weapon;
-                break;
+                if (weapon is Weapon)
+                {
+                    Player.Inventory.UsingWeapon = (Weapon)weapon;
+                    break;
+                }
             }
-            var PlayerArmor = db.Table<Armor>().Where(v => v.LocationId == 9999 && v.InventoryId == 1);
-            foreach (Armor armor in PlayerArmor)
+            var PlayerArmor = Player.Inventory.ItemList.Where(v => v.InventoryId == 1);
+            foreach (AItem armor in PlayerArmor)
             {
-                Player.Inventory.UsingArmor = armor;
-                break;
+                if (armor is Armor)
+                {
+                    Player.Inventory.UsingArmor = (Armor)armor;
+                    break;
+                }
             }
             Player.RefreshMaximumValues();
 
@@ -172,15 +178,12 @@ namespace Dracak.Classes.Locations
             Armor PlayerArmor = new Armor("Oblečení", 1, 1, "Klasické hadry", 0, true, 9999, 1);
 
             Consumable PlayerItem1 = new Consumable("Jablko", 7, true, 5, "popis", 9, true, 9999, 9999);
-            Weapon PlayerItem2 = new Weapon("Meč", 1, 3, WeaponType.Melee, "popis", 8, true, 9999, 9999);
 
             Inventory PlayerInventory = new Inventory() {
                 Id = 1,
                 ItemList = new List<AItem>() {
                         PlayerWeapon,
                         PlayerArmor,
-                        PlayerItem1,
-                        PlayerItem2
                     },
                 CreatureId = 1,
                 UsingArmor = PlayerArmor,
@@ -205,6 +208,8 @@ namespace Dracak.Classes.Locations
         }
         public void FillLocationsToDB()
         {
+            Random randInt = new Random();
+
             this.InsertWithChildren(new Location
             {
                 Id = 1,
@@ -216,37 +221,14 @@ namespace Dracak.Classes.Locations
                 SlowSearchText = "Důkladně prohledáváš Severní pláž",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(1, 2), new LocationBind(1, 3) },
                 ItemList =  new List<AItem> {
-                    new Weapon("Meč", 1, 3, WeaponType.Melee,"popis", 8, false, 1001, 1001),
-                    new Weapon("Šavle", 3, 3, WeaponType.Melee,"popis", 20, false, 1001, 1001),
-                    new Armor("Kožené brnění",5,5,"popis", 8, false, 1001, 1001),
-                    new Consumable("Jablko",7,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",5,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",6,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",8,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",5,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Zlaté Jablko",5,true,5,"popis",22, false, 1001, 1001),
-                    new Consumable("Jablko",13,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",9,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",11,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Zlaté Jablko",5,true,5,"popis",14, false, 1001, 1001),
-                    new Consumable("Jablko",4,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",12,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",6,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",14,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Zlaté Jablko",5,true,5,"popis",12, false, 1001, 1001),
-                    new Consumable("Jablko",5,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",8,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",5,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",9,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Zlaté Jablko",5,true,5,"popis",15, false, 1001, 1001),
-                    new Consumable("Jablko",1,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",21,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",9,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Zlaté Jablko",5,true,5,"popis",13, false, 1001, 1001),
-                    new Consumable("Jablko",365,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",7,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",4,true,5,"popis",9, false, 1001, 1001),
-                    new Consumable("Jablko",8,true,5,"popis",9, false, 1001, 1001),
+                    new Weapon("Meč", 1, 3, WeaponType.Melee,"Klasický meč, nijak zvlášť ostrý.", randInt.Next(4,8), false, 1001, 1001),
+                    new Weapon("Šavle", 2, 3, WeaponType.Melee,"Nabroušený zahnutý meč, ideální pro sekání hlav.", randInt.Next(8,15), false, 1001, 1001),
+                    new Weapon("Ubodávač", 3, 4, WeaponType.Melee, "Jak s ním hodáš zabít svého nepřítele? Správně.. (Ubodat)", randInt.Next(15,21), false, 1001, 1001),
+                    new Weapon("Drakobijec", 5, 4, WeaponType.Melee, "Tak který drak dneska dostane nakládačku?", randInt.Next(21,26), false, 1001, 1001),
+                    new Armor("Kožené brnění",5,5,"Brnění vyrobeno z pevné kůže", randInt.Next(4,8), false, 1001, 1001),
+                    new Consumable("Jablko",7,true,5,"Šťavnaté jablíčko", randInt.Next(4,8), false, 1001, 1001, 0, 3, 6, 0),
+                    new Consumable("Jablko",5,true,5,"Šťavnaté jablíčko", randInt.Next(4,8), false, 1001, 1001, 0, 3, 6, 0),
+                    new Consumable("Zlaté Jablko",5,true,5,"Zlaté šťavnaté jablíčko, plné magické energie. Co se asi stane, když ho sníš?",randInt.Next(8,15), false, 1001, 1001, 10, 3, 6, 10),
                 },
             });
             this.InsertWithChildren(new Location

@@ -54,6 +54,7 @@ namespace Dracak.Classes.Creatures
         {
             DBhelper.UpdateWithChildren(Player);
             DBhelper.UpdateOne(Player.Inventory);
+            DBhelper.UpdateList(Player.Inventory.ItemList);
             DBhelper.UpdateOne(Player.PrimaryStats);
         }
         public void UpdateItem(AItem item)

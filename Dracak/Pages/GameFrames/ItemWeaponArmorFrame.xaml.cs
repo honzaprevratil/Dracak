@@ -21,34 +21,55 @@ namespace Dracak.Pages
     /// <summary>
     /// Interakční logika pro Actions.xaml
     /// </summary>
-    public partial class ItemDetailWeaponFrame : Page
+    public partial class ItemWeaponArmorFrame : Page
     {
         private AItem viewedItem;
-        public ItemDetailWeaponFrame(AItem item)
+        public ItemWeaponArmorFrame(AItem item)
         {
             InitializeComponent();
             viewedItem = item;
+        }
 
-            Name.Content = item.Name;
-            Speed.Content = item.Speed;
-            Description.Text = item.Description;
+        private void Click_GoBack(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+        private void Click_Equip(object sender, RoutedEventArgs e)
+        { 
+            App.GameActions.EquipItem(viewedItem);
+            Equiped.Visibility = Visibility.Visible;
+            NotEquiped.Visibility = Visibility.Hidden;
+            Throw.Visibility = Visibility.Hidden;
+        }
+
+        private void Click_Throw(object sender, RoutedEventArgs e)
+        {
+            App.GameActions.DropItem(viewedItem);
+            this.NavigationService.GoBack();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Name.Content = viewedItem.Name;
+            Speed.Content = viewedItem.Speed;
+            Description.Text = viewedItem.Description;
 
             /* RARITY COLORS */
             var bc = new BrushConverter();
-            if (item.FindChance <= 7)// 0 - 7
+            if (viewedItem.FindChance <= 7)// 0 - 7
             {
                 Type.Foreground = (Brush)bc.ConvertFrom("#FF888888");//WHITE - COMMON
                 Type.Content = "Normální";
             }
-            else if (item.FindChance <= 14)// 8 - 14 
+            else if (viewedItem.FindChance <= 14)// 8 - 14 
             {
                 Type.Foreground = (Brush)bc.ConvertFrom("#FF0743AC");//BLUE - RARE
-                Type.Content = "Vzácn" + ((item is Weapon) ? "á" : "é");
+                Type.Content = "Vzácn" + ((viewedItem is Weapon) ? "á" : "é");
             }
-            else if (item.FindChance <= 20)// 15 - 20
+            else if (viewedItem.FindChance <= 20)// 15 - 20
             {
                 Type.Foreground = (Brush)bc.ConvertFrom("#FF911CC7");//PURPLE - EPIC
-                Type.Content = "Epick" + ((item is Weapon) ? "á" : "é");
+                Type.Content = "Epick" + ((viewedItem is Weapon) ? "á" : "é");
             }
             else// 21 - 26
             {
@@ -57,9 +78,9 @@ namespace Dracak.Pages
             }
 
 
-            if (item is Weapon)
+            if (viewedItem is Weapon)
             {
-                switch (((Weapon)item).Type)
+                switch (((Weapon)viewedItem).Type)
                 {
                     case WeaponType.Melee:
                         Type.Content += " zbraň na blízko";
@@ -70,17 +91,17 @@ namespace Dracak.Pages
                 }
 
                 DamageLabel.Content = "Poškození";
-                Damage.Content = ((Weapon)item).Damage;
+                Damage.Content = ((Weapon)viewedItem).Damage;
             }
-            else if (item is Armor)
+            else if (viewedItem is Armor)
             {
                 Type.Content += " brnění";
 
                 DamageLabel.Content = "Absorbce";
-                Damage.Content = ((Armor)item).Defense;
+                Damage.Content = ((Armor)viewedItem).Defense;
             }
 
-            if (item.InventoryId == 1)
+            if (viewedItem.InventoryId == 1)
             {
                 Equiped.Visibility = Visibility.Visible;
                 NotEquiped.Visibility = Visibility.Hidden;
@@ -92,27 +113,6 @@ namespace Dracak.Pages
                 NotEquiped.Visibility = Visibility.Visible;
                 Throw.Visibility = Visibility.Visible;
             }
-        }
-
-        private void Click_GoBack(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.GoBack();
-        }
-        private void Click_Equip(object sender, RoutedEventArgs e)
-        {
-            if (viewedItem is Weapon)
-            {
-
-            }
-            else if (viewedItem is Armor)
-            {
-
-            }
-        }
-
-        private void Click_Throw(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

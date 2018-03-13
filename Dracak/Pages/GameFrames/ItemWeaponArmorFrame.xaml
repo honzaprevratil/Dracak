@@ -1,4 +1,4 @@
-﻿<Page x:Class="Dracak.Pages.ItemDetailWeaponFrame"
+﻿<Page x:Class="Dracak.Pages.ItemWeaponArmorFrame"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Dracak.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="480" d:DesignWidth="480"
-      Title="ItemDetailWeaponFrame">
+      Title="ItemWeaponArmorFrame" Loaded="Page_Loaded">
 
 
     <Grid Margin="60,30,60,40">
@@ -27,7 +27,7 @@
 
         <Label Panel.ZIndex="3" x:Name="Name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Dýka"/>
 
-        <Label Foreground="Black" x:Name="Type" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource BulgariaFont}" FontSize="20" Content="Sečná zbraň" FontStyle="Italic" Padding="50,0"/>
+        <Label Foreground="Black" x:Name="Type" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource BulgariaFont}" FontSize="20" Content="Sečná zbraň" FontStyle="Italic" Padding="20,0"/>
         <Label Foreground="#FFBF0303" x:Name="DamageLabel" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Poškození" Padding="15,0,15,0"/>
         <Label Foreground="#FFBF0303" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Rychlost" Padding="15,0,15,0"/>
 
@@ -40,7 +40,7 @@
             <Label Foreground="#FFBF0303" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Zpět" />
         </Button>
 
-        <Label x:Name="Equiped" Foreground="black" Grid.Column="0" Grid.Row="5" Style="{StaticResource BulgariaFont}" HorizontalAlignment="Right" FontSize="35" Padding="4,10,4,0" FontStyle="Oblique" Content="Vybaveno" />
+        <Label x:Name="Equiped" Visibility="Hidden" Foreground="black" Grid.Column="0" Grid.Row="5" Style="{StaticResource BulgariaFont}" HorizontalAlignment="Right" FontSize="35" Padding="4,10,4,0" FontStyle="Oblique" Content="Vybaveno" />
 
         <Button Click="Click_Equip" x:Name="NotEquiped" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Margin="0,0,30,0" Height="55" Width="128" >
             <Label Foreground="#FFBF0303" Style="{StaticResource BulgariaFont}" FontSize="30" FontStyle="Oblique" Content="Vybavit" />

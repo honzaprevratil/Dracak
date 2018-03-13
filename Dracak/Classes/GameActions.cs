@@ -1,4 +1,5 @@
-﻿using Dracak.Classes.Locations;
+﻿using Dracak.Classes.Items;
+using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,51 @@ namespace Dracak.Classes
 
             /* REMOVES ITEM FROM LIST */
             App.LocationViewModel.CurrentLocation.ItemList.RemoveAt(itemIndex);
+        }
+        public void DropItem(AItem droppedItem)
+        {
+            int itemIndex = App.PlayerViewModel.Player.Inventory.ItemList.IndexOf(droppedItem);
+
+            App.LocationViewModel.CurrentLocation.ItemList.Add(droppedItem);
+            App.LocationViewModel.UpdateLocationItemList();
+            App.PlayerViewModel.Player.Inventory.ItemList.RemoveAt(itemIndex);
+            App.PlayerViewModel.UpdatePlayer();
+        }
+        public void EatConsumable(Consumable food)
+        {
+            App.PlayerViewModel.Player.Eat(food);
+            if (food.Amount > 1)
+            {
+                App.PlayerViewModel.UpdateItem(food);
+            } else
+            {
+                App.PlayerViewModel.Player.Inventory.ItemList.Remove(food);
+            }
+            App.PlayerViewModel.ReRenderBars();
+        }
+        
+        public void EquipItem (AItem WeaponOrArmor)
+        {
+            WeaponOrArmor.InventoryId = 1;
+
+            if (WeaponOrArmor is Weapon)
+            {
+                Weapon OldWeapon = App.PlayerViewModel.Player.Inventory.UsingWeapon;
+                OldWeapon.InventoryId = 9999;
+                App.PlayerViewModel.UpdateItem(OldWeapon);
+
+                App.PlayerViewModel.Player.Inventory.UsingWeapon = (Weapon)WeaponOrArmor;
+            }
+            else if (WeaponOrArmor is Armor)
+            {
+                Armor OldArmor = App.PlayerViewModel.Player.Inventory.UsingArmor;
+                OldArmor.InventoryId = 9999;
+                App.PlayerViewModel.UpdateItem(OldArmor);
+
+                App.PlayerViewModel.Player.Inventory.UsingArmor = (Armor)WeaponOrArmor;
+            }
+
+            App.PlayerViewModel.UpdateItem(WeaponOrArmor);
         }
 
         public void Sleep(int hours)

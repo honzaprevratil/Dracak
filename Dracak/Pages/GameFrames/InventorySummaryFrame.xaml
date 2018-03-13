@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Dracak.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="480" d:DesignWidth="480"
-      Title="InventorySummaryFrame">
+      Title="InventorySummaryFrame" Loaded="Page_Loaded">
 
 
     <Grid Margin="60,30,60,40">
@@ -22,7 +22,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.9*" />
             <ColumnDefinition Width="1.9*" />
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.7*" />
         </Grid.ColumnDefinitions>
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Výstroj"/>

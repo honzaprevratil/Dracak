@@ -21,16 +21,15 @@ namespace Dracak.Pages
     /// <summary>
     /// Interakční logika pro Actions.xaml
     /// </summary>
-    public partial class ItemDetailWeaponFrame : Page
+    public partial class ItemConsumableFrame : Page
     {
-        private AItem viewedItem;
-        public ItemDetailWeaponFrame(AItem item)
+        private Consumable viewedItem;
+        public ItemConsumableFrame(Consumable item)
         {
             InitializeComponent();
             viewedItem = item;
 
             Name.Content = item.Name;
-            Speed.Content = item.Speed;
             Description.Text = item.Description;
 
             /* RARITY COLORS */
@@ -43,12 +42,12 @@ namespace Dracak.Pages
             else if (item.FindChance <= 14)// 8 - 14 
             {
                 Type.Foreground = (Brush)bc.ConvertFrom("#FF0743AC");//BLUE - RARE
-                Type.Content = "Vzácn" + ((item is Weapon) ? "á" : "é");
+                Type.Content = "Vzácn" + (item.CanBeEaten ? "á" : "ý");
             }
             else if (item.FindChance <= 20)// 15 - 20
             {
                 Type.Foreground = (Brush)bc.ConvertFrom("#FF911CC7");//PURPLE - EPIC
-                Type.Content = "Epick" + ((item is Weapon) ? "á" : "é");
+                Type.Content = "Epick" + (item.CanBeEaten ? "á" : "ý");
             }
             else// 21 - 26
             {
@@ -56,63 +55,41 @@ namespace Dracak.Pages
                 Type.Content = "Legendární";
             }
 
-
-            if (item is Weapon)
+            if (item.CanBeEaten)
             {
-                switch (((Weapon)item).Type)
-                {
-                    case WeaponType.Melee:
-                        Type.Content += " zbraň na blízko";
-                        break;
-                    case WeaponType.Ranged:
-                        Type.Content += " střelná zbraň";
-                        break;
-                }
-
-                DamageLabel.Content = "Poškození";
-                Damage.Content = ((Weapon)item).Damage;
-            }
-            else if (item is Armor)
-            {
-                Type.Content += " brnění";
-
-                DamageLabel.Content = "Absorbce";
-                Damage.Content = ((Armor)item).Defense;
-            }
-
-            if (item.InventoryId == 1)
-            {
-                Equiped.Visibility = Visibility.Visible;
-                NotEquiped.Visibility = Visibility.Hidden;
-                Throw.Visibility = Visibility.Hidden;
+                Type.Content += " potravina";
+                Eat.Visibility = Visibility.Visible;
             }
             else
             {
-                Equiped.Visibility = Visibility.Hidden;
-                NotEquiped.Visibility = Visibility.Visible;
-                Throw.Visibility = Visibility.Visible;
+                Type.Content += " materiál";
+                Eat.Visibility = Visibility.Hidden;
             }
+
+            Amount.Content = item.Amount;
         }
 
         private void Click_GoBack(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }
-        private void Click_Equip(object sender, RoutedEventArgs e)
+        private void Click_Eat(object sender, RoutedEventArgs e)
         {
-            if (viewedItem is Weapon)
+            App.GameActions.EatConsumable(viewedItem);
+            if (viewedItem.Amount <= 1)
             {
-
-            }
-            else if (viewedItem is Armor)
+                this.NavigationService.GoBack();
+            } else
             {
-
+                viewedItem.Amount -= 1;
+                Amount.Content = viewedItem.Amount;
             }
         }
-
         private void Click_Throw(object sender, RoutedEventArgs e)
         {
-
+            App.GameActions.DropItem(viewedItem);
+            this.NavigationService.GoBack();
         }
+
     }
 }
