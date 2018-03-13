@@ -59,11 +59,11 @@
             <Label x:Name="Speed" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="35" Content="9" Padding="15,0,15,0"/>
         </Grid>
 
-        <Button Click="Click_GoBack" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Height="60" Width="125" >
+        <Button Click="Click_GoBack" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Height="55" Margin="0,5,0,0" Width="105" >
             <Label Foreground="#FFBF0303" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Zpět" />
         </Button>
 
-        <Button Click="Click_ItemsInventory" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Margin="0,0,30,0" Width="190" >
+        <Button Click="Click_ItemsInventory" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Margin="0,1,30,0" Width="190" >
             <Label Foreground="#FFBF0303" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Předměty" />
         </Button>
     </Grid>
