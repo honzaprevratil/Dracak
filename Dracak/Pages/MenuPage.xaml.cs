@@ -50,7 +50,7 @@ namespace Dracak
                     else
                     {
                         /* CAN NOT DELETE, WISH TO RESTART? */
-                        result = MessageBox.Show("Abyste mohl začít novou hru, hru je nejprve nutno restartovat." + "\n\n" + "Přeje si restarotvat hru?", "Restart game", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        result = MessageBox.Show("Abyste mohl začít novou hru, hru je nejprve nutno restartovat." + "\n\n" + "Přeje si restarotvat hru?", "Restartovat hru", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                             Application.Current.Shutdown();
                     }
@@ -62,7 +62,19 @@ namespace Dracak
 
         private void Click_ContinueGame(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new GamePage().BindData().StartWriting());
+            FileHelper fileHelper = new FileHelper();
+
+            /* EXISTS SAVE? */
+            if (File.Exists(fileHelper.GetDBfilePath()))
+            {
+                this.NavigationService.Navigate(new GamePage().BindData().StartWriting());
+            } 
+            else
+            {
+                var result = MessageBox.Show("Abyste mohl pokračovat musíte nejprve začít novou hru."+"\n\n"+"Chcete začít novou hru?", "Začít novou hru", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (result == MessageBoxResult.Yes)
+                    this.NavigationService.Navigate(new StoryPage().StartWriting());
+            }
         }
 
         private void Click_ExitGame(object sender, RoutedEventArgs e)

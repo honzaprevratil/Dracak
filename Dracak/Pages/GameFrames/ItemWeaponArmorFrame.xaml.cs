@@ -55,28 +55,11 @@ namespace Dracak.Pages
             Description.Text = viewedItem.Description;
 
             /* RARITY COLORS */
-            var bc = new BrushConverter();
-            if (viewedItem.FindChance <= 7)// 0 - 7
-            {
-                Type.Foreground = (Brush)bc.ConvertFrom("#FF888888");//WHITE - COMMON
-                Type.Content = "Normální";
-            }
-            else if (viewedItem.FindChance <= 14)// 8 - 14 
-            {
-                Type.Foreground = (Brush)bc.ConvertFrom("#FF0743AC");//BLUE - RARE
-                Type.Content = "Vzácn" + ((viewedItem is Weapon) ? "á" : "é");
-            }
-            else if (viewedItem.FindChance <= 20)// 15 - 20
-            {
-                Type.Foreground = (Brush)bc.ConvertFrom("#FF911CC7");//PURPLE - EPIC
-                Type.Content = "Epick" + ((viewedItem is Weapon) ? "á" : "é");
-            }
-            else// 21 - 26
-            {
-                Type.Foreground = (Brush)bc.ConvertFrom("#FFC9470B");//ORANGE - LEGENDARY
-                Type.Content = "Legendární";
-            }
-
+            Brush RarityColorBrush = App.GameActions.GetRarityBrush(viewedItem, Type);
+            Name.Foreground = RarityColorBrush;
+            Type.Foreground = RarityColorBrush;
+            if (viewedItem.FindChance > 7 && viewedItem.FindChance < 21)
+                Type.Content += ((viewedItem is Weapon) ? "á" : "é");
 
             if (viewedItem is Weapon)
             {

@@ -93,7 +93,7 @@ namespace Dracak
         public string GetStringDamage()
         {
             int DamageLow = (PrimaryStats.Strength + Inventory.UsingWeapon.Damage);
-            return DamageLow.ToString() + " - " + (DamageLow + 6).ToString() + " (~" + (DamageLow + 3).ToString() + ")";
+            return DamageLow.ToString() + " - " + (DamageLow + 6).ToString() + " [~" + (DamageLow + 3).ToString() + "]";
         }
         public double GetDefense()
         {
@@ -112,6 +112,11 @@ namespace Dracak
                     CurrentHealth -= 1;
             } else
                 CurrentHealth -= Damage;
+        }
+
+        public int Iniciative()
+        {
+            return this.PrimaryStats.Inteligence;
         }
     }
 }

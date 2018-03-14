@@ -152,6 +152,10 @@ namespace Dracak.Classes.Locations
         {
             db.Delete(table);
         }
+        public void DeleteOne<T>(T table) where T : class, new()
+        {
+            db.Delete(table);
+        }
         public void UpdateList<AItem>(List<AItem> ItemList)
         {
             foreach (AItem table in ItemList)
@@ -201,6 +205,7 @@ namespace Dracak.Classes.Locations
             {
                 Id = 1,
                 InLocationId = 1,
+                InFight = false,
                 Inventory = PlayerInventory,
                 PrimaryStats = PlayerStats,
             };
@@ -225,17 +230,18 @@ namespace Dracak.Classes.Locations
                 ItemList = new List<AItem> {
                     new Weapon("Meč", 1, 3, WeaponType.Melee,"Klasický meč, nijak zvlášť ostrý.", randInt.Next(4,8), false, 1001, 1001),
                     new Weapon("Šavle", 2, 3, WeaponType.Melee,"Nabroušený zahnutý meč, ideální pro sekání hlav.", randInt.Next(8,15), false, 1001, 1001),
-                    new Weapon("Ubodávač", 3, 4, WeaponType.Melee, "Jak s ním hodáš zabít svého nepřítele? Správně.. (Ubodat)", randInt.Next(15,21), false, 1001, 1001),
-                    new Weapon("Drakobijec", 5, 4, WeaponType.Melee, "Tak který drak dneska dostane nakládačku?", randInt.Next(21,26), false, 1001, 1001),
-                    new Armor("Kožené brnění",5,5,"Brnění vyrobeno z pevné kůže", randInt.Next(4,8), false, 1001, 1001),
-                    new Consumable("Jablko",7,true,5,"Šťavnaté jablíčko", randInt.Next(4,8), false, 1001, 1001, 0, 3, 6, 0),
-                    new Consumable("Jablko",5,true,5,"Šťavnaté jablíčko", randInt.Next(4,8), false, 1001, 1001, 0, 3, 6, 0),
-                    new Consumable("Zlaté Jablko",5,true,5,"Zlaté šťavnaté jablíčko, plné magické energie. Co se asi stane, když ho sníš?",randInt.Next(8,15), false, 1001, 1001, 10, 3, 6, 10),
+                    new Weapon("Ubodávač", 4, 5, WeaponType.Melee, "Jak s ním hodáš zabít svého nepřítele? Správně.. (Ubodat)", randInt.Next(15,21), false, 1001, 1001),
+                    new Weapon("Drakobijec", 6, 4, WeaponType.Melee, "Tak který drak dneska dostane nakládačku?", randInt.Next(21,26), false, 1001, 1001),
+                    new Armor("Kožené brnění", 2, 1, "Brnění vyrobeno z pevné kůže", randInt.Next(4,8), false, 1001, 1001),
+                    new Consumable("Jablko",7,true,5,"Šťavnaté jablíčko", randInt.Next(4,8), false, 1001, 1001),
+                    new Consumable("Jablko",5,true,5,"Šťavnaté jablíčko", randInt.Next(4,8), false, 1001, 1001),
+                    new Consumable("Zlaté Jablko",5,true,5,"Zlaté šťavnaté jablíčko, plné magické energie. Co se asi stane, když ho sníš?",randInt.Next(8,15), false, 1001, 1001),
                 },
             });
-            this.InsertWithChildren(new Enemy("Vlk", 30, 6, 10, 6, 5, "Zrovna sis začínal říkat, že je ideální čas na to, tohle místo opustit.. Když v tom uslyšíš zašustění křoví a do Tvých zad na Tebe skáče zuřivý vlk!.. Utečeš nebo budeš bojovat?") { LocationId = 1 });
-
-
+            this.InsertWithChildren(new Enemy("Vlk", 30, 6, 10, 6, 5,
+                "Zrovna sis začínal říkat, že je ideální čas na to, tohle místo opustit.. Když v tom uslyšíš zašustění křoví a do Tvých zad na Tebe skáče zuřivý vlk!.. Utečeš nebo budeš bojovat?",
+                "Tělo vlka leží bezvládně na zemi. Bohužel si dovolil na tabulkově silnějšího nepřítele a to se mu moc nevyplatilo. Třeba Tě sundá příští hru, až nebudeš připraven."
+            ) { LocationId = 1 });
 
             this.InsertWithChildren(new Location
             {
@@ -257,11 +263,103 @@ namespace Dracak.Classes.Locations
                 Description = "Rozhodl ses jít lesem.",
                 FastSearchText = "Rychle jsi prohledal Severní les.",
                 SlowSearchText = "Důkladně prohledáváš Severní les.",
-                AdjacentLocations = new List<LocationBind> { new LocationBind(3, 1) },
+                AdjacentLocations = new List<LocationBind> { new LocationBind(3, 1), new LocationBind(3, 4), new LocationBind(3, 5), new LocationBind(3, 6)},
             });
-            /*
-             * HERE WILL BE ALL LOCATIONS
-             */
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 4,
+                Name = "Západní les",
+                Image = @"/Dracak;component/Images/Locations/zapadni-les.jpg",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(4, 3), new LocationBind(4, 6), new LocationBind(4, 7), new LocationBind(4, 10) },
+            });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 5,
+                Name = "Východní les",
+                Image = @"/Dracak;component/Images/Locations/vychodni-les.jpg",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(5, 3), new LocationBind(5, 6), new LocationBind(5, 7) },
+            });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 6,
+                Name = "Hory",
+                Image = @"/Dracak;component/Images/Locations/hory.png",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(6, 5), new LocationBind(6, 4), new LocationBind(6, 3), new LocationBind(6, 7) },
+            });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 7,
+                Name = "Jižní les",
+                Image = @"/Dracak;component/Images/Locations/jizni-les.jpg",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(7, 6), new LocationBind(7, 5), new LocationBind(7, 4), new LocationBind(7, 8) },
+            });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 8,
+                Name = "Jižní pláž",
+                Image = @"/Dracak;component/Images/Locations/jizni-plaz.jpg",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(8, 7), new LocationBind(8, 9) },
+            });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 9,
+                Name = "Jižní moře",
+                Image = @"/Dracak;component/Images/Locations/jizni-more.png",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(9, 8) },
+            });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 10,
+                Name = "Ruiny vesnice",
+                Image = @"/Dracak;component/Images/Locations/ruiny-vesnice.jpg",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(10, 4) },
+            });
+            //this.InsertWithChildren(new Location
+            //{
+            //    Id = 3,
+            //    Name = "",
+            //    Image = @"/Dracak;component/Images/Locations/",
+            //    Filter = "#4CA49C15",
+            //    Description = ".",
+            //    FastSearchText = ".",
+            //    SlowSearchText = ".",
+            //    AdjacentLocations = new List<LocationBind> { new LocationBind(3, 1) },
+            //});
         }
     }
 }

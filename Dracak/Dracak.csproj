@@ -271,7 +271,7 @@
     <Resource Include="Images\pergamen.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\zapadni-les.png" />
+    <Resource Include="Images\Locations\hory.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Locations\stonehange.jpg" />
@@ -281,6 +281,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Locations\severni-more.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\jizni-plaz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\zapadni-les.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\jizni-les.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\vychodni-les.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\jizni-more.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\ruiny-vesnice.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />

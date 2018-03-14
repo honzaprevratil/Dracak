@@ -30,12 +30,14 @@ namespace Dracak.Pages
 
         private string HeaderText;
         private Button[] buttons;
+        private Label[] labels;
         private List<AItem> ItemList;
 
         public ItemListFrame(string header)
         {
             InitializeComponent();
             buttons = new Button[] { But1, But2, But3, But4, But5, But6, But7, But8, But9, But10 };
+            labels = new Label[] { Lab1, Lab2, Lab3, Lab4, Lab5, Lab6, Lab7, Lab8, Lab9, Lab10 };
             ItemListHeader.Content = header;
             HeaderText = header;
         }
@@ -104,6 +106,23 @@ namespace Dracak.Pages
                             buttons[butCtr].Visibility = Visibility.Hidden;
                             break;
                         }
+                        /* RARITY COLOR */
+                        labels[butCtr].Foreground = App.GameActions.GetRarityBrush(ItemList[ItemCounter]);
+
+                        /* SET TOOLTIP*/
+                        if (ItemList[ItemCounter] is Weapon)
+                        {
+                            buttons[butCtr].ToolTip = "Poškození: " + ((Weapon)ItemList[ItemCounter]).Damage + " / " + ItemList[ItemCounter].Speed + " :Rychlost"; // set description
+                        }
+                        else if (ItemList[ItemCounter] is Armor)
+                        {
+                            buttons[butCtr].ToolTip = "Absorbce: " + ((Armor)ItemList[ItemCounter]).Defense + " / " + ItemList[ItemCounter].Speed + " :Rychlost"; // set description
+                        }
+                        else if (ItemList[ItemCounter] is Consumable)
+                        {
+                            buttons[butCtr].ToolTip = "Množství: " + ((Consumable)ItemList[ItemCounter]).Amount; // set description
+                        }
+
                         buttons[butCtr].CommandParameter = ItemCounter;
                         buttons[butCtr].Visibility = Visibility.Visible;
                         ItemCounter++;

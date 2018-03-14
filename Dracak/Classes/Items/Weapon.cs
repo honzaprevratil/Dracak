@@ -23,7 +23,12 @@ namespace Dracak.Classes.Items
         }
         public override string GetName()
         {
-            return Name + " [ " + Damage + "/" + Speed + " ]" ;
+            if (InventoryId == 1)
+            {
+                return "*"+ Name + "*";
+            }
+            //return Name + " [ " + Damage + "/" + Speed + " ]";
+            return Name;
         }
         public string GetStats()
         {

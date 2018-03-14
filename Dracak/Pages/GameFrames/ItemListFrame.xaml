@@ -38,43 +38,43 @@
         </Button>
 
         <Button x:Name="But1" Click="Click_Item1" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160" >
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab1" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But2" Click="Click_Item2" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160" >
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab2" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But3" Click="Click_Item3" Grid.Column="0" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160" >
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab3" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But4" Click="Click_Item4" Grid.Column="1" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160" >
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label  x:Name="Lab4" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But5" Click="Click_Item5" Grid.Row="3" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab5" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But6" Click="Click_Item6" Grid.Row="3" Grid.Column="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab6" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But7" Click="Click_Item7" Grid.Row="4" Grid.Column="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab7" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But8" Click="Click_Item8" Grid.Row="4" Grid.Column="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab8" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But9" Click="Click_Item9" Grid.Row="5" Grid.Column="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab9" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
 
         <Button x:Name="But10" Click="Click_Item10" Grid.Row="5" Grid.Column="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="52" Width="160">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
+            <Label x:Name="Lab10" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="20" Content="" />
         </Button>
     </Grid>
 </Page>

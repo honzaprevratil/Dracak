@@ -22,17 +22,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.9*" />
             <ColumnDefinition Width="1.9*" />
-            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.71*" />
         </Grid.ColumnDefinitions>
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Výstroj"/>
 
         <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Zbraň" Padding="15,0,15,0"/>
-        <Label x:Name="WeaponName" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Meč" Padding="15,0,15,0"/>
+        <Label x:Name="WeaponName" Foreground="#FF4F4F4F" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Meč" Padding="15,0,15,0"/>
         <Label x:Name="WeaponDamage" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource BulgariaFont}" FontSize="30" Content="1/1" Padding="15,0,15,0" ToolTip="Poškození / Rychlost"/>
 
         <Label Foreground="Black" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="25" Content="Brnění" Padding="15,0,15,0" />
-        <Label x:Name="ArmorName" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Kožené" Padding="15,0,15,0"/>
+        <Label x:Name="ArmorName" Foreground="#FF4F4F4F" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="Kožené" Padding="15,0,15,0"/>
         <Label x:Name="ArmorDefence" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource BulgariaFont}" FontSize="30" Content="1/2" Padding="15,0,15,0" ToolTip="Absorbace / Rychlost"/>
 
 

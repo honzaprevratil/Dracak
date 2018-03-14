@@ -22,13 +22,16 @@ namespace Dracak.Pages
     public partial class FightFrame : Page
     {
         Enemy enemy;
+        bool PlayerStarts = false;
+        int EscapeAttempts = 0;
+        Random randInt = new Random();
+
         public FightFrame()
         {
             InitializeComponent();
-        }
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
             enemy = App.LocationViewModel.CurrentLocation.Enemy;
+            if ((App.PlayerViewModel.Player.Iniciative() + randInt.Next(1, 7)) > (enemy.Iniciative() + randInt.Next(1, 7)))
+                PlayerStarts = true;
 
             App.SlowWriter.StoryFull = enemy.Story;
 
@@ -36,36 +39,44 @@ namespace Dracak.Pages
             Damage.Content = enemy.GetStringDamage();
             Defense.Content = enemy.Defense;
             Speed.Content = enemy.Speed;
+
             EnemyHealthBar.Maximum = enemy.MaxHealth;
             EnemyHealthBar.Value = enemy.CurrentHealth;
+            App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
         }
 
         private void Click_Inventory(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new InventorySummaryFrame());
         }
-        
+
         private void Click_Attack(object sender, RoutedEventArgs e)
         {
-            enemy.TakeDamage(App.PlayerViewModel.Player.DealDamage(), true);
-            EnemyHealthBar.Value = enemy.CurrentHealth;
+            App.GameActions.FightOneRound(PlayerStarts);
 
+            /* ENEMY KILLED */
             if (enemy.CurrentHealth < 0)
             {
                 this.NavigationService.Navigate(new ActionsFrame());
-
-                enemy.IsAlive = false;
-
-                App.PlayerViewModel.Player.StatsPoints += 1;
-                App.PlayerViewModel.UpdatePlayer();
             }
 
-            App.LocationViewModel.DBhelper.UpdateOne(enemy);
+            EnemyHealthBar.Value = enemy.CurrentHealth; // enemy's render
         }
 
         private void Click_RunAway(object sender, RoutedEventArgs e)
         {
-
+            bool escaped = App.GameActions.TryEscape(EscapeAttempts);
+            if (escaped)
+            {
+                this.NavigationService.Navigate(new ActionsFrame());
+            }
+            else
+            {
+                EscapeAttempts++;
+            }
         }
     }
 }

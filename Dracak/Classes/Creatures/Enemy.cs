@@ -14,7 +14,7 @@ namespace Dracak.Classes.Creatures
         {
 
         }
-        public Enemy(string name, int health, int damage, int speed, int defense, int fightChance, string story)
+        public Enemy(string name, int health, int damage, int speed, int defense, int fightChance, string story, string deathStory)
         {
             this.Name = name;
             this.CurrentHealth = health;
@@ -22,16 +22,18 @@ namespace Dracak.Classes.Creatures
             this.Damage = damage;
             this.Speed = speed;
             this.Defense = defense;
-            this.FightChance = fightChance;
+            this.Aggressivity = fightChance;
             this.Story = story;
+            this.DeathStory = deathStory;
         }
 
         [ForeignKey(typeof(Location))]
         public int LocationId { get; set; }
 
         public string Name { get; set; }
-        public string Story { get; set; }
 
+        public string Story { get; set; }
+        public string DeathStory { get; set; }
 
         public double CurrentHealth { get; set; }
         public int MaxHealth { get; set; }
@@ -39,8 +41,9 @@ namespace Dracak.Classes.Creatures
 
         public int Damage { get; set; }
         public int Speed { get; set; }
+        public int Inteligence { get; set; }
         public int Defense { get; set; }
-        public int FightChance { get; set; }
+        public int Aggressivity { get; set; }
 
         public double DealDamage()
         {
@@ -53,7 +56,7 @@ namespace Dracak.Classes.Creatures
         }
         public string GetStringDamage()
         {
-            return Damage.ToString() + " - " + (Damage + 6).ToString() + " (~" + (Damage + 3).ToString() + ")";
+            return Damage.ToString() + " - " + (Damage + 6).ToString() + " [~" + (Damage + 3).ToString() + "]";
         }
         public double GetDefense()
         {
@@ -72,6 +75,11 @@ namespace Dracak.Classes.Creatures
             }
             else
                 CurrentHealth -= DamageDealt;
+        }
+
+        public int Iniciative()
+        {
+            return Inteligence;
         }
     }
 }

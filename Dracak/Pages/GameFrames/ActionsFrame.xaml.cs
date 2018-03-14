@@ -24,6 +24,11 @@ namespace Dracak.Pages
         {
             InitializeComponent();
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.PlayerViewModel.Player.InFight)
+                this.NavigationService.Navigate(new FightFrame());
+        }
         private void Click_Move(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MoveFrame());

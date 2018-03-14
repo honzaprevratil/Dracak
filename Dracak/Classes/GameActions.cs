@@ -1,10 +1,13 @@
-﻿using Dracak.Classes.Items;
+﻿using Dracak.Classes.Creatures;
+using Dracak.Classes.Items;
 using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Dracak.Classes
 {
@@ -12,62 +15,81 @@ namespace Dracak.Classes
     {
         public bool Move(MoveOptions Speed, int AdjacentLocationId)
         {
+            Player player = App.PlayerViewModel.Player;
             Random randInt = new Random();
             int time = randInt.Next(0, 4);
+
             /*SPEND TIME -- BASED ON MOVE OPTION*/
             switch (Speed)
             {
                 case MoveOptions.Walk:
-                    if (Ambush(3))
+                    if (Ambush(player.GetTrueActionCost(3)))
                     {
-                        App.PlayerViewModel.Player.DoAction(time, (int)(time / 3));
+                        player.DoAction(time, (int)(time / 3));
                         return true;
                     }
-                    App.PlayerViewModel.Player.DoAction(3, 1);
+                    player.DoAction(3, 1);
                     break;
 
                 case MoveOptions.March:
-                    if (Ambush(2))
+                    if (Ambush(player.GetTrueActionCost(2)))
                     {
-                        App.PlayerViewModel.Player.DoAction((int)(time / 1.5), time);
+                        player.DoAction((int)(time / 1.5), time);
                         return true;
                     }
-                    App.PlayerViewModel.Player.DoAction(2, 3);
+                    player.DoAction(2, 3);
                     break;
 
                 case MoveOptions.Run:
-                    if (Ambush(1))
+                    if (Ambush(player.GetTrueActionCost(1)))
                     {
-                        App.PlayerViewModel.Player.DoAction((int)(time / 3), time*2);
+                        player.DoAction((int)(time / 3), time * 2);
                         return true;
                     }
-                    App.PlayerViewModel.Player.DoAction(1, 6);
+                    player.DoAction(1, 6);
                     break;
             }
 
             int locationId = App.LocationViewModel.CurrentLocation.AdjacentLocations[AdjacentLocationId].BindedId;
             App.LocationViewModel.ChangeLocation(locationId);
-            App.PlayerViewModel.Player.InLocationId = locationId;
+            player.InLocationId = locationId;
+
+            if (Ambush(player.GetTrueActionCost(0)))
+            {
+                return true;
+            }
 
             App.PlayerViewModel.ReRenderBars();
             return false;
         }
 
-        public void Search(SearchOptions Speed)
+        public bool Search(SearchOptions Speed)
         {
+            Player player = App.PlayerViewModel.Player;
             Random randInt = new Random();
+            int time = randInt.Next(0, 4);
             int dice = 0;
 
             /*GET DICE, SPEND TIME -- BASED ON SEARCH OPTION*/
             switch (Speed)
             {
                 case SearchOptions.SlowSearch:
-                    App.PlayerViewModel.Player.DoAction(3, 3);
+                    if (Ambush(player.GetTrueActionCost(3)))
+                    {
+                        player.DoAction(time, time);
+                        return true;
+                    }
+                    player.DoAction(3, 3);
                     dice = randInt.Next(6, 12);// 1k6 +5 BONUS FOR SLOW SEARCH
                     break;
 
                 case SearchOptions.FastSearch:
-                    App.PlayerViewModel.Player.DoAction(1, 1);
+                    if (Ambush(player.GetTrueActionCost(1)))
+                    {
+                        player.DoAction((int)(time / 3), (int)(time / 3));
+                        return true;
+                    }
+                    player.DoAction(1, 1);
                     dice = randInt.Next(1, 7);// 1k6
                     break;
             }
@@ -87,12 +109,13 @@ namespace Dracak.Classes
             if (foundItems.Length > 0)
             {
                 foundItems = foundItems.Substring(0, foundItems.Length - 2);
-                App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + " Našel jsi: " + foundItems+".";
+                App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + " Našel jsi: " + foundItems + ".";
             }
             else
                 App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + " Nic jsi neneašel.";
 
             App.LocationViewModel.UpdateLocationItemList();
+            return false;
         }
         public bool TryFindItem(AItem item, int itemIndex, int bonusChance = 0)
         {
@@ -155,7 +178,23 @@ namespace Dracak.Classes
         }
         public void EatConsumable(Consumable food)
         {
-            App.PlayerViewModel.Player.Eat(food);
+            switch (food.Name)
+            {
+                case "Jablko":
+                    App.PlayerViewModel.Player.Eat(1, 0.5, 0, 0);
+                    break;
+                case "Zlaté Jablko":
+                    App.PlayerViewModel.Player.Eat(2, 1, 3, 3);
+                    break;
+                default:
+                    App.PlayerViewModel.Player.Eat(1, 1, 1, 1);
+                    break;
+            }
+
+            /* FREE HIT IF IN FIGHT*/
+            if (App.PlayerViewModel.Player.InFight)
+                EnemyAtack();
+
             if (food.Amount > 0)
             {
                 App.PlayerViewModel.UpdateItem(food);
@@ -164,7 +203,7 @@ namespace Dracak.Classes
                 App.PlayerViewModel.Player.Inventory.ItemList.Remove(food);
                 App.PlayerViewModel.DBhelper.DeleteItem(food);
             }
-            App.PlayerViewModel.ReRenderBars();
+            App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
         }
         
         public void EquipItem (AItem WeaponOrArmor)
@@ -188,7 +227,12 @@ namespace Dracak.Classes
                 App.PlayerViewModel.Player.Inventory.UsingArmor = (Armor)WeaponOrArmor;
             }
 
+            /* FREE HIT IF IN FIGHT*/
+            if (App.PlayerViewModel.Player.InFight)
+                EnemyAtack();
+
             App.PlayerViewModel.UpdateItem(WeaponOrArmor);
+            App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
         }
 
         public void Sleep(int hours)
@@ -198,21 +242,159 @@ namespace Dracak.Classes
             App.SlowWriter.StoryFull = "Hodil sis šlofíka na " + hours + (hours < 5 ? "hodiny." : "hodin.") + App.PlayerViewModel.GetTextLivingStatus();
         }
 
-        public bool Ambush(int hours)
+
+
+        /* FIGHTS */
+        /* FIGHTS */
+        /* FIGHTS */
+        public bool Ambush(double hours)
         {
             if (App.LocationViewModel.CurrentLocation.Enemy is null)
                 return false;
-            if (!App.LocationViewModel.CurrentLocation.Enemy.IsAlive)
+            if (!App.LocationViewModel.CurrentLocation.Enemy.IsAlive || App.LocationViewModel.CurrentLocation.Enemy.CurrentHealth <= 0)
                 return false;
 
             Random randInt = new Random();
-            int rage = App.LocationViewModel.CurrentLocation.Enemy.FightChance;
+            int rage = App.LocationViewModel.CurrentLocation.Enemy.Aggressivity;
             int dex = App.PlayerViewModel.Player.PrimaryStats.Dextirity;
 
             if ((rage + randInt.Next(1, 6) + hours) > (dex + randInt.Next(1, 6)))
+            {
+                App.PlayerViewModel.Player.InFight = true;
+                App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
                 return true;
+            }
             else
                 return false;
+        }
+        public bool TryEscape(int Attempt)
+        {
+            var enemy = App.LocationViewModel.CurrentLocation.Enemy;
+            var player = App.PlayerViewModel.Player;
+            enemy.Aggressivity -= 1;
+
+            if (Attempt >= 3)
+            {
+                enemy.Aggressivity -= 1;
+                App.LocationViewModel.DBhelper.UpdateOne(enemy); // enemy's DB-update
+                player.InFight = false;
+                App.PlayerViewModel.ReRenderBars(); // player's DB-update
+                return true;
+            }
+
+            Random randInt = new Random();
+
+            if (player.GetBattleSpeed() + randInt.Next(1, 7) > enemy.GetBattleSpeed() + randInt.Next(1, 7))
+            {
+                enemy.Aggressivity -= 1;
+                App.LocationViewModel.DBhelper.UpdateOne(enemy); // enemy's DB-update
+                player.InFight = false;
+                App.PlayerViewModel.ReRenderBars();// player's DB-update
+                return true;
+            }
+
+            App.LocationViewModel.DBhelper.UpdateOne(enemy); // enemy's DB-update
+            EnemyAtack();
+            return false;
+        }
+
+        public void FightOneRound(bool playerStarts)
+        {
+            var enemy = App.LocationViewModel.CurrentLocation.Enemy;
+            var player = App.PlayerViewModel.Player;
+            double SpeedDifference = enemy.GetBattleSpeed() - App.PlayerViewModel.Player.GetBattleSpeed();
+
+            if (playerStarts)
+            {
+                PlayerAtack();
+                if (enemy.CurrentHealth > 0) // IsAlive
+                    EnemyAtack();
+            }
+            else
+            {
+                EnemyAtack();
+                if (player.IsAlive)
+                    PlayerAtack();
+            }
+
+            /* ENEMY KILLED */
+            if (enemy.CurrentHealth < 0)
+            {
+                App.SlowWriter.StoryFull = enemy.DeathStory; // story write
+
+                player.InFight = false;
+                player.StatsPoints += 1; // skill point for kill
+                App.LocationViewModel.DBhelper.DeleteOne(enemy); // enemy's DB-update
+                App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
+            }
+        }
+
+        public void EnemyAtack()
+        {
+            var enemy = App.LocationViewModel.CurrentLocation.Enemy;
+            var player = App.PlayerViewModel.Player;
+            double SpeedDifference = enemy.GetBattleSpeed() - App.PlayerViewModel.Player.GetBattleSpeed();
+
+            /* BONUS DAMAGE FOR SPEED */
+            if (SpeedDifference >= 5)
+                player.TakeDamage(enemy.DealDamage() + 3, true);
+            else
+                player.TakeDamage(enemy.DealDamage(), true);
+
+            /* SECOND STRIKE */
+            if (SpeedDifference >= 10)
+                player.TakeDamage(enemy.DealDamage(), true);
+
+            App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
+        }
+        public void PlayerAtack()
+        {
+            var enemy = App.LocationViewModel.CurrentLocation.Enemy;
+            var player = App.PlayerViewModel.Player;
+            double SpeedDifference = enemy.GetBattleSpeed() - App.PlayerViewModel.Player.GetBattleSpeed();
+
+            /* BONUS DAMAGE FOR SPEED */
+            if (SpeedDifference <= -5)
+                enemy.TakeDamage(player.DealDamage() + 3, true);
+            else
+                enemy.TakeDamage(player.DealDamage(), true);
+
+            /* SECOND STRIKE */
+            if (SpeedDifference <= -10)
+                enemy.TakeDamage(player.DealDamage(), true);
+
+            App.LocationViewModel.DBhelper.UpdateOne(enemy); // enemy's DB-update
+        }
+
+
+        /* RARITY COLORS */
+        public Brush GetRarityBrush(AItem Item, Label TextRarityLabel = null)
+        {
+            var bc = new BrushConverter();
+            if (Item.FindChance <= 7)// 0 - 7
+            {
+                if (TextRarityLabel != null)
+                    TextRarityLabel.Content = "Normální";
+                return (Brush)bc.ConvertFrom("#FF4F4F4F");//WHITE - COMMON
+            }
+            else if (Item.FindChance <= 14)// 8 - 14 
+            {
+                if (TextRarityLabel != null)
+                    TextRarityLabel.Content = "Vzácn";
+                return (Brush)bc.ConvertFrom("#FF0743AC");//BLUE - RARE
+            }
+            else if (Item.FindChance <= 20)// 15 - 20
+            {
+                if (TextRarityLabel != null)
+                    TextRarityLabel.Content = "Epick";
+                return (Brush)bc.ConvertFrom("#FF911CC7");//PURPLE - EPIC
+            }
+            else// 21 - 26
+            {
+                if (TextRarityLabel != null)
+                    TextRarityLabel.Content = "Legendární";
+                return (Brush)bc.ConvertFrom("#FFDE8300");//ORANGE - LEGENDARY
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Dracak.Classes.Creatures
         }
 
         public int InLocationId { get; set; }
+        public bool InFight { get; set; }
         public int StatsPoints { get; set; }
 
         /* H U N G E R */
@@ -115,11 +116,15 @@ namespace Dracak.Classes.Creatures
 
         public void DoAction(int ActionCost, int EnergyCost)
         {
-            // max swiftness - 15 ==> all actions cost 50% less
-            double TrueActionCost = ActionCost - ((double)PrimaryStats.Swiftness / 30) * ActionCost;
-            currentThirst -= TrueActionCost;
-            currentHunger -= TrueActionCost;
+            currentThirst -= GetTrueActionCost(ActionCost);
+            currentHunger -= GetTrueActionCost(ActionCost);
             currentEnergy -= EnergyCost;
+        }
+        public double GetTrueActionCost(int ActionCost)
+        {
+            // max swiftness - 15 ==> all actions cost 50% less
+            // about -3% drom duration foreach point
+            return ActionCost - ((double)PrimaryStats.Swiftness / 30) * ActionCost;
         }
         public void Sleep(int hours)
         {
@@ -147,12 +152,12 @@ namespace Dracak.Classes.Creatures
                     break;
             }
         }
-        public void Eat(Consumable consumable)
+        public void Eat(double hungerGain = 0, double thirstGain = 0, double healthGain = 0, double energyGain = 0)
         {
-            currentHealth += consumable.HealthGain;
-            currentThirst += consumable.ThirstGain;
-            currentHunger += consumable.HungerGain;
-            currentEnergy += consumable.EnergyGain;
+            currentHealth += healthGain;
+            currentThirst += thirstGain;
+            currentHunger += hungerGain;
+            currentEnergy += energyGain;
         }
         public void ChangePrimaryStats(PrimaryStats primaryStats)
         {

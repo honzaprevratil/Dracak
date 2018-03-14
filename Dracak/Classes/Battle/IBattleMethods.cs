@@ -10,6 +10,7 @@ namespace Dracak.Classes.Battle
     {
         double DealDamage();
         void TakeDamage(double DamageDealt, bool UseArmor);
+        int Iniciative();
         double GetDefense();
         double GetBattleSpeed();
         string GetStringDamage();

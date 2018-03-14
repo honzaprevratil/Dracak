@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Dracak.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="480" d:DesignWidth="480"
-      Title="ActionsFrame">
+      Title="ActionsFrame" Loaded="Page_Loaded">
 
 
     <Grid Margin="60,30,60,40">
