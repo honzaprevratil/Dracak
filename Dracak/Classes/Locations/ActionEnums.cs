@@ -14,4 +14,8 @@ namespace Dracak.Classes.Locations
     {
         SlowSearch, FastSearch
     }
+    public enum ActionResult
+    {
+        Done, Died, Ambushed
+    }
 }

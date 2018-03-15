@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Dracak.Pages
 {
@@ -21,6 +22,7 @@ namespace Dracak.Pages
     /// </summary>
     public partial class GamePage : Page
     {
+        private DispatcherTimer timer = new DispatcherTimer();
         public GamePage()
         {
             InitializeComponent();
@@ -72,6 +74,11 @@ namespace Dracak.Pages
                 Source = App.PlayerViewModel
             };
             ThirstBar.SetBinding(ProgressBar.ValueProperty, BindingThirst);
+
+            /* CHECK ALIVE */
+            timer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            timer.Tick += (sender, args) => { CheckAlive(); };
+            timer.Start();
             return this;
         }
         public GamePage StartWriting()
@@ -80,6 +87,15 @@ namespace Dracak.Pages
             return this;
         }
 
+        private void CheckAlive()
+        {
+            if (!App.PlayerViewModel.Player.IsAlive)
+            {
+                App.PlayerViewModel.DBhelper.DeleteAllFromDB();
+                this.NavigationService.Navigate(new DeathPage());
+                timer.Stop();
+            }
+        }
 
         private void GameFrame_Initialized(object sender, EventArgs e)
         {

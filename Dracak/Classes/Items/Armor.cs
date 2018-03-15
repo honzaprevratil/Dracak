@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dracak.Classes.Items
+namespace Dracak.Classes.AItems
 {
     public class Armor : AItem
     {

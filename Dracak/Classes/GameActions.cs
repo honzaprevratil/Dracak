@@ -1,5 +1,5 @@
 ﻿using Dracak.Classes.Creatures;
-using Dracak.Classes.Items;
+using Dracak.Classes.AItems;
 using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
@@ -109,10 +109,17 @@ namespace Dracak.Classes
             if (foundItems.Length > 0)
             {
                 foundItems = foundItems.Substring(0, foundItems.Length - 2);
-                App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + " Našel jsi: " + foundItems + ".";
+                if (Speed == SearchOptions.FastSearch)
+                    App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + foundItems + ".";
+                else
+                    App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.SlowSearchText + foundItems + ".";
             }
             else
-                App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + " Nic jsi neneašel.";
+                if (Speed == SearchOptions.FastSearch)
+                    App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + "velký prd.";
+                else
+                    App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + "ztracenou lítost.";
+
 
             App.LocationViewModel.UpdateLocationItemList();
             return false;

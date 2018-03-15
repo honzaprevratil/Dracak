@@ -1,7 +1,7 @@
 ﻿using Dracak.Classes;
 using Dracak.Classes.Battle;
 using Dracak.Classes.Creatures;
-using Dracak.Classes.Items;
+using Dracak.Classes.AItems;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace Dracak
 
         /* CURRENT HEALTH + IS ALIVE */
         public double currentHealth;
-        public bool IsAlive;
+        public bool IsAlive { get; set; } = true;
         public double CurrentHealth
         {
             get
@@ -61,7 +61,7 @@ namespace Dracak
                 currentHealth = currentHealth > 0 ? value : 0;
                 currentHealth = currentHealth < MaxHealth ? currentHealth : MaxHealth;
 
-                IsAlive = currentHealth == 0 ? true : false;
+                IsAlive = currentHealth == 0 ? false : true;
             }
         }
 

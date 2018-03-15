@@ -1,5 +1,5 @@
 ﻿using Dracak.Classes.Creatures;
-using Dracak.Classes.Items;
+using Dracak.Classes.AItems;
 using Dracak.Pages;
 using SQLite;
 using SQLiteNetExtensions.Extensions;
@@ -25,14 +25,7 @@ namespace Dracak.Classes.Locations
         public DBhelper()
         {
             Connect();
-
-            var AllLocations = this.GetAllWithChildren<Location>();
-
-            if (AllLocations.Count == 0)
-            {
-                this.FillPlayerToDB();
-                this.FillLocationsToDB();
-            }
+            FillAllDefaultData();
         }
         public void Connect()
         {
@@ -66,6 +59,7 @@ namespace Dracak.Classes.Locations
         public void CloseConnection()
         {
             db.Close();
+            GC.Collect();
         }
         public void InsertWithChildren<T>(T table) where T : ATable, new()
         {
@@ -156,6 +150,25 @@ namespace Dracak.Classes.Locations
         {
             db.Delete(table);
         }
+        public void DeleteAllFromDB()
+        {
+            /*LOACTIONS TABLES*/
+            db.DeleteAll<Location>();
+            db.DeleteAll<LocationBind>();
+            /*ITEMS TABLES*/
+            db.DeleteAll<Armor>();
+            db.DeleteAll<Consumable>();
+            db.DeleteAll<Weapon>();
+            db.DeleteAll<AItem>();
+            /* CREATURES TABLES */
+            db.DeleteAll<Creature>();
+            db.DeleteAll<Enemy>();
+            db.DeleteAll<PrimaryStats>();
+            db.DeleteAll<Inventory>();
+            db.DeleteAll<Player>();
+            /* DEFAULT DATA */
+            FillAllDefaultData();
+        }
         public void UpdateList<AItem>(List<AItem> ItemList)
         {
             foreach (AItem table in ItemList)
@@ -176,6 +189,16 @@ namespace Dracak.Classes.Locations
 
 
         /* START DATA */
+        public void FillAllDefaultData()
+        {
+            var AllLocations = this.GetAllWithChildren<Location>();
+
+            if (AllLocations.Count == 0)
+            {
+                this.FillPlayerToDB();
+                this.FillLocationsToDB();
+            }
+        }
         public void FillPlayerToDB()
         {
             Weapon PlayerWeapon = new Weapon("Nůž", 1, 1, WeaponType.Melee, "Malý kapesní nožík", 0, true, 9999, 1);
@@ -224,8 +247,8 @@ namespace Dracak.Classes.Locations
                 Image = @"/Dracak;component/Images/Locations/severni-plaz.png",
                 Filter = "#4CA49C15",
                 Description = "Stojíš na severní pláži. Všude kolem Tebe písek, palmy, kameny a moře. Nehostinné podmínky ostrova na Tebe volají ze všech stran. Co se rozhodneš udělat?",
-                FastSearchText = "Rychle jsi prohledal Severní pláž.",
-                SlowSearchText = "Důkladně prohledáváš Severní pláž.",
+                FastSearchText = "V levo písek, v pravo písek, v botě? Noha, co jinýho bys tam čekal. V hromadě písku jsi krom písku našel: ",
+                SlowSearchText = "Začal jsi kopat v písku jednu díru za druhou. Přece tu něco někde musí být.. Co třeba pirátský poklad?... Po 3 hodinách hledání jsi našel: ",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(1, 2), new LocationBind(1, 3) },
                 ItemList = new List<AItem> {
                     new Weapon("Meč", 1, 3, WeaponType.Melee,"Klasický meč, nijak zvlášť ostrý.", randInt.Next(4,8), false, 1001, 1001),
@@ -249,9 +272,9 @@ namespace Dracak.Classes.Locations
                 Name = "Severní moře",
                 Image = @"/Dracak;component/Images/Locations/severni-more.jpg",
                 Filter = "#4CA49C15",
-                Description = "Rozhodl ses plavit mořem.",
-                FastSearchText = "Rychle jsi prohledal Severní moře.",
-                SlowSearchText = "Důkladně prohledáváš Severní moře.",
+                Description = "Rozhodl ses plavit mořem. Ale jak daleko asi můžeš doplavat bez lodi? No moc daleko to nebude.. Takže vlastně jen stojíš na severní pláži s nohama ve vodě a čumíš směrem do moře.",
+                FastSearchText = "Rozhlédnul ses kolem nějakou chvíli jsi chodil ve vodě, když v tom jsi na dně v kromadě toho písku zahlédl... Kámen. Krom toho jsi našel:",
+                SlowSearchText = "Co chceš v moři důkladně prohledávat?.. Tady stejně nic nenajdeš.. No dobře, tak jsi našel:.",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(2, 1)},
             });
             this.InsertWithChildren(new Location
@@ -260,7 +283,7 @@ namespace Dracak.Classes.Locations
                 Name = "Severní les",
                 Image = @"/Dracak;component/Images/Locations/severni-les.jpg",
                 Filter = "#7FA49C15",
-                Description = "Rozhodl ses jít lesem.",
+                Description = "Rozhodl ses jít lesem. Vysoké listnaté stromy a hustý travní porost nyní křižují Tvou cestu. ",
                 FastSearchText = "Rychle jsi prohledal Severní les.",
                 SlowSearchText = "Důkladně prohledáváš Severní les.",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(3, 1), new LocationBind(3, 4), new LocationBind(3, 5), new LocationBind(3, 6)},

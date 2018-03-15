@@ -1,4 +1,4 @@
-﻿using Dracak.Classes.Items;
+﻿using Dracak.Classes.AItems;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
