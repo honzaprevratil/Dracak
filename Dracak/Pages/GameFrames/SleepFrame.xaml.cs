@@ -29,17 +29,25 @@ namespace Dracak.Pages
         {
             var param = (sender as Button).CommandParameter;
             int.TryParse(param.ToString(), out int hours);
-            bool OK = App.GameActions.Sleep(hours);
+
             this.NavigationService.GoBack();
 
-            if (!OK)
-                this.NavigationService.Navigate(new FightFrame());
+            switch (App.GameActions.Sleep(hours))
+            {
+                case ActionResult.PlayerDied:
+                    // Game.NavigationService.Navigate(new DeathPage());
+                    // how to do this????
+                    break;
+
+                case ActionResult.PlayerAmbushed:
+                    this.NavigationService.Navigate(new FightFrame().LoadEnemy());
+                    break;
+            }
         }
 
         private void Click_GoBack(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
-
         }
     }
 }

@@ -86,29 +86,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Battle\IBattleMethods.cs" />
+    <Compile Include="Classes\Actions\IBattleMethods.cs" />
     <Compile Include="Classes\Creatures\Enemy.cs" />
     <Compile Include="Classes\Creatures\Player.cs" />
     <Compile Include="Classes\Creatures\PlayerViewModel.cs" />
     <Compile Include="Classes\Creatures\PrimaryStats.cs" />
     <Compile Include="Classes\DB\ATable.cs" />
     <Compile Include="Classes\DB\FileHelper.cs" />
-    <Compile Include="Classes\FightActions.cs" />
-    <Compile Include="Classes\GameActions.cs" />
-    <Compile Include="Classes\ItemActions.cs" />
+    <Compile Include="Classes\Actions\FightActions.cs" />
+    <Compile Include="Classes\Actions\GameActions.cs" />
+    <Compile Include="Classes\Actions\ItemActions.cs" />
     <Compile Include="Classes\Items\AItem.cs" />
     <Compile Include="Classes\Creatures\Creature.cs" />
     <Compile Include="Classes\Items\Armor.cs" />
     <Compile Include="Classes\Creatures\Inventory.cs" />
-    <Compile Include="Classes\Items\ItemInfo.cs" />
     <Compile Include="Classes\Items\Weapon.cs" />
-    <Compile Include="Classes\Locations\Actions.cs" />
     <Compile Include="Classes\Locations\LocationViewModel.cs" />
     <Compile Include="Classes\DB\DBhelper.cs" />
     <Compile Include="Classes\Locations\Location.cs" />
     <Compile Include="Classes\Items\Consumable.cs" />
     <Compile Include="Classes\Locations\LocationBind.cs" />
-    <Compile Include="Classes\Locations\ActionEnums.cs" />
+    <Compile Include="Classes\Actions\ActionEnums.cs" />
     <Compile Include="Pages\GameFrames\FightFrame.xaml.cs">
       <DependentUpon>FightFrame.xaml</DependentUpon>
     </Compile>
@@ -145,7 +143,7 @@
     <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\SlowWriter.cs" />
+    <Compile Include="Classes\Locations\SlowWriter.cs" />
     <Page Include="Pages\GameFrames\FightFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -281,9 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Locations\hory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Locations\stonehange.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Locations\severni-les.jpg" />

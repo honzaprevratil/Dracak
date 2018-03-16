@@ -28,20 +28,36 @@ namespace Dracak.Pages
         }
         private void Click_Fast(object sender, RoutedEventArgs e)
         {
-            bool Ambushed = App.GameActions.ItemActions.Search(SearchOptions.FastSearch);
             this.NavigationService.GoBack();
 
-            if (Ambushed)
-                this.NavigationService.Navigate(new FightFrame());
+            switch (App.GameActions.ItemActions.Search(SearchOptions.FastSearch))
+            {
+                case ActionResult.PlayerDied:
+                    // Game.NavigationService.Navigate(new DeathPage());
+                    // how to do this????
+                    break;
+
+                case ActionResult.PlayerAmbushed:
+                    this.NavigationService.Navigate(new FightFrame().LoadEnemy());
+                    break;
+            }
         }
 
         private void Click_Slow(object sender, RoutedEventArgs e)
         {
-            bool Ambushed = App.GameActions.ItemActions.Search(SearchOptions.SlowSearch);
             this.NavigationService.GoBack();
 
-            if (Ambushed)
-                this.NavigationService.Navigate(new FightFrame());
+            switch (App.GameActions.ItemActions.Search(SearchOptions.SlowSearch))
+            {
+                case ActionResult.PlayerDied:
+                    // Game.NavigationService.Navigate(new DeathPage());
+                    // how to do this????
+                    break;
+
+                case ActionResult.PlayerAmbushed:
+                    this.NavigationService.Navigate(new FightFrame().LoadEnemy());
+                    break;
+            }
         }
 
         private void Click_GoBack(object sender, RoutedEventArgs e)

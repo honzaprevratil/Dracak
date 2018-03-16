@@ -27,7 +27,7 @@ namespace Dracak.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (App.PlayerViewModel.Player.InFight)
-                this.NavigationService.Navigate(new FightFrame());
+                this.NavigationService.Navigate(new FightFrame().LoadEnemy());
             if (App.PlayerViewModel.Player.StatsPoints > 0)
             {
                 SkillPointsNotification.Visibility = Visibility.Visible;

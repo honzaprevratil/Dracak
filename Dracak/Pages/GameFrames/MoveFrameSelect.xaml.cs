@@ -47,15 +47,23 @@ namespace Dracak.Pages
         {
             /* GET ID */
             var param = (sender as Button).CommandParameter;
-            int.TryParse(param.ToString(), out int AdjacentLocationId);
+            int.TryParse(param.ToString(), out int AdjacentLocationIndex);
             
+            this.NavigationService.GoBack();
+            this.NavigationService.GoBack();
             /* MOVE */
-            bool OK = App.GameActions.Move(SelectedMoveOption, AdjacentLocationId);
-            this.NavigationService.GoBack();
-            this.NavigationService.GoBack();
 
-            if (!OK)
-                this.NavigationService.Navigate(new FightFrame());
+            switch (App.GameActions.Move(SelectedMoveOption, AdjacentLocationIndex))
+            {
+                case ActionResult.PlayerDied:
+                    // Game.NavigationService.Navigate(new DeathPage());
+                    // how to do this????
+                    break;
+
+                case ActionResult.PlayerAmbushed:
+                    this.NavigationService.Navigate(new FightFrame().LoadEnemy());
+                    break;
+            }
         }
         private void Click_GoBack(object sender, RoutedEventArgs e)
         {

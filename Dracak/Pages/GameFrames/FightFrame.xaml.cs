@@ -1,4 +1,5 @@
 ﻿using Dracak.Classes.Creatures;
+using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,9 @@ namespace Dracak.Pages
         public FightFrame()
         {
             InitializeComponent();
+        }
+        public FightFrame LoadEnemy()
+        {
             enemy = App.LocationViewModel.CurrentLocation.Enemy;
             if ((App.PlayerViewModel.Player.Iniciative() + randInt.Next(1, 7)) > (enemy.Iniciative() + randInt.Next(1, 7)))
                 PlayerStarts = true;
@@ -43,6 +47,8 @@ namespace Dracak.Pages
             EnemyHealthBar.Maximum = enemy.MaxHealth;
             RenderEnemyHealthBar(); // enemy's render
             App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
+
+            return this;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -61,27 +67,36 @@ namespace Dracak.Pages
 
         private void Click_Attack(object sender, RoutedEventArgs e)
         {
-            App.GameActions.FightActions.FightOneRound(PlayerStarts);
-
-            /* ENEMY KILLED */
-            if (enemy.CurrentHealth <= 0)
+            switch(App.GameActions.FightActions.FightOneRound(PlayerStarts))
             {
-                this.NavigationService.Navigate(new ActionsFrame());
-            }
+                case ActionResult.PlayerDied:
+                    // GamePage.NavigationService.Navigate(new DeathPage());
+                    // how to do this????
+                    break;
 
+                case ActionResult.EnemyDied:
+                    this.NavigationService.Navigate(new ActionsFrame());
+                    break;
+            }
             RenderEnemyHealthBar(); // enemy's render
         }
 
         private void Click_RunAway(object sender, RoutedEventArgs e)
         {
-            bool escaped = App.GameActions.FightActions.TryEscape(EscapeAttempts);
-            if (escaped)
+            switch (App.GameActions.FightActions.TryEscape(EscapeAttempts))
             {
-                this.NavigationService.Navigate(new ActionsFrame());
-            }
-            else
-            {
-                EscapeAttempts++;
+                case ActionResult.PlayerDied:
+                    // Game.NavigationService.Navigate(new DeathPage());
+                    // how to do this????
+                    break;
+
+                case ActionResult.SuccessfullyDone:
+                    this.NavigationService.Navigate(new ActionsFrame());
+                    break;
+
+                default:
+                    EscapeAttempts++;
+                    break;
             }
         }
     }

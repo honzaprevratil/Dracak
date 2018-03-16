@@ -19,55 +19,63 @@ namespace Dracak.Classes
         /* ACTIONS WITH ITEMS */
         public ItemActions ItemActions = new ItemActions();
 
-        public bool Move(MoveOptions Speed, int AdjacentLocationId)
+        public ActionResult Move(MoveOptions Speed, int AdjacentLocationIndex)
         {
-            Player player = App.PlayerViewModel.Player;
+            var playerVM = App.PlayerViewModel;
+            var locationVM = App.LocationViewModel;
 
             /*SPEND TIME -- BASED ON MOVE OPTION*/
             switch (Speed)
             {
                 case MoveOptions.Walk:
-                    player.DoAction(3, 1);
+                    playerVM.Player.DoAction(3, 1);
                     break;
 
                 case MoveOptions.March:
-                    player.DoAction(2, 3);
+                    playerVM.Player.DoAction(2, 3);
                     break;
 
                 case MoveOptions.Run:
-                    player.DoAction(1, 6);
+                    playerVM.Player.DoAction(1, 6);
                     break;
             }
 
-            int locationId = App.LocationViewModel.CurrentLocation.AdjacentLocations[AdjacentLocationId].BindedId;
-            App.LocationViewModel.ChangeLocation(locationId);
-            player.InLocationId = locationId;
+            int AdjacentLocationId = locationVM.CurrentLocation.AdjacentLocations[AdjacentLocationIndex].BindedId;
+            locationVM.ChangeLocation(AdjacentLocationId);
+            playerVM.Player.InLocationId = AdjacentLocationId;
 
-            if (FightActions.Ambush(player.GetTrueActionCost((int)Speed)))
+            if (FightActions.Ambush(playerVM.Player.GetTrueActionCost((int)Speed)) == ActionResult.PlayerAmbushed)
             {
-                return false;
+                return ActionResult.PlayerAmbushed;
             }
 
-            App.PlayerViewModel.ReRenderBars();
-            return true;
+            playerVM.ReRenderBars();
+
+            if (playerVM.Player.IsAlive)
+                return ActionResult.SuccessfullyDone;
+            else
+                return ActionResult.PlayerDied;
         }
-        public bool Sleep(int hours)
+        public ActionResult Sleep(int hours)
         {
             var playerVM = App.PlayerViewModel;
             Random randInt = new Random();
 
-            if (FightActions.Ambush(playerVM.Player.GetTrueActionCost(hours / 2)))
+            if (FightActions.Ambush(playerVM.Player.GetTrueActionCost(hours / 2)) == ActionResult.PlayerAmbushed)
             {
                 playerVM.Player.Sleep(randInt.Next(0, hours));
                 playerVM.ReRenderBars();
-                return false;
+                return ActionResult.PlayerAmbushed;
             }
             playerVM.Player.Sleep(hours);
 
             playerVM.ReRenderBars();
             App.SlowWriter.StoryFull = "Hodil sis šlofíka na " + hours + (hours < 5 ? " hodiny." : " hodin.") + App.PlayerViewModel.GetTextLivingStatus();
 
-            return true;
+            if (playerVM.Player.IsAlive)
+                return ActionResult.SuccessfullyDone;
+            else 
+                return ActionResult.PlayerDied;
         }
     }
 }

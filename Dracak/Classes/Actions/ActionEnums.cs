@@ -16,6 +16,6 @@ namespace Dracak.Classes.Locations
     }
     public enum ActionResult
     {
-        Done, Died, Ambushed
+        SuccessfullyDone, PlayerDied, PlayerAmbushed, EnemyDied
     }
 }

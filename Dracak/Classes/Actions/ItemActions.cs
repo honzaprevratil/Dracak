@@ -16,9 +16,11 @@ namespace Dracak.Classes
         /* 
          * ACTIONS FOR FIGHTS 
          */
-        public bool Search(SearchOptions Speed)
+        public ActionResult Search(SearchOptions Speed)
         {
-            Player player = App.PlayerViewModel.Player;
+            var locationVM = App.LocationViewModel;
+            var playerVM = App.PlayerViewModel;
+            
             Random randInt = new Random();
             int time = randInt.Next(0, 4);
             int dice = 0;
@@ -27,31 +29,31 @@ namespace Dracak.Classes
             switch (Speed)
             {
                 case SearchOptions.SlowSearch:
-                    if (App.GameActions.FightActions.Ambush(player.GetTrueActionCost(3)))
+                    if (App.GameActions.FightActions.Ambush(playerVM.Player.GetTrueActionCost(3)) == ActionResult.PlayerAmbushed)
                     {
-                        player.DoAction(time, time);
-                        return true;
+                        playerVM.Player.DoAction(time, time);
+                        return ActionResult.PlayerAmbushed;
                     }
-                    player.DoAction(3, 3);
+                    playerVM.Player.DoAction(3, 3);
                     dice = randInt.Next(6, 12);// 1k6 +5 BONUS FOR SLOW SEARCH
                     break;
 
                 case SearchOptions.FastSearch:
-                    if (App.GameActions.FightActions.Ambush(player.GetTrueActionCost(1)))
+                    if (App.GameActions.FightActions.Ambush(playerVM.Player.GetTrueActionCost(1)) == ActionResult.PlayerAmbushed)
                     {
-                        player.DoAction((int)(time / 3), (int)(time / 3));
-                        return true;
+                        playerVM.Player.DoAction((int)(time / 3), (int)(time / 3));
+                        return ActionResult.PlayerAmbushed;
                     }
-                    player.DoAction(1, 1);
+                    playerVM.Player.DoAction(1, 1);
                     dice = randInt.Next(1, 7);// 1k6
                     break;
             }
-            App.PlayerViewModel.ReRenderBars();
+            playerVM.ReRenderBars();
 
             /*TRY FIND ITEM*/
             int counter = 0;
             string foundItems = "";
-            List<AItem> LocationItemList = App.LocationViewModel.CurrentLocation.ItemList.ToList();
+            List<AItem> LocationItemList = locationVM.CurrentLocation.ItemList.ToList();
 
             foreach (AItem item in LocationItemList)
             {
@@ -63,19 +65,18 @@ namespace Dracak.Classes
             {
                 foundItems = foundItems.Substring(0, foundItems.Length - 2);
                 if (Speed == SearchOptions.FastSearch)
-                    App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + foundItems + ".";
+                    App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + foundItems + ".";
                 else
-                    App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.SlowSearchText + foundItems + ".";
+                    App.SlowWriter.StoryFull = locationVM.CurrentLocation.SlowSearchText + foundItems + ".";
             }
             else
                 if (Speed == SearchOptions.FastSearch)
-                App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + "velký prd.";
+                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + "velký prd.";
             else
-                App.SlowWriter.StoryFull = App.LocationViewModel.CurrentLocation.FastSearchText + "ztracenou lítost.";
+                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + "ztracenou lítost.";
 
-
-            App.LocationViewModel.UpdateLocationItemList();
-            return false;
+            locationVM.UpdateLocationItemList();
+            return ActionResult.SuccessfullyDone;
         }
         public bool TryFindItem(AItem item, int itemIndex, int bonusChance = 0)
         {
@@ -165,82 +166,89 @@ namespace Dracak.Classes
             App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
         }
 
-        public void EatConsumable(Consumable food)
+        public ActionResult EatConsumable(Consumable food)
         {
+            var playerVM = App.PlayerViewModel;
             Random randInt = new Random();
             switch (food.Name)
             {
                 case "Kokosy":
-                    App.PlayerViewModel.Player.Eat(1, 2, 0, 0);
+                    playerVM.Player.Eat(1, 2, 0, 0);
                     break;
                 case "Banány":
-                    App.PlayerViewModel.Player.Eat(3, 0, 0, 3);
+                    playerVM.Player.Eat(3, 0, 0, 3);
                     break;
 
                 case "Chaluhy":
-                    App.PlayerViewModel.Player.Eat(0.5, 0, -1, 0);
+                    playerVM.Player.Eat(0.5, 0, -1, 0);
                     break;
                 case "Mrtvá ryba":
-                    App.PlayerViewModel.Player.Eat(8, 0, -15, 0);
+                    playerVM.Player.Eat(8, 0, -15, 0);
                     break;
 
                 case "Brusinky":
-                    App.PlayerViewModel.Player.Eat(0.5, 1, 0, 0);
+                    playerVM.Player.Eat(0.5, 1, 0, 0);
                     break;
                 case "Maliny":
-                    App.PlayerViewModel.Player.Eat(2, 1, 0, 0);
+                    playerVM.Player.Eat(2, 1, 0, 0);
                     break;
                 case "Ostružiny":
-                    App.PlayerViewModel.Player.Eat(4, 2, 1, 1);
+                    playerVM.Player.Eat(4, 2, 1, 1);
                     break;
                 case "Jahody":
-                    App.PlayerViewModel.Player.Eat(4, 3, 10, 10);
+                    playerVM.Player.Eat(4, 3, 10, 10);
                     break;
                 case "Zelená houba":
                     if (randInt.Next(0, 2) == 1)
-                        App.PlayerViewModel.Player.Eat(99, 99, 99, 99);
+                        playerVM.Player.Eat(99, 99, 99, 99);
                     else
-                        App.PlayerViewModel.Player.Eat(-99, -99, -99, -99);
+                        playerVM.Player.Eat(-99, -99, -99, -99);
                     break;
 
                 case "Mochomůrky":
-                    App.PlayerViewModel.Player.Eat(3, 0, -10, 0);
+                    playerVM.Player.Eat(3, 0, -10, 0);
                     break;
                 case "Hřiby":
-                    App.PlayerViewModel.Player.Eat(3, 0, 0, 0);
+                    playerVM.Player.Eat(3, 0, 0, 0);
                     break;
                 case "Borůvky":
-                    App.PlayerViewModel.Player.Eat(1, 2, 2, 0);
+                    playerVM.Player.Eat(1, 2, 2, 0);
                     break;
                 case "Chléb":
-                    App.PlayerViewModel.Player.Eat(5, 0, 0, 4);
+                    playerVM.Player.Eat(5, 0, 0, 4);
                     break;
 
                 case "Jablko":
-                    App.PlayerViewModel.Player.Eat(1, 0.5, 0, 0);
+                    playerVM.Player.Eat(1, 0.5, 0, 0);
                     break;
                 case "Zlaté Jablko":
-                    App.PlayerViewModel.Player.Eat(2, 1, 3, 3);
+                    playerVM.Player.Eat(2, 1, 3, 3);
                     break;
                 default:
-                    App.PlayerViewModel.Player.Eat(1, 1, 1, 1);
+                    playerVM.Player.Eat(1, 1, 1, 1);
                     break;
             }
 
             /* FREE HIT IF IN FIGHT*/
-            if (App.PlayerViewModel.Player.InFight)
-                App.GameActions.FightActions.EnemyAtack();
+            if (playerVM.Player.InFight)
+            {
+                if (App.GameActions.FightActions.EnemyAtack() == ActionResult.PlayerDied)
+                    return ActionResult.PlayerDied;
+            }
 
             if (food.Amount > 0)
-            {
-                App.PlayerViewModel.UpdateItem(food);
-            }
+                playerVM.UpdateItem(food);
             else
             {
-                App.PlayerViewModel.Player.Inventory.ItemList.Remove(food);
-                App.PlayerViewModel.DBhelper.DeleteItem(food);
+                playerVM.Player.Inventory.ItemList.Remove(food);
+                playerVM.DBhelper.DeleteItem(food);
             }
-            App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
+            playerVM.ReRenderBars(); // player's render + DB-update
+
+            if (playerVM.Player.IsAlive)
+                return ActionResult.SuccessfullyDone;
+            else
+                return ActionResult.PlayerDied;
         }
 
         /* RARITY COLORS */

@@ -287,8 +287,8 @@ namespace Dracak.Classes.Locations
                 },
             });
             this.InsertWithChildren(new Enemy("Medůza", 5, 10, 3, 1, 3, 30,
-                "Stojíš v tom zpropadeném moři a vyhlížíš nějakou loď, která by Tě mohla vysvobodit. Najednou Ti projde bolest skrz nohu. Cukneš sebou a když se podíváš dolů, spatříš medůzu.",
-                "Téměř jedním bodnutím jsi zničil tohoto chapadlovitého protivníka. Avšak jeho žahnutí nebylo vůbec příjemné."
+                "Stojíš v tom zpropadeném moři a vyhlížíš nějakou loď, která by Tě mohla vysvobodit. Najednou Ti projde bolest skrz nohu. Cukneš sebou a když se podíváš dolů, spatříš medůzu, která Tě právě požahala svým otráveným chapadlem.",
+                "Jedním bodnutím jsi zničil tohoto chapadlovitého bezbranného protivníka. Avšak jeho žahnutí nebylo vůbec příjemné. Otázka zní, stálo mu to za jeho ubohou smrt?..."
             )
             { LocationId = 2 });
 
@@ -424,6 +424,11 @@ namespace Dracak.Classes.Locations
                     new Consumable("Banány", randInt.Next(3, 8), true, 5, "žluté a zahnuté", randInt.Next(12, 15), false, 1008, 1008),
                 },
             });
+            this.InsertWithChildren(new Enemy("Obří krab", randInt.Next(100, 120), randInt.Next(5, 7), 3, randInt.Next(9, 11), 20, 2,
+                "Jak tak stojíš na jižní pláži a vyhlížíš loď, najednou uslyšíš dupání v písku. Je stále hlasitější a hlasitější.. Když v tom spatříš obrovského běžícího.. Kraba? Co je tohle za hříčku přírody? Kde se tu krucinál vzal dvoumetrový krab???... Připrav se na závěrečný boj.",
+                "V zuřivém vzteku jsi této nemilosrdné zubaté kočičce udeřil poslední ránu a poslal jí tak bezvladně k zemi. Šavlozub je mrtev. Msta je dokonána a Johnova duše nyní může v klidu odejít... Což je Tvoje jedinná útěch nad bratrovou smrtí"
+            )
+            { LocationId = 6 });
 
             this.InsertWithChildren(new Location
             {
