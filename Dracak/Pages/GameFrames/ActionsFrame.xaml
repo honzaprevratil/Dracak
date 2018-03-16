@@ -23,12 +23,13 @@
         </Grid.ColumnDefinitions>
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Akce"/>
+        <Label x:Name="SkillPointsNotification" Panel.ZIndex="2" Grid.Column="1" Grid.Row="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BulgariaFont}" FontSize="25" Content="+10" Margin="120,15,0,54" Height="33" Width="60"/>
 
-        <Button Click="Click_Move" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="125" >
+        <Button Click="Click_Move" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="125">
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pohyb" />
         </Button>
 
-        <Button Click="Click_Inventory" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="155" >
+        <Button Click="Click_Inventory" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="155">
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Inventář" />
         </Button>
 
@@ -43,7 +44,7 @@
         <Button Click="Click_PickUp" Grid.Column="0" Grid.Row="3" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="135" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Sebrat" />
         </Button>
-        
+
         <Button Click="Click_Sleep" Grid.Column="1" Grid.Row="3" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="170" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Odpočívat" />
         </Button>

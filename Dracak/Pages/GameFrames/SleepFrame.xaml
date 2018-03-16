@@ -24,19 +24,19 @@
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Odpočívat"/>
         
-        <Button ToolTip="Akce: 2h, Energie: +20%" Click="Click_SleepHours" CommandParameter="2" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
+        <Button ToolTip="Akce: 2h, Energie: +20%, Životy: až +20%" Click="Click_SleepHours" CommandParameter="2" Grid.Column="0" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="2 hod" />
         </Button>
 
-        <Button ToolTip="Akce: 4h, Energie: +45%" Click="Click_SleepHours" CommandParameter="4" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
+        <Button ToolTip="Akce: 4h, Energie: +45%, Životy: až +45%" Click="Click_SleepHours" CommandParameter="4" Grid.Column="1" Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="4 hod" />
         </Button>
 
-        <Button ToolTip="Akce: 6h, Energie: +75%" Click="Click_SleepHours" CommandParameter="6" Grid.Column="0" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
+        <Button ToolTip="Akce: 6h, Energie: +75%, Životy: až +75%" Click="Click_SleepHours" CommandParameter="6" Grid.Column="0" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="6 hod" />
         </Button>
 
-        <Button ToolTip="Akce: 8h, Energie: +100%" Click="Click_SleepHours" CommandParameter="8" Grid.Column="1" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
+        <Button ToolTip="Akce: 8h, Energie: +100%, Životy: až +100%" Click="Click_SleepHours" CommandParameter="8" Grid.Column="1" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="130" >
             <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="8 hod" />
         </Button>
 

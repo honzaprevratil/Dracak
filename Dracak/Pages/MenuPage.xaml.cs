@@ -67,7 +67,16 @@ namespace Dracak
             /* EXISTS SAVE? */
             if (File.Exists(fileHelper.GetDBfilePath()))
             {
-                this.NavigationService.Navigate(new GamePage().BindData().StartWriting());
+                DBhelper dBhelper = new DBhelper();
+
+                if (dBhelper.CheckData())
+                    this.NavigationService.Navigate(new GamePage().BindData().StartWriting());
+                else
+                {
+                    var result = MessageBox.Show("Abyste mohl pokračovat musíte nejprve začít novou hru." + "\n\n" + "Chcete začít novou hru?", "Začít novou hru", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (result == MessageBoxResult.Yes)
+                        this.NavigationService.Navigate(new StoryPage().StartWriting());
+                }
             } 
             else
             {

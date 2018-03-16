@@ -20,10 +20,14 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="StoryImage" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Stretch="UniformToFill" HorizontalAlignment="Center" Source="/Dracak;component/Images/Locations/severni-les.jpg"/>
-        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#66A49C15"/>
+        <Image x:Name="StoryImage" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Stretch="UniformToFill" HorizontalAlignment="Center" Source="/Dracak;component/Images/Locations/zapadni-les.jpg"/>
+        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#44A29A21"/>
 
-        <Label x:Name="StoryHeader" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Severní Pláž"/>
+        <Label x:Name="StoryHeader" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Severní Pláž" Padding="50,10,50,18">
+            <Label.Background>
+                <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+            </Label.Background>
+        </Label>
 
         <Grid Grid.Column="1" Panel.ZIndex="3" Grid.Row="1" Margin="10,10">
             <Grid.Background>
@@ -50,12 +54,20 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button Click="Click_Menu" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="240">
-                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Hlavní menu" />
+            <Button Click="Click_Menu" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="70" Width="322">
+                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Hlavní menu" Padding="45,10,45,10">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+                    </Label.Background>
+                </Label>
             </Button>
 
-            <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="60" Width="220">
-                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" />
+            <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="70" Width="300">
+                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" Padding="45,10,45,10">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+                    </Label.Background>
+                </Label>
             </Button>
 
         </Grid>
@@ -72,17 +84,28 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ProgressBar x:Name="HealthBar" Foreground="#FF0A9129" Background="#7FFFF7F0" BorderBrush="#FF0A9129" BorderThickness="5" Panel.ZIndex="4" Height="25"  Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="100" Value="75" Width="267" HorizontalAlignment="Right" ToolTip="Životy" />
-            <ProgressBar x:Name="EnergyBar" Foreground="#FF91910A" Background="#7FF0F8FF" BorderBrush="#FF91910A" BorderThickness="2" Panel.ZIndex="4" Height="12"  Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="100" Value="21" Width="227" HorizontalAlignment="Right" ToolTip="Energie" />
-            <ProgressBar x:Name="HungerBar" Foreground="#FF910A0A" Background="#7FF0F8FF" BorderBrush="#FF910A0A" BorderThickness="2" Panel.ZIndex="4" Height="12"  Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="100" Value="60" Width="227" HorizontalAlignment="Right" ToolTip="Hlad" />
-            <ProgressBar x:Name="ThirstBar" Foreground="#FF0A5491" Background="#7FF0F8FF" BorderBrush="#FF0A5491" BorderThickness="2" Panel.ZIndex="4" Height="12"  Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="100" Value="68" Width="227" HorizontalAlignment="Right" ToolTip="Žízeň" />
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="25" FontStyle="Oblique" Panel.ZIndex="6" Content="Životy" Margin="190,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Left" ToolTip="5 * Výdrž"/>
+            <Label x:Name="HealthBarString" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="25" FontStyle="Oblique" Panel.ZIndex="5" Content="25/30" Margin="232,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Center" />
+            <ProgressBar x:Name="HealthBar" Foreground="#FF0A9129" Background="#7FFFF7F0" BorderBrush="#FF0A9129" BorderThickness="5" Panel.ZIndex="4" Height="30"  Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="100" Value="75" Width="267" HorizontalAlignment="Right"/>
+
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="18" FontStyle="Oblique" Panel.ZIndex="6" Content="Hlad" Grid.Row="1" Margin="190,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Left" ToolTip="1 * Výdrž" />
+            <Label x:Name="HungerBarString" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="18" FontStyle="Oblique" Panel.ZIndex="5" Content="25/30" Grid.Row="1" Margin="240,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Center" />
+            <ProgressBar x:Name="HungerBar" Foreground="#FF910A0A" Background="#7FF0F8FF" BorderBrush="#FF910A0A" BorderThickness="2" Panel.ZIndex="4" Height="19"  Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="100" Value="60" Width="267" HorizontalAlignment="Right"/>
+
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="18" FontStyle="Oblique" Panel.ZIndex="6" Content="Žízeň" Grid.Row="2" Margin="190,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Left" ToolTip="2/3 * Výdrž" />
+            <Label x:Name="ThirstBarString" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="18" FontStyle="Oblique" Panel.ZIndex="5" Content="25/30" Grid.Row="2" Margin="240,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Center" />
+            <ProgressBar x:Name="ThirstBar" Foreground="#FF0A5491" Background="#7FF0F8FF" BorderBrush="#FF0A5491" BorderThickness="2" Panel.ZIndex="4" Height="19"  Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="100" Value="68" Width="267" HorizontalAlignment="Right"/>
+            
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="18" FontStyle="Oblique" Panel.ZIndex="6" Content="Energie" Grid.Row="3" Margin="190,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Left" ToolTip="3 * Síla" />
+            <Label x:Name="EnergyBarString" Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="18" FontStyle="Oblique" Panel.ZIndex="5" Content="25/30" Grid.Row="3" Margin="240,0,0,0" Padding="5,0,5,0" HorizontalContentAlignment="Center" />
+            <ProgressBar x:Name="EnergyBar" Foreground="#FF91910A" Background="#7FF0F8FF" BorderBrush="#FF91910A" BorderThickness="2" Panel.ZIndex="4" Height="19"  Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="100" Value="21" Width="267" HorizontalAlignment="Right"/>
 
         </Grid>
 
 
 
 
-        <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Padding="30,15" Style="{StaticResource QuidQuoFont}" Foreground="Black" FontSize="36"  TextWrapping="Wrap" TextAlignment="Left" Text="Stojíš na severním moři"/>
+        <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Padding="30,15" Style="{StaticResource StoryBlock}" Foreground="Black" FontSize="36"  TextWrapping="Wrap" TextAlignment="Left" Text="Stojíš na severním moři"/>
 
     </Grid>
 </Page>

@@ -14,7 +14,7 @@ namespace Dracak.Classes.Creatures
         {
 
         }
-        public Enemy(string name, int health, int damage, int speed, int defense, int fightChance, string story, string deathStory)
+        public Enemy(string name, int health, int damage, int speed, int defense, int fightChance, int iniciative, string story, string deathStory)
         {
             this.Name = name;
             this.CurrentHealth = health;
@@ -24,6 +24,7 @@ namespace Dracak.Classes.Creatures
             this.Defense = defense;
             this.Aggressivity = fightChance;
             this.Story = story;
+            this.Inteligence = iniciative;
             this.DeathStory = deathStory;
         }
 

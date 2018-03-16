@@ -1,4 +1,5 @@
 ﻿using Dracak.Classes.Creatures;
+using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,53 +32,54 @@ namespace Dracak.Pages
         {
             App.SlowWriter.Target = StoryBlock;
             /* LOCATION NAME */
-            Binding BindingName = new Binding("CurrentLocationName")
-            {
-                Source = App.LocationViewModel
-            };
+            Binding BindingName = new Binding("CurrentLocationName") { Source = App.LocationViewModel };
             StoryHeader.SetBinding(ContentControl.ContentProperty, BindingName);
+            
             /* LOCATION IMAGE */
-            Binding BindingImage = new Binding("CurrentLocationImage")
-            {
-                Source = App.LocationViewModel
-            };
+            Binding BindingImage = new Binding("CurrentLocationImage") { Source = App.LocationViewModel };
             StoryImage.SetBinding(Image.SourceProperty, BindingImage);
+            
             /* LOCATION FILTER */
-            Binding BindingFilter = new Binding("CurrentLocationFilter")
-            {
-                Source = App.LocationViewModel
-            };
-            Filter.SetBinding(BackgroundProperty, BindingFilter);
-
+            Binding BindingFilter = new Binding("CurrentLocationFilter") { Source = App.LocationViewModel };
+            Filter.SetBinding(TextBlock.BackgroundProperty, BindingFilter);
 
             /* PLAYER'S HEALTH BAR */
-            Binding BindingHealth = new Binding("HealthBarValue")
-            {
-                Source = App.PlayerViewModel
-            };
-            HealthBar.SetBinding(ProgressBar.ValueProperty, BindingHealth);
+            Binding BindingHealth = new Binding("HealthBarValue") { Source = App.PlayerViewModel }; // value bind
+            Binding BindingBarsWidth = new Binding("HealthThirstHungerBarWidth") { Source = App.PlayerViewModel }; // bar width bind
+            Binding BindingHealthText = new Binding("HealthBarString") { Source = App.PlayerViewModel }; // text value bind
+
+            HealthBar.SetBinding(ProgressBar.ValueProperty, BindingHealth); // value bind
+            HealthBar.SetBinding(ProgressBar.WidthProperty, BindingBarsWidth); // bar width bind - same for health, thirst and hunger
+            HealthBarString.SetBinding(ContentControl.ContentProperty, BindingHealthText); // text value bind
+
             /* PLAYER'S ENERGY BAR */
-            Binding BindingEnergy = new Binding("EnergyBarValue")
-            {
-                Source = App.PlayerViewModel
-            };
-            EnergyBar.SetBinding(ProgressBar.ValueProperty, BindingEnergy);
+            Binding BindingEnergy = new Binding("EnergyBarValue") { Source = App.PlayerViewModel }; // value bind
+            Binding BindingEneryWidth = new Binding("EnergyBarWidth") { Source = App.PlayerViewModel };  // bar width bind
+            Binding BindingEnergyText = new Binding("EnergyBarString") { Source = App.PlayerViewModel }; // text value bind
+
+            EnergyBar.SetBinding(ProgressBar.ValueProperty, BindingEnergy); // value bind
+            EnergyBar.SetBinding(ProgressBar.WidthProperty, BindingEneryWidth); // bar width bind 
+            EnergyBarString.SetBinding(ContentControl.ContentProperty, BindingEnergyText); // text value bind
+
             /* PLAYER'S HUNGER BAR */
-            Binding BindingHunger = new Binding("HungerBarValue")
-            {
-                Source = App.PlayerViewModel
-            };
-            HungerBar.SetBinding(ProgressBar.ValueProperty, BindingHunger);
+            Binding BindingHunger = new Binding("HungerBarValue") { Source = App.PlayerViewModel }; // value bind
+            Binding BindingHungerText = new Binding("HungerBarString") { Source = App.PlayerViewModel }; // text value bind
+
+            HungerBar.SetBinding(ProgressBar.ValueProperty, BindingHunger); // value bind
+            HungerBar.SetBinding(ProgressBar.WidthProperty, BindingBarsWidth); // bar width bind - same for health, thirst and hunger
+            HungerBarString.SetBinding(ContentControl.ContentProperty, BindingHungerText); // text value bind
+
             /* PLAYER'S THIRST BAR */
-            Binding BindingThirst = new Binding("ThirstBarValue")
-            {
-                Source = App.PlayerViewModel
-            };
-            ThirstBar.SetBinding(ProgressBar.ValueProperty, BindingThirst);
+            Binding BindingThirst = new Binding("ThirstBarValue") { Source = App.PlayerViewModel }; // value bind
+            Binding BindingThirstText = new Binding("ThirstBarString") { Source = App.PlayerViewModel }; // text value bind
+
+            ThirstBar.SetBinding(ProgressBar.ValueProperty, BindingThirst);// value bind
+            ThirstBar.SetBinding(ProgressBar.WidthProperty, BindingBarsWidth); // bar width bind - same for health, thirst and hunger
+            ThirstBarString.SetBinding(ContentControl.ContentProperty, BindingThirstText); // text value bind
 
             /* CHECK ALIVE */
-            timer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            timer.Tick += (sender, args) => { CheckAlive(); };
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 333);
+            //timer.Tick += (sender, args) => { CheckAlive(); };
             timer.Start();
             return this;
         }

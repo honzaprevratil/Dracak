@@ -95,6 +95,7 @@ namespace Dracak.Pages
             App.PlayerViewModel.Player.StatsPoints = int.Parse(Points.Content.ToString());
 
             App.PlayerViewModel.ReRenderBars();
+            this.NavigationService.GoBack();
         }
         private void StatUp(Label statLabel, Button statUpButton)
         {

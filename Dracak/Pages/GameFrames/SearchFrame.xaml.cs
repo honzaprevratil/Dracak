@@ -28,7 +28,7 @@ namespace Dracak.Pages
         }
         private void Click_Fast(object sender, RoutedEventArgs e)
         {
-            bool Ambushed = App.GameActions.Search(SearchOptions.FastSearch);
+            bool Ambushed = App.GameActions.ItemActions.Search(SearchOptions.FastSearch);
             this.NavigationService.GoBack();
 
             if (Ambushed)
@@ -37,7 +37,7 @@ namespace Dracak.Pages
 
         private void Click_Slow(object sender, RoutedEventArgs e)
         {
-            bool Ambushed = App.GameActions.Search(SearchOptions.SlowSearch);
+            bool Ambushed = App.GameActions.ItemActions.Search(SearchOptions.SlowSearch);
             this.NavigationService.GoBack();
 
             if (Ambushed)

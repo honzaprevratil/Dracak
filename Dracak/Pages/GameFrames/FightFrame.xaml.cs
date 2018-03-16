@@ -41,11 +41,17 @@ namespace Dracak.Pages
             Speed.Content = enemy.Speed;
 
             EnemyHealthBar.Maximum = enemy.MaxHealth;
-            EnemyHealthBar.Value = enemy.CurrentHealth;
+            RenderEnemyHealthBar(); // enemy's render
             App.PlayerViewModel.ReRenderBars(); // player's render + DB-update
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void RenderEnemyHealthBar()
+        {
+            EnemyHealthBarString.Content = enemy.CurrentHealth + " / " + enemy.MaxHealth;
+            EnemyHealthBar.Value = enemy.CurrentHealth;
         }
 
         private void Click_Inventory(object sender, RoutedEventArgs e)
@@ -55,20 +61,20 @@ namespace Dracak.Pages
 
         private void Click_Attack(object sender, RoutedEventArgs e)
         {
-            App.GameActions.FightOneRound(PlayerStarts);
+            App.GameActions.FightActions.FightOneRound(PlayerStarts);
 
             /* ENEMY KILLED */
-            if (enemy.CurrentHealth < 0)
+            if (enemy.CurrentHealth <= 0)
             {
                 this.NavigationService.Navigate(new ActionsFrame());
             }
 
-            EnemyHealthBar.Value = enemy.CurrentHealth; // enemy's render
+            RenderEnemyHealthBar(); // enemy's render
         }
 
         private void Click_RunAway(object sender, RoutedEventArgs e)
         {
-            bool escaped = App.GameActions.TryEscape(EscapeAttempts);
+            bool escaped = App.GameActions.FightActions.TryEscape(EscapeAttempts);
             if (escaped)
             {
                 this.NavigationService.Navigate(new ActionsFrame());

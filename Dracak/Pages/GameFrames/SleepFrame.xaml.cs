@@ -29,7 +29,11 @@ namespace Dracak.Pages
         {
             var param = (sender as Button).CommandParameter;
             int.TryParse(param.ToString(), out int hours);
-            App.GameActions.Sleep(hours);
+            bool OK = App.GameActions.Sleep(hours);
+            this.NavigationService.GoBack();
+
+            if (!OK)
+                this.NavigationService.Navigate(new FightFrame());
         }
 
         private void Click_GoBack(object sender, RoutedEventArgs e)

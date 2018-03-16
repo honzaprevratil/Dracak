@@ -21,8 +21,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.9*" />
-            <ColumnDefinition Width="1.9*" />
-            <ColumnDefinition Width="0.71*" />
+            <ColumnDefinition Width="1.8*" />
+            <ColumnDefinition Width="0.72*" />
         </Grid.ColumnDefinitions>
 
         <Label Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Výstroj"/>

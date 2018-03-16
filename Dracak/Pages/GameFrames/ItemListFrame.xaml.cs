@@ -91,7 +91,7 @@ namespace Dracak.Pages
             {
                 /* NEXT BUTTON VISIBLITY*/
                 ButNext.Visibility = ItemList.Count > 10 ? Visibility.Visible : Visibility.Hidden;
-                PageStatus.Content = OnPage.ToString() + "/" + MaxPage.ToString();
+                PageStatus.Content = "stránka\n     " + OnPage.ToString() + "/" + MaxPage.ToString();
 
                 for (int butCtr = 0; butCtr <= 9; butCtr++)
                 {
@@ -107,16 +107,16 @@ namespace Dracak.Pages
                             break;
                         }
                         /* RARITY COLOR */
-                        labels[butCtr].Foreground = App.GameActions.GetRarityBrush(ItemList[ItemCounter]);
+                        labels[butCtr].Foreground = App.GameActions.ItemActions.GetRarityBrush(ItemList[ItemCounter]);
 
                         /* SET TOOLTIP*/
                         if (ItemList[ItemCounter] is Weapon)
                         {
-                            buttons[butCtr].ToolTip = "Poškození: " + ((Weapon)ItemList[ItemCounter]).Damage + " / " + ItemList[ItemCounter].Speed + " :Rychlost"; // set description
+                            buttons[butCtr].ToolTip = "Poškození: " + ((Weapon)ItemList[ItemCounter]).Damage + "\nRychlost: " + ItemList[ItemCounter].Speed; // set description
                         }
                         else if (ItemList[ItemCounter] is Armor)
                         {
-                            buttons[butCtr].ToolTip = "Absorbce: " + ((Armor)ItemList[ItemCounter]).Defense + " / " + ItemList[ItemCounter].Speed + " :Rychlost"; // set description
+                            buttons[butCtr].ToolTip = "Absorbce: " + ((Armor)ItemList[ItemCounter]).Defense + "\nRychlost: " + ItemList[ItemCounter].Speed; // set description
                         }
                         else if (ItemList[ItemCounter] is Consumable)
                         {
@@ -139,7 +139,7 @@ namespace Dracak.Pages
 
             if (HeaderText == "Sebrat")
             {
-                App.GameActions.PickUpItem(ItemList[itemIndex]);
+                App.GameActions.ItemActions.PickUp(ItemList[itemIndex]);
 
                 if (MaxPage == OnPage)
                 {

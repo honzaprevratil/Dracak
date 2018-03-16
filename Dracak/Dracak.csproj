@@ -93,7 +93,9 @@
     <Compile Include="Classes\Creatures\PrimaryStats.cs" />
     <Compile Include="Classes\DB\ATable.cs" />
     <Compile Include="Classes\DB\FileHelper.cs" />
+    <Compile Include="Classes\FightActions.cs" />
     <Compile Include="Classes\GameActions.cs" />
+    <Compile Include="Classes\ItemActions.cs" />
     <Compile Include="Classes\Items\AItem.cs" />
     <Compile Include="Classes\Creatures\Creature.cs" />
     <Compile Include="Classes\Items\Armor.cs" />
@@ -293,19 +295,22 @@
     <Resource Include="Images\Locations\jizni-plaz.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\zapadni-les.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Locations\jizni-les.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Locations\vychodni-les.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Locations\jizni-more.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Locations\ruiny-vesnice.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pergamen2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\vychodni-les.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\zapadni-les.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Locations\jizni-les.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.5\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />

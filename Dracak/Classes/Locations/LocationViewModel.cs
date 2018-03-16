@@ -33,6 +33,7 @@ namespace Dracak.Classes.Locations
         public LocationViewModel()
         {
             DBhelper = new DBhelper();
+            DBhelper.FillAllDefaultData();
             LocationsDict = DBhelper.GetLocationDict();
             this.CurrentLocation = DBhelper.GetLocationById(App.PlayerViewModel.Player.InLocationId);
         }
@@ -70,7 +71,7 @@ namespace Dracak.Classes.Locations
 
         /* LOCATION FILTER */
         private Brush locationFilter;
-        public Brush CurrentLocationFilter { get { return locationFilter; } }
+        public Brush CurrentLocationFilter { get { return locationFilter; } set { locationFilter = value; } }
 
         public void ChangeLocation (int locationId)
         {

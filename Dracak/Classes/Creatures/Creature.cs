@@ -18,7 +18,7 @@ namespace Dracak
             this.PrimaryStats = primaryStats;
             this.Inventory = inventory;
 
-            currentHealth = SetAndReturnMaxHealth();
+            CurrentHealth = SetAndReturnMaxHealth();
         }
         public Creature()
         {
@@ -47,21 +47,22 @@ namespace Dracak
         }
 
         /* CURRENT HEALTH + IS ALIVE */
-        public double currentHealth;
+        public double CurrentHealth;
         public bool IsAlive { get; set; } = true;
-        public double CurrentHealth
+        public double currentHealth
         {
             get
             {
-                return currentHealth;
-            } set
+                return CurrentHealth;
+            }
+            set
             {
-                currentHealth = value;
+                CurrentHealth = value;
 
-                currentHealth = currentHealth > 0 ? value : 0;
-                currentHealth = currentHealth < MaxHealth ? currentHealth : MaxHealth;
+                CurrentHealth = CurrentHealth > 0 ? value : 0;
+                CurrentHealth = CurrentHealth < MaxHealth ? CurrentHealth : MaxHealth;
 
-                IsAlive = currentHealth == 0 ? false : true;
+                IsAlive = CurrentHealth == 0 ? false : true;
             }
         }
 
@@ -107,11 +108,11 @@ namespace Dracak
             {
                 double Absorption = GetDefense();
                 if (Damage > Absorption)
-                    CurrentHealth -= Damage - Absorption;
+                    currentHealth -= Damage - Absorption;
                 else
-                    CurrentHealth -= 1;
+                    currentHealth -= 1;
             } else
-                CurrentHealth -= Damage;
+                currentHealth -= Damage;
         }
 
         public int Iniciative()

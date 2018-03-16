@@ -33,7 +33,7 @@ namespace Dracak.Pages
             Description.Text = item.Description;
 
             /* RARITY COLORS */
-            Brush RarityColorBrush = App.GameActions.GetRarityBrush(viewedItem, Type);
+            Brush RarityColorBrush = App.GameActions.ItemActions.GetRarityBrush(viewedItem, Type);
             Name.Foreground = RarityColorBrush;
             Type.Foreground = RarityColorBrush;
             if (viewedItem.FindChance > 7 && viewedItem.FindChance < 21)
@@ -65,11 +65,11 @@ namespace Dracak.Pages
             }
             viewedItem.Amount -= 1;
             Amount.Content = viewedItem.Amount;
-            App.GameActions.EatConsumable(viewedItem);
+            App.GameActions.ItemActions.EatConsumable(viewedItem);
         }
         private void Click_Throw(object sender, RoutedEventArgs e)
         {
-            App.GameActions.DropItem(viewedItem);
+            App.GameActions.ItemActions.Drop(viewedItem);
             this.NavigationService.GoBack();
         }
 

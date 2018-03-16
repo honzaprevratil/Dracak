@@ -17,6 +17,7 @@ namespace Dracak.Classes.Creatures
         public PlayerViewModel()
         {
             DBhelper = new DBhelper();
+            DBhelper.FillAllDefaultData();
 
             this.Player = DBhelper.GetPlayer();
         }
@@ -35,17 +36,22 @@ namespace Dracak.Classes.Creatures
         /* RERENDER BARS */
         public void ReRenderBars()
         {
-            healthBarValue = (Player.CurrentHealth / Player.MaxHealth) * 100;
-            OnPropertyChanged("HealthBarValue");
+            /* HEALTH BAR REFRESH */
+            HealthBarValue = 1;
+            HealthBarString = "";
+            /* HUNGER BAR REFRESH */
+            HungerBarValue = 1;
+            HungerBarString = "";
+            /* THIRST BAR REFRESH */
+            ThirstBarValue = 1;
+            ThirstBarString = "";
+            /* ENERGY BAR REFRESH */
+            EnergyBarValue = 1;
+            EnergyBarString = "";
 
-            hungerBarValue = (Player.CurrentHunger / Player.MaxHunger) * 100;
-            OnPropertyChanged("HungerBarValue");
-
-            thirstBarValue = (Player.CurrentThirst / Player.MaxThirst) * 100;
-            OnPropertyChanged("ThirstBarValue");
-
-            energyBarValue = (Player.CurrentEnergy / Player.MaxEnergy) * 100;
-            OnPropertyChanged("EnergyBarValue");
+            /* BARS WIDTH */
+            HealthThirstHungerBarWidth = 1;
+            EnergyBarWidth = 1;
 
             UpdatePlayer();
         }
@@ -69,10 +75,31 @@ namespace Dracak.Classes.Creatures
             get { return healthBarValue; }
             set
             {
-                healthBarValue = (Player.CurrentHealth / Player.MaxHealth) * 100;
+                healthBarValue = (Player.currentHealth / Player.MaxHealth) * 100;
                 OnPropertyChanged("HealthBarValue");
             }
         }
+        private string healthBarString;
+        public string HealthBarString
+        {
+            get { return healthBarString; }
+            set
+            {
+                healthBarString = Math.Round(Player.currentHealth, 1) + " / " + Player.MaxHealth;
+                OnPropertyChanged("HealthBarString");
+            }
+        }
+        private double barWidth;
+        public double HealthThirstHungerBarWidth
+        {
+            get { return barWidth; }
+            set
+            {
+                barWidth = 267 + 19 * (Player.PrimaryStats.Stamina - 5);
+                OnPropertyChanged("HealthThirstHungerBarWidth");
+            }
+        }
+
 
         /* PLAYER CURRENT HUNGER BAR VALUE*/
         private double hungerBarValue;
@@ -83,6 +110,16 @@ namespace Dracak.Classes.Creatures
             {
                 hungerBarValue = (Player.CurrentHunger / Player.MaxHunger) * 100;
                 OnPropertyChanged("HungerBarValue");
+            }
+        }
+        private string hungerBarString;
+        public string HungerBarString
+        {
+            get { return hungerBarString; }
+            set
+            {
+                hungerBarString = Math.Round(Player.CurrentHunger, 1) + " / " + Player.MaxHunger;
+                OnPropertyChanged("HungerBarString");
             }
         }
 
@@ -97,6 +134,16 @@ namespace Dracak.Classes.Creatures
                 OnPropertyChanged("ThirstBarValue");
             }
         }
+        private string thirstBarString;
+        public string ThirstBarString
+        {
+            get { return thirstBarString; }
+            set
+            {
+                thirstBarString = Math.Round(Player.CurrentThirst, 1) + " / " + Player.MaxThirst;
+                OnPropertyChanged("ThirstBarString");
+            }
+        }
 
         /* PLAYER CURRENT ENERGY BAR VALUE*/
         private double energyBarValue;
@@ -109,6 +156,26 @@ namespace Dracak.Classes.Creatures
                 OnPropertyChanged("EnergyBarValue");
             }
         }
+        private string energyBarString;
+        public string EnergyBarString
+        {
+            get { return energyBarString; }
+            set
+            {
+                energyBarString = Math.Round(Player.CurrentEnergy, 1) + " / " + Player.MaxEnergy;
+                OnPropertyChanged("EnergyBarString");
+            }
+        }
+        private double energyBarWidth;
+        public double EnergyBarWidth
+        {
+            get { return energyBarWidth; }
+            set
+            {
+                energyBarWidth = 267 + 19 * (Player.PrimaryStats.Strength - 5);
+                OnPropertyChanged("EnergyBarWidth");
+            }
+        }
 
         public string GetTextLivingStatus()
         {
@@ -116,9 +183,9 @@ namespace Dracak.Classes.Creatures
             string status = " ";
 
             /* HEALTH */
-            if (Player.CurrentHealth == 0)
+            if (Player.currentHealth == 0)
                 status += "Jsi mrtvý. ";
-            else if (Player.CurrentHealth <= Player.MaxHealth / 10)
+            else if (Player.currentHealth <= Player.MaxHealth / 10)
                 status += "Jsi těžce raněný. ";
 
             /* ENERGY */

@@ -21,6 +21,20 @@
                 <Setter Property="TextBlock.LineHeight"
                         Value="50"/>
             </Style>
+            <Style x:Key="StoryBlock" TargetType="TextBlock">
+                <Setter Property="TextElement.FontFamily"
+                        Value="Fonts/#AkaDora" />
+                <!-- Quid Pro Quo -->
+                <Setter Property="TextElement.FontSize" 
+                        Value="36"/>
+                <Setter Property="TextBlock.LineHeight"
+                        Value="50"/>
+                <!--<Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#B2C5B61B"/>
+                    </Trigger>
+                </Style.Triggers>-->
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

@@ -28,6 +28,13 @@ namespace Dracak.Pages
         {
             if (App.PlayerViewModel.Player.InFight)
                 this.NavigationService.Navigate(new FightFrame());
+            if (App.PlayerViewModel.Player.StatsPoints > 0)
+            {
+                SkillPointsNotification.Visibility = Visibility.Visible;
+                SkillPointsNotification.Content = "+" + App.PlayerViewModel.Player.StatsPoints;
+            }
+            else
+                SkillPointsNotification.Visibility = Visibility.Hidden;
         }
         private void Click_Move(object sender, RoutedEventArgs e)
         {

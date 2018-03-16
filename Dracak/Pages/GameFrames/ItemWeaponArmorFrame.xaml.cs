@@ -36,7 +36,7 @@ namespace Dracak.Pages
         }
         private void Click_Equip(object sender, RoutedEventArgs e)
         { 
-            App.GameActions.EquipItem(viewedItem);
+            App.GameActions.ItemActions.Equip(viewedItem);
             Equiped.Visibility = Visibility.Visible;
             NotEquiped.Visibility = Visibility.Hidden;
             Throw.Visibility = Visibility.Hidden;
@@ -44,7 +44,7 @@ namespace Dracak.Pages
 
         private void Click_Throw(object sender, RoutedEventArgs e)
         {
-            App.GameActions.DropItem(viewedItem);
+            App.GameActions.ItemActions.Drop(viewedItem);
             this.NavigationService.GoBack();
         }
 
@@ -55,7 +55,7 @@ namespace Dracak.Pages
             Description.Text = viewedItem.Description;
 
             /* RARITY COLORS */
-            Brush RarityColorBrush = App.GameActions.GetRarityBrush(viewedItem, Type);
+            Brush RarityColorBrush = App.GameActions.ItemActions.GetRarityBrush(viewedItem, Type);
             Name.Foreground = RarityColorBrush;
             Type.Foreground = RarityColorBrush;
             if (viewedItem.FindChance > 7 && viewedItem.FindChance < 21)
@@ -73,6 +73,7 @@ namespace Dracak.Pages
                         break;
                 }
 
+                NotEquiped.ToolTip = "Aktuální zbraň: " + App.PlayerViewModel.Player.Inventory.UsingWeapon.Name + "\nPoškození: " + App.PlayerViewModel.Player.Inventory.UsingWeapon.Damage + "\nRychlost: " + App.PlayerViewModel.Player.Inventory.UsingWeapon.Speed;
                 DamageLabel.Content = "Poškození";
                 Damage.Content = ((Weapon)viewedItem).Damage;
             }
@@ -80,6 +81,7 @@ namespace Dracak.Pages
             {
                 Type.Content += " brnění";
 
+                NotEquiped.ToolTip = "Aktuální brnění: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Name + "\nPoškození: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Defense + "\nRychlost: " + App.PlayerViewModel.Player.Inventory.UsingWeapon.Speed;
                 DamageLabel.Content = "Absorbce";
                 Damage.Content = ((Armor)viewedItem).Defense;
             }

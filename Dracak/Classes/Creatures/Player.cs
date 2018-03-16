@@ -10,7 +10,7 @@ namespace Dracak.Classes.Creatures
 {
     public class Player : Creature
     {
-        public Player (int strngth = 4, int stamina = 4, int dextirity = 4, int inteligence = 4, int swiftness = 4)
+        public Player (int strngth = 5, int stamina = 5, int dextirity = 5, int inteligence = 5, int swiftness = 5)
             : base(new PrimaryStats(strngth, stamina, dextirity, inteligence, swiftness), new Inventory())
         {
 
@@ -19,13 +19,13 @@ namespace Dracak.Classes.Creatures
         {
 
         }
-        public void DefaultData(int statsPoints = 15)
+        public void DefaultData(int statsPoints = 5)
         {
             RefreshMaximumValues();
             currentHunger = SetAndReturnMaxHunger();
             currentThirst = SetAndReturnMaxThirst();
             currentEnergy = SetAndReturnMaxEnergy();
-            currentHealth = SetAndReturnMaxHealth();
+            CurrentHealth = SetAndReturnMaxHealth();
             StatsPoints = statsPoints;
         }
 
@@ -111,7 +111,7 @@ namespace Dracak.Classes.Creatures
         public double MaxEnergy { get; set; }
         private double SetAndReturnMaxEnergy()
         {
-            return MaxEnergy = 2 * PrimaryStats.Stamina + PrimaryStats.Strength;
+            return MaxEnergy = 3 * PrimaryStats.Strength;
         }
 
         public void DoAction(int ActionCost, int EnergyCost)
@@ -128,7 +128,6 @@ namespace Dracak.Classes.Creatures
         }
         public void Sleep(int hours)
         {
-            DoAction(hours / 2, 0);
             switch (hours)
             {
                 case 2:
@@ -151,6 +150,7 @@ namespace Dracak.Classes.Creatures
                     currentHealth += MaxHealth * (0.5 * (currentHunger > 0 ? 1 : 0) + 0.5 * (currentThirst > 0 ? 1 : 0));
                     break;
             }
+            DoAction(hours / 2, 0);
         }
         public void Eat(double hungerGain = 0, double thirstGain = 0, double healthGain = 0, double energyGain = 0)
         {
