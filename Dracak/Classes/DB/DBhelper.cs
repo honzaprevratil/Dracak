@@ -58,6 +58,7 @@ namespace Dracak.Classes.Locations
         public void CloseConnection()
         {
             db.Close();
+            GC.WaitForPendingFinalizers();
             GC.Collect();
         }
         public void InsertWithChildren<T>(T table) where T : ATable, new()
@@ -253,8 +254,8 @@ namespace Dracak.Classes.Locations
                 Image = @"/Dracak;component/Images/Locations/severni-plaz.png",
                 Filter = "#4CA49C15",
                 Description = "Stojíš na severní pláži. Všude kolem Tebe písek, palmy, kameny a moře. Nehostinné podmínky ostrova na Tebe volají ze všech stran. Co se rozhodneš udělat?",
-                FastSearchText = "V levo písek, v pravo písek, v botě? Noha, co jinýho bys tam čekal. Jinak jsi v hromadě písku krom písku našel: ",
-                SlowSearchText = "Začal jsi kopat v písku jednu díru za druhou. Přece tu něco někde musí být.. Co třeba pirátský poklad? A nebo nějaká stopa po Johnovi... Po 3 hodinách hledání jsi našel: ",
+                FastSearchText = "V levo písek, v pravo písek, v botě? Noha, co jinýho bys tam čekal. Jinak jsi v hromadě písku krom písku našel:",
+                SlowSearchText = "Začal jsi kopat v písku jednu díru za druhou. Přece tu něco někde musí být.. Co třeba pirátský poklad? A nebo nějaká stopa po Johnovi... Po 3 hodinách hledání jsi našel:",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(1, 2), new LocationBind(1, 3) },
                 ItemList = new List<AItem> {
                     new Weapon("Starý meč", 1, 3, WeaponType.Melee,"Klasický meč, nijak zvlášť ostrý. Avšak co postrádá v ostrosti dohání ve... Stáří.", randInt.Next(4,8), false, 1001, 1001),
@@ -398,11 +399,16 @@ namespace Dracak.Classes.Locations
                 Name = "Jižní les",
                 Image = @"/Dracak;component/Images/Locations/jizni-les.jpg",
                 Filter = "#3DBDB31D",
-                Description = ".",
-                FastSearchText = ".",
-                SlowSearchText = ".",
+                Description = "Další a další stromy.. Je na tomhle zpropadeném ostrově i něco jiného? Jo jasně, krom stromů, písku a moře, je tu taky různá havěť, netoužící po ničem jiném, než po Tvé smrti.",
+                FastSearchText = "Rychle jsi prohledal jižní les.",
+                SlowSearchText = "Pomalu prohledáváš jižní les.",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(7, 6), new LocationBind(7, 5), new LocationBind(7, 4), new LocationBind(7, 8) },
             });
+            this.InsertWithChildren(new Enemy("Alfa Vlk", randInt.Next(50, 75), randInt.Next(8, 11), 10, randInt.Next(7, 9), randInt.Next(10,20), 10,
+                "Krev prvního vlka ještě ani póřádně nezachla v místech, kde jsi ho zabil a Ty už čelíš dalšímu vlkovi. Ovšem ten první mu nejspíše jenom sloužil, protože tenhle je o dost větší. Připrav se!",
+                "Jack : vlci, 2:0, wohoo!..."
+            )
+            { LocationId = 7 });
 
             this.InsertWithChildren(new Location
             {
@@ -411,11 +417,12 @@ namespace Dracak.Classes.Locations
                 Image = @"/Dracak;component/Images/Locations/jizni-plaz.jpg",
                 Filter = "#43635F32",
                 Description = "Dorazil jsi na konec tohodle ostrova. Další pláž plná písku ze které by se mohl vztyčit plachty a odplout. No jo, ale kde vezmeš tu loď? Počkat.. Vždyť támhle na břehu jedna stojí!.",
-                FastSearchText = "Tahle pláž je mnohem víc bohatá na palmy, kokos sem, banán tam, všude kam se podívám.. Ha há... Sklidil jsi:",
-                SlowSearchText = ".",
+                FastSearchText = "Tahle pláž je mnohem víc bohatá na palmy, kokos sem, banán tam, všude kam se podívám.. Ha há... Krom hromady jídla sis všimnul i lodi, stojící na břehu. Jsi zachráněn?... Z kokosovo banánové úrody jsi sklidil:",
+                SlowSearchText = "Tahle pláž je mnohem víc bohatá na palmy, kokos sem, banán tam, všude kam se podívám.. Ha há... Krom hromady jídla sis všimnul i lodi, stojící na břehu. Jsi zachráněn?... Z kokosovo banánové úrody jsi sklidil:",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(8, 7), new LocationBind(8, 9) },
                 ItemList = new List<AItem> {
                     new Weapon("Kokosák", 9, 1, WeaponType.Melee, "Co si hravě strčí mečouna do kapsy? Mega ultimátní kanón střílející celé kokosy. A ano, funguje i na bowlingové koule, výrobce zaručuje 98% úspěšnost na strike.", randInt.Next(21, 26), false, 1008, 1008),
+                    new Weapon("Klepeto", 6, 2, WeaponType.Melee, "Obří krabí klepeto. Jen škoda, že už si ho nejspíš moc neužiješ.", randInt.Next(15, 21), false, 1008, 1008),
                     new Consumable("Kokosy", randInt.Next(2, 6), true, 5, "Sladký kokosový ořech plný výtečného kokosového mléka. No dobře, i voda je lepší než tohle, ale máš na výběr?", randInt.Next(4, 8), false, 1008, 1008),
                     new Consumable("Kokosy", randInt.Next(1, 7), true, 5, "Sladký kokosový ořech plný výtečného kokosového mléka. No dobře, i voda je lepší než tohle, ale máš na výběr?", randInt.Next(4, 8), false, 1008, 1008),
                     new Consumable("Kokosy", randInt.Next(3, 8), true, 5, "Sladký kokosový ořech plný výtečného kokosového mléka. No dobře, i voda je lepší než tohle, ale máš na výběr?", randInt.Next(6, 8), false, 1008, 1008),
@@ -426,9 +433,9 @@ namespace Dracak.Classes.Locations
             });
             this.InsertWithChildren(new Enemy("Obří krab", randInt.Next(100, 120), randInt.Next(5, 7), 3, randInt.Next(9, 11), 20, 2,
                 "Jak tak stojíš na jižní pláži a vyhlížíš loď, najednou uslyšíš dupání v písku. Je stále hlasitější a hlasitější.. Když v tom spatříš obrovského běžícího.. Kraba? Co je tohle za hříčku přírody? Kde se tu krucinál vzal dvoumetrový krab???... Připrav se na závěrečný boj.",
-                "V zuřivém vzteku jsi této nemilosrdné zubaté kočičce udeřil poslední ránu a poslal jí tak bezvladně k zemi. Šavlozub je mrtev. Msta je dokonána a Johnova duše nyní může v klidu odejít... Což je Tvoje jedinná útěch nad bratrovou smrtí"
+                "Mocným úderem do již nakřupnuté krabovi ulity jsi jí roztříštil a v následujících sekundách jsi několikrát brutálně udeřil do tohot oslabeného místa. Krab s odporným pískotem padl k zemi.... Je libo krabí salát či krabí polévka?"
             )
-            { LocationId = 6 });
+            { LocationId = 8 });
 
             this.InsertWithChildren(new Location
             {
@@ -436,10 +443,10 @@ namespace Dracak.Classes.Locations
                 Name = "Jižní moře",
                 Image = @"/Dracak;component/Images/Locations/jizni-more.png",
                 Filter = "#56635D0D",
-                Description = ".",
-                FastSearchText = ".",
-                SlowSearchText = ".",
-                AdjacentLocations = new List<LocationBind> { new LocationBind(9, 8) },
+                Description = "Došel jsi až na kraj k jižnímu břehu. Koukáš na pirátskou loď, ale nikde nevidíš posádku. Kde jsou všichni?.",
+                FastSearchText = "Záleží na tom vůbec? Naskoč na loď a jeď!.. Našel jsi tu:",
+                SlowSearchText = "Záleží na tom vůbec? Naskoč na loď a jeď!.. Našel jsi tu:",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(9, 8), new LocationBind(9, 11) },
             });
 
             /*RUINY VESNICE*/
@@ -468,6 +475,18 @@ namespace Dracak.Classes.Locations
                 "Pirát padá k zemi jako když se potápí loď. Pomalu a bolestivě, jelikož jsi ho ke konci souboje shodil ze sřechy, kde se taky odehrával váš souboj."
             )
             { LocationId = 10 });
+
+            this.InsertWithChildren(new Location
+            {
+                Id = 11,
+                Name = "Loď",
+                Image = @"/Dracak;component/Images/shipstorm.jpg",
+                Filter = "#4CA49C15",
+                Description = ".",
+                FastSearchText = ".",
+                SlowSearchText = ".",
+                AdjacentLocations = new List<LocationBind> { new LocationBind(11, 9) },
+            });
 
             //this.InsertWithChildren(new Location
             //{

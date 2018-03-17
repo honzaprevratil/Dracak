@@ -24,10 +24,14 @@ namespace Dracak
         {
 
         }
-        public override string GetName()
+        public override string GetInventoryName()
         {
-            //return Name + " [ " + Amount + " ]";
             return Name;
+        }
+
+        public override string GetWriterName()
+        {
+            return Name + " (" + Amount + ")";
         }
     }
 }

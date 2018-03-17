@@ -57,7 +57,7 @@ namespace Dracak.Pages
                         StoryImage.Source = new BitmapImage(new Uri(@"/Dracak;component/Images/castaway.jpg", UriKind.Relative));
                         Filter.Background = (Brush)new BrushConverter().ConvertFrom("#4CA49C15");
 
-                        writer.StoryFull = "Přes hlavu se Ti přelila přílivová vlna, která Tě probouzí ze snu. S odplouvající vodou otevíráš oči a vykašláváš nechutně slanou vodu, kterou jsi právě vdechl. S menší motolicí se zvedáš ze země. Na obličeji máš ještě písek, který ti sám postupně odpadává. Jak se tak rozhlížíš kolem sebe, začínáš cítit tupou bolest na levé části hlavy. Rukou nahmatáváš to místo, a když se pak díváš na prsty, spatříš krev. „Co se to sakra stalo? Od čeho mám tu ránu na hlavě? Ztroskotali jsme? A kde je John?!“ ptáš se sám sebe. Avšak na žádnou z těchto otázek zatím neznáš odpověď.";
+                        writer.StoryFull = "Přes hlavu se Ti přelila přílivová vlna, která Tě probouzí ze snu. S odplouvající vodou otevíráš oči a vykašláváš nechutně slanou vodu, kterou jsi právě vdechl. S menší motolicí se zvedáš ze země. Na obličeji máš ještě písek, který Ti sám postupně odpadává. Jak se tak rozhlížíš kolem sebe, začínáš cítit tupou bolest na levé části hlavy. Rukou nahmatáváš to místo, a když se pak díváš na prsty, spatříš krev. „Co se to sakra stalo? Od čeho mám tu ránu na hlavě? Ztroskotali jsme? A kde je John?!“ ptáš se sám sebe. Avšak na žádnou z těchto otázek zatím neznáš odpověď.";
                         writer.StartWriting();
                         break;
 

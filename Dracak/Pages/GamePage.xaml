@@ -55,19 +55,17 @@
 
 
             <Button Click="Click_Menu" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="70" Width="322">
-                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Hlavní menu" Padding="45,10,45,10">
-                    <Label.Background>
-                        <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
-                    </Label.Background>
-                </Label>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+                </Button.Background>
+                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Hlavní menu" />
             </Button>
 
             <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Height="70" Width="300">
-                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" Padding="45,10,45,10">
-                    <Label.Background>
-                        <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
-                    </Label.Background>
-                </Label>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+                </Button.Background>
+                <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" />
             </Button>
 
         </Grid>

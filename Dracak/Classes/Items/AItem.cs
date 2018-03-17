@@ -37,6 +37,7 @@ namespace Dracak.Classes
         {
 
         }
-        public abstract string GetName();
+        public abstract string GetInventoryName();
+        public abstract string GetWriterName();
     }
 }

@@ -19,14 +19,17 @@ namespace Dracak.Classes.AItems
         {
 
         }
-        public override string GetName()
+        public override string GetInventoryName()
         {
             if (InventoryId == 1)
             {
                 return "*" + Name + "*";
             }
-            //return Name + " [ " + Defense + " / " + Speed + " ] ";
             return Name;
+        }
+        public override string GetWriterName()
+        {
+            return Name + " (" + Defense + "/" + Speed + ")";
         }
         public string GetStats()
         {

@@ -107,6 +107,9 @@
     <Compile Include="Classes\Items\Consumable.cs" />
     <Compile Include="Classes\Locations\LocationBind.cs" />
     <Compile Include="Classes\Actions\ActionEnums.cs" />
+    <Compile Include="Pages\EndPage.xaml.cs">
+      <DependentUpon>EndPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GameFrames\FightFrame.xaml.cs">
       <DependentUpon>FightFrame.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Locations\SlowWriter.cs" />
+    <Page Include="Pages\EndPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\GameFrames\FightFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

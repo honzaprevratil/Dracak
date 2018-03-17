@@ -30,18 +30,16 @@
         </Label>
         <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Grid.ColumnSpan="2" Margin="130,0" Padding="20,10" Style="{StaticResource QuidQuoFont}" Foreground="Black" TextWrapping="Wrap" TextAlignment="Left" Text=""/>
         <Button Click="Click_Skip" Panel.ZIndex="3" Grid.Column="0" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" Margin="150,0,0,0" HorizontalAlignment="Left" Height="70" Width="270">
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Přeskočit" Padding="45,10,45,10">
-                <Label.Background>
-                    <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
-                </Label.Background>
-            </Label>
+            <Button.Background>
+                <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+            </Button.Background>
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Přeskočit"/>
         </Button>
         <Button Click="Click_Next" Panel.ZIndex="3" Grid.Column="1" Grid.Row="2" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0,0,150,0" HorizontalAlignment="Right" Height="70" Width="300" >
-            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" Padding="45,10,45,10">
-                <Label.Background>
-                    <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
-                </Label.Background>
-            </Label>
+            <Button.Background>
+                <ImageBrush ImageSource="/Dracak;component/Images/pergamen2.png" Stretch="Fill"/>
+            </Button.Background>
+            <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat"/>
         </Button>
     </Grid>
 </Page>

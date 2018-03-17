@@ -52,16 +52,16 @@ namespace Dracak.Classes
 
             /*TRY FIND ITEM*/
             int counter = 0;
-            string foundItems = "";
+            string foundItems = " ";
             List<AItem> LocationItemList = locationVM.CurrentLocation.ItemList.ToList();
 
             foreach (AItem item in LocationItemList)
             {
                 if (TryFindItem(item, counter, dice))
-                    foundItems += item.Name + ", ";
+                    foundItems += item.GetWriterName() + ", ";
                 counter++;
             }
-            if (foundItems.Length > 0)
+            if (foundItems.Length > 1)
             {
                 foundItems = foundItems.Substring(0, foundItems.Length - 2);
                 if (Speed == SearchOptions.FastSearch)
@@ -70,10 +70,10 @@ namespace Dracak.Classes
                     App.SlowWriter.StoryFull = locationVM.CurrentLocation.SlowSearchText + foundItems + ".";
             }
             else
-                if (Speed == SearchOptions.FastSearch)
-                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + "velký prd.";
-            else
-                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + "ztracenou lítost.";
+            {
+                string[] nothingList = new string[] { "ztracenou lítost", "velký kulový", "velký prd", "pěkný prd", "prd", "absolutně nic", "nic", "starou bačkoru" };
+                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + nothingList[randInt.Next(0, nothingList.Length)];
+            }
 
             locationVM.UpdateLocationItemList();
             return ActionResult.SuccessfullyDone;

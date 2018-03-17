@@ -1,4 +1,5 @@
 ﻿using Dracak.Classes.Creatures;
+using Dracak.Classes.DB;
 using Dracak.Classes.Locations;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,7 @@ namespace Dracak.Pages
 
             /* CHECK ALIVE */
             timer.Interval = new TimeSpan(0, 0, 0, 0, 333);
-            //timer.Tick += (sender, args) => { CheckAlive(); };
+            timer.Tick += (sender, args) => { CheckAlive(); };
             timer.Start();
             return this;
         }
@@ -95,7 +96,15 @@ namespace Dracak.Pages
             {
                 App.PlayerViewModel.DBhelper.DeleteAllFromDB();
                 this.NavigationService.Navigate(new DeathPage());
+                App.PlayerViewModel.DBhelper.CloseConnection();
+                App.LocationViewModel.DBhelper.CloseConnection();
+                FileHelper fileHelper = new FileHelper();
+                fileHelper.DeleteDB();
                 timer.Stop();
+            }
+            if (App.PlayerViewModel.Player.InLocationId == 11)
+            {
+                this.NavigationService.Navigate(new EndPage());
             }
         }
 

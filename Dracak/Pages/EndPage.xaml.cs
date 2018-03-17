@@ -22,9 +22,9 @@ namespace Dracak
     /// <summary>
     /// Interakční logika pro MainGame.xaml
     /// </summary>
-    public partial class MenuPage : Page
+    public partial class EndPage : Page
     {
-        public MenuPage()
+        public EndPage()
         {
             InitializeComponent();
         }
@@ -37,7 +37,7 @@ namespace Dracak
             if (File.Exists(fileHelper.GetDBfilePath()))
             {
                 MessageBoxResult result = MessageBox.Show("Abyste mohl začít novou hru, aktuální postup hry musí být smazán." + "\n\n" + "Přejete si smazat herní postup?" + "\n\n" + "VAROVÁNÍ: Herní progres bude smazán TRVALE!", "Začít novou hru", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                
+
                 /* WANT TO DELETE SAVE? */
                 if (result == MessageBoxResult.Yes)
                 {
@@ -58,36 +58,6 @@ namespace Dracak
             }
             else
                 this.NavigationService.Navigate(new StoryPage().StartWriting());
-        }
-
-        private void Click_ContinueGame(object sender, RoutedEventArgs e)
-        {
-            FileHelper fileHelper = new FileHelper();
-
-            /* EXISTS SAVE? */
-            if (File.Exists(fileHelper.GetDBfilePath()))
-            {
-                DBhelper dBhelper = new DBhelper();
-
-                if (dBhelper.CheckData())
-                {
-                    dBhelper.CloseConnection();
-                    this.NavigationService.Navigate(new GamePage().BindData().StartWriting());
-                }
-                else
-                {
-                    dBhelper.CloseConnection();
-                    var result = MessageBox.Show("Abyste mohl pokračovat musíte nejprve začít novou hru." + "\n\n" + "Chcete začít novou hru?", "Začít novou hru", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                    if (result == MessageBoxResult.Yes)
-                        this.NavigationService.Navigate(new StoryPage().StartWriting());
-                }
-            } 
-            else
-            {
-                var result = MessageBox.Show("Abyste mohl pokračovat musíte nejprve začít novou hru."+"\n\n"+"Chcete začít novou hru?", "Začít novou hru", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                if (result == MessageBoxResult.Yes)
-                    this.NavigationService.Navigate(new StoryPage().StartWriting());
-            }
         }
 
         private void Click_ExitGame(object sender, RoutedEventArgs e)

@@ -99,7 +99,7 @@ namespace Dracak.Pages
                     {
                         try
                         {
-                            (buttons[butCtr].Content as Label).Content = ItemList[ItemCounter].GetName();
+                            (buttons[butCtr].Content as Label).Content = ItemList[ItemCounter].GetInventoryName();
                         }
                         catch
                         {
