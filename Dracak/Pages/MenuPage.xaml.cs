@@ -27,6 +27,7 @@ namespace Dracak
         public MenuPage()
         {
             InitializeComponent();
+            gameVersion.Content = "verze 1.1 (18.03.18)";
         }
 
         private void Click_NewGame(object sender, RoutedEventArgs e)

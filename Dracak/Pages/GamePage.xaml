@@ -39,12 +39,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
             <Frame x:Name="GameFrame" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" Initialized="GameFrame_Initialized"/>
-
         </Grid>
+        
         <Grid Panel.ZIndex="3" Grid.Column="0" Grid.Row="2">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -67,9 +65,7 @@
                 </Button.Background>
                 <Label Foreground="Black" Style="{StaticResource BulgariaFont}" FontSize="35" FontStyle="Oblique" Content="Pokračovat" />
             </Button>
-
         </Grid>
-
 
         <Grid Panel.ZIndex="3" Grid.Column="1" Grid.Row="2" Margin="15,0,18,5">
             <Grid.RowDefinitions>
@@ -99,9 +95,6 @@
             <ProgressBar x:Name="EnergyBar" Foreground="#FF91910A" Background="#7FF0F8FF" BorderBrush="#FF91910A" BorderThickness="2" Panel.ZIndex="4" Height="19"  Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="100" Value="21" Width="267" HorizontalAlignment="Right"/>
 
         </Grid>
-
-
-
 
         <TextBlock x:Name="StoryBlock" Grid.Row="1" Panel.ZIndex="3" Padding="30,15" Style="{StaticResource StoryBlock}" Foreground="Black" FontSize="36"  TextWrapping="Wrap" TextAlignment="Left" Text="Stojíš na severním moři"/>
 

@@ -92,19 +92,23 @@ namespace Dracak.Pages
 
         private void CheckAlive()
         {
-            if (!App.PlayerViewModel.Player.IsAlive)
+            if (!App.PlayerViewModel.Player.IsAlive || App.PlayerViewModel.Player.InLocationId == 11)
             {
                 App.PlayerViewModel.DBhelper.DeleteAllFromDB();
-                this.NavigationService.Navigate(new DeathPage());
                 App.PlayerViewModel.DBhelper.CloseConnection();
                 App.LocationViewModel.DBhelper.CloseConnection();
                 FileHelper fileHelper = new FileHelper();
                 fileHelper.DeleteDB();
                 timer.Stop();
-            }
-            if (App.PlayerViewModel.Player.InLocationId == 11)
-            {
-                this.NavigationService.Navigate(new EndPage());
+
+                if (!App.PlayerViewModel.Player.IsAlive)
+                {
+                    this.NavigationService.Navigate(new DeathPage());
+                }
+                if (App.PlayerViewModel.Player.InLocationId == 11)
+                {
+                    this.NavigationService.Navigate(new EndPage());
+                }
             }
         }
 

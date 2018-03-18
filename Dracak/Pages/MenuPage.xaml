@@ -53,7 +53,7 @@
                 <Label Foreground="Yellow" Style="{StaticResource BulgariaFont}" FontSize="50" Content="Konec"/>
             </Button>
 
-            <Label Foreground="Yellow" Style="{StaticResource BulgariaFont}" HorizontalAlignment="Right" FontSize="20" Content="verze 1.0 (17.03.18)" Grid.Row="2" Margin="0,77,0,-25" />
+            <Label Foreground="Yellow" Style="{StaticResource BulgariaFont}" HorizontalAlignment="Right" FontSize="20" Content="verze 1.0 (17.03.18)" Grid.Row="2" Margin="0,77,0,-25" x:Name="gameVersion" />
             <Label Foreground="Yellow" Style="{StaticResource BulgariaFont}" HorizontalAlignment="Left" FontSize="20" Content="Game by:   Jan PŘEVRÁTIL" Grid.Row="2" Margin="0,77,0,-25" />
 
         </Grid>
