@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
 
         <Image x:Name="StoryImage" Panel.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Stretch="UniformToFill" HorizontalAlignment="Center" Source="/Dracak;component/Images/Locations/zapadni-les.jpg"/>
-        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#44A29A21"/>
+        <TextBlock x:Name="Filter" Panel.ZIndex="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#59FFF669"/>
 
         <Label x:Name="StoryHeader" Panel.ZIndex="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FFBF0303" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BulgariaFont}" FontSize="60" Content="Severní Pláž" Padding="50,10,50,18">
             <Label.Background>

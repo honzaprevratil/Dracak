@@ -27,7 +27,7 @@ namespace Dracak
         public DeathPage()
         {
             InitializeComponent();
-            gameVersion.Content = "verze 1.1 (18.03.18)";
+            gameVersion.Content = "verze 1.1.02 (19.03.18)";
         }
 
         private void Click_ExitGame(object sender, RoutedEventArgs e)

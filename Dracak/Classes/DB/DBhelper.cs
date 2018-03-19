@@ -225,7 +225,7 @@ namespace Dracak.Classes.Locations
             };
             this.InsertWithChildren(PlayerInventory);
 
-            PrimaryStats PlayerStats = new PrimaryStats(10,10,10,10,10)
+            PrimaryStats PlayerStats = new PrimaryStats(5, 5, 5, 5, 5)
             {
                 CreatureId = 1,
             };
