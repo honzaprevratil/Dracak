@@ -124,7 +124,7 @@ namespace Dracak.Classes.Creatures
         {
             // max swiftness - 15 ==> all actions cost 50% less
             // about -3% drom duration foreach point
-            return ActionCost - ((double)PrimaryStats.Swiftness / 30) * ActionCost;
+            return ActionCost * (1 - (double)PrimaryStats.Swiftness / 30);
         }
         public void Sleep(int hours)
         {
