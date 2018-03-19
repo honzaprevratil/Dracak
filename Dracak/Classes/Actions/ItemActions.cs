@@ -72,7 +72,7 @@ namespace Dracak.Classes
             else
             {
                 string[] nothingList = new string[] { "ztracenou lítost", "velký kulový", "velký prd", "pěkný prd", "prd", "absolutně nic", "nic", "starou bačkoru" };
-                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + nothingList[randInt.Next(0, nothingList.Length)];
+                App.SlowWriter.StoryFull = locationVM.CurrentLocation.FastSearchText + " " + nothingList[randInt.Next(0, nothingList.Length)];
             }
 
             locationVM.UpdateLocationItemList();

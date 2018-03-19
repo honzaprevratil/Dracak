@@ -225,7 +225,7 @@ namespace Dracak.Classes.Locations
             };
             this.InsertWithChildren(PlayerInventory);
 
-            PrimaryStats PlayerStats = new PrimaryStats(5, 5, 5, 5, 5)
+            PrimaryStats PlayerStats = new PrimaryStats(10,10,10,10,10)
             {
                 CreatureId = 1,
             };
@@ -305,7 +305,6 @@ namespace Dracak.Classes.Locations
                 AdjacentLocations = new List<LocationBind> { new LocationBind(3, 1), new LocationBind(3, 4), new LocationBind(3, 5), new LocationBind(3, 6)},
                 ItemList = new List<AItem> {
                     new Weapon("Ubodávač", 4, 5, WeaponType.Melee, "Dlouhé dřevěné kopí zdobené vyřezanými ornamenty... Zbývá jen otázka: \"Jak s ním hodáš zabít svého nepřítele?\" Správně.. Ubodat!", randInt.Next(15,21), false, 1003, 1003),
-                    new Armor("Mechochvoj", 4, 3, "Mechová obrana pro opravdového pána lesů", randInt.Next(15, 21), false, 1003, 1003),
                     new Consumable("Brusinky", randInt.Next(1, 8), true, 5, "\"Prej sou dobrý na močák.\"", randInt.Next(4, 8), false, 1003, 1003),
                     new Consumable("Maliny", randInt.Next(1, 8), true, 5, "Sladké lesní ovoce", randInt.Next(8, 15), false, 1003, 1003),
                     new Consumable("Ostružiny", randInt.Next(4, 10), true, 5, "Jako maliny, akorát trochu kyselejší a modřejší", randInt.Next(15, 21), false, 1003, 1003),
@@ -355,8 +354,8 @@ namespace Dracak.Classes.Locations
                 SlowSearchText = "Sice se Ti to tu nelíbí, ale když se musí něco prohledat, tak jedině pořádně. .",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(5, 3), new LocationBind(5, 6), new LocationBind(5, 7), new LocationBind(5, 10) },
                 ItemList = new List<AItem> {
-                    new Armor("Hadí kůže", 3, 3, "Lehké brnění vyrobeno z kůže \"nejmenovaných plazivých ještěrů\".", randInt.Next(8, 15), true, 1005, 1005),
-                    new Weapon("Flusačka", 6, 1, WeaponType.Ranged, "Dlouhá dutá tyč, zdobená kouzelnými znaky. Součástí sady je také neomezná munice, takže se nemusíš bát, že by došly šipky.", randInt.Next(15,21), false, 1005, 1005),
+                    new Armor("Hadí kůže", 3, 3, "Lehké brnění vyrobeno z kůže \"nejmenovaných plazivých ještěrů\".", randInt.Next(8, 15), false, 1005, 1005),
+                    new Weapon("Flusačka", 5, 1, WeaponType.Ranged, "Dlouhá dutá tyč, zdobená kouzelnými znaky. Součástí sady je také neomezná munice, takže se nemusíš bát, že by došly šipky.", randInt.Next(15,21), false, 1005, 1005),
                     new Consumable("Mochomůrky", randInt.Next(5, 10), true, 5, "\"Třeba budou v tejhle hře jedle ne?..\"", randInt.Next(8, 15), false, 1005, 1005),
                     new Consumable("Hřiby", randInt.Next(1, 8), true, 5, "Usmažil sis je pohledem, takže je nežereš syrové, neboj.", randInt.Next(8, 15), false, 1005, 1005),
                     new Consumable("Hřiby", randInt.Next(3, 5), true, 5, "Usmažil sis je pohledem, takže je nežereš syrové, neboj.", randInt.Next(8, 15), false, 1005, 1005),
@@ -378,8 +377,8 @@ namespace Dracak.Classes.Locations
                 Image = @"/Dracak;component/Images/Locations/hory.png",
                 Filter = "#33FFF787",
                 Description = "Dorazil jsi ke skalním útesům. Zhruba v půlce hory vidíš jeskyni. Téhle oblasti by bylo lepší se vyhnout a právě proto ses sem vydal. Bude to dlouhá a strmá cesta...",
-                FastSearchText = ".",
-                SlowSearchText = "Rozhodl ses to tu prohledat. A jako první se vydáváš do jeskyně, jelikož to je místo, jehož tajemství Tě nejvíce zajímají. Hned při vstupu do ",
+                FastSearchText = "Rychle ses tu poohlédnul. Do jeskyně se jsi jen tak nahlédnul, protože prohledat jí by bylo nad dlouho. Mezi dvěma kameny jsi našel:",
+                SlowSearchText = "Rozhodl ses to tu prohledat. A jako první se vydáváš do jeskyně, jelikož to je místo, jehož tajemství Tě nejvíce zajímají. Hned při vstupu do jeskyně jsi spatřil jeskynní malby. Kdo je tu zanechal? Byla tu někdy civilizace?... Jinak jis našel:",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(6, 5), new LocationBind(6, 4), new LocationBind(6, 3), new LocationBind(6, 7) },
                 ItemList = new List<AItem> {
                     new Consumable("Kosti", randInt.Next(5, 10), false, 5, "John si zaslouží důstojný pohřeb.. A nebo alespoň to, co z něj zbylo si ho zaslouží.", randInt.Next(8, 15), false, 1006, 1006),
@@ -403,8 +402,13 @@ namespace Dracak.Classes.Locations
                 FastSearchText = "Rychle jsi prohledal jižní les. Našel jsi:",
                 SlowSearchText = "Pomalu prohledáváš jižní les. Našel jsi:",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(7, 6), new LocationBind(7, 5), new LocationBind(7, 4), new LocationBind(7, 8) },
+                ItemList = new List<AItem> {
+                    new Armor("Mechochvoj", 4, 3, "Mechová obrana pro opravdového pána lesů", randInt.Next(15, 21), false, 1007, 1007),
+                    new Consumable("Jahody", randInt.Next(1, 3), true, 5, "Červené královny lesa.", randInt.Next(21, 26), false, 1007, 1007),
+                    new Consumable("Mochomůrky", randInt.Next(2, 6), true, 5, "\"Třeba budou v tejhle hře jedle ne?..\"", randInt.Next(8, 15), false, 1007, 1007),
+                },
             });
-            this.InsertWithChildren(new Enemy("Alfa Vlk", randInt.Next(50, 75), randInt.Next(8, 11), 12, randInt.Next(7, 9), randInt.Next(10,20), 10,
+            this.InsertWithChildren(new Enemy("Alfa Vlk", randInt.Next(75, 100), randInt.Next(8, 11), 12, randInt.Next(7, 9), randInt.Next(10,20), 10,
                 "Krev prvního vlka ještě ani póřádně nezachla v místech, kde jsi ho zabil a Ty už čelíš dalšímu vlkovi. Ovšem ten první mu nejspíše jenom sloužil, protože tenhle je o dost větší. Připrav se!",
                 "Jack : vlci, 2:0, wohoo!..."
             )
@@ -445,7 +449,7 @@ namespace Dracak.Classes.Locations
                 Name = "Jižní moře",
                 Image = @"/Dracak;component/Images/Locations/jizni-more.png",
                 Filter = "#56635D0D",
-                Description = "Došel jsi až na kraj k jižnímu břehu. Koukáš na pirátskou loď, ale nikde nevidíš posádku. Kde jsou všichni? Zemřeli?.. Na druhou stranu komu to vadí, vždyť loď je teď Tvoje",
+                Description = "Došel jsi až na kraj k jižnímu břehu. Koukáš na pirátskou loď, ale nikde nevidíš posádku. Kde jsou všichni? Zemřeli?.. Na druhou stranu komu to vadí, vždyť loď je teď Tvoje.",
                 FastSearchText = "Záleží na tom vůbec? Naskoč na loď a jeď!.. Našel jsi tu:",
                 SlowSearchText = "Záleží na tom vůbec? Naskoč na loď a jeď!.. Našel jsi tu:",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(9, 8), new LocationBind(9, 11) },
@@ -463,9 +467,9 @@ namespace Dracak.Classes.Locations
                 SlowSearchText = "Procházíš každý dům a snažíš se najít stopy toho, co se tu stalo. Teprve až když se dostáváš do hlavního nejvýznamějšího úbytku, všechno Ti dochází. Na stěně vysí zlatá šavle, na stole je několik lahví rumu. Piráti je zpustošili... Při hledání jsi našel:",
                 AdjacentLocations = new List<LocationBind> { new LocationBind(10, 5) },
                 ItemList = new List<AItem> {
-                    new Armor("Rudý plášť", 1, 5, "Co postrádá na obraně, dohání na stylu.", randInt.Next(8, 15), true, 1010, 1010),
+                    new Armor("Rudý plášť", 1, 5, "Co postrádá na obraně, dohání na stylu.", randInt.Next(8, 15), false, 1010, 1010),
                     new Weapon("Kovaný meč", 3, 3, WeaponType.Ranged, "S příjemnou rukojetí!", randInt.Next(8, 15), false, 1010, 1010),
-                    new Armor("Aztécká zbroj", 6, 0, "Těžké aztécké brnění, v celku nemobilní, za to neprůstřelné 9mm... OK to bylo přehnaný.. No i když kdybys stál dostatečně daleko.", randInt.Next(15, 21), true, 1010, 1010),
+                    new Armor("Aztécká zbroj", 6, 0, "Těžké aztécké brnění, v celku nemobilní, za to neprůstřelné 9mm... OK to bylo přehnaný.. No i když kdybys stál dostatečně daleko.", randInt.Next(15, 21), false, 1010, 1010),
                     new Weapon("Palcát", 5, 3, WeaponType.Ranged, "Ideální na drcení hlav, lámání kostí a louskání ořechů.", randInt.Next(15, 21), false, 1010, 1010),
                     new Consumable("Chléb", randInt.Next(1, 3), true, 5, "Chléb z pšeničné mouky dle prastarého Aztéckého receptu.", randInt.Next(15, 21), false, 1010, 1010),
                     new Consumable("Chléb", randInt.Next(1, 3), true, 5, "Chléb z pšeničné mouky dle prastarého Aztéckého receptu.", randInt.Next(15, 21), false, 1010, 1010),
@@ -484,7 +488,7 @@ namespace Dracak.Classes.Locations
                 Id = 11,
                 Name = "Loď",
                 Image = @"/Dracak;component/Images/shipstorm.jpg",
-                Filter = "",
+                Filter = "#3AA49B13",
                 Description = "Nastoupil jsi na loď a odplul jsi z ostrova.",
                 FastSearchText = ".",
                 SlowSearchText = ".",

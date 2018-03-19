@@ -81,7 +81,7 @@ namespace Dracak.Pages
             {
                 Type.Content += " brnění";
 
-                NotEquiped.ToolTip = "Aktuální brnění: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Name + "\nAbsorbce: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Defense + "\nRychlost: " + App.PlayerViewModel.Player.Inventory.UsingWeapon.Speed;
+                NotEquiped.ToolTip = "Aktuální brnění: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Name + "\nAbsorbce: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Defense + "\nRychlost: " + App.PlayerViewModel.Player.Inventory.UsingArmor.Speed;
                 DamageLabel.Content = "Absorbce";
                 Damage.Content = ((Armor)viewedItem).Defense;
             }
