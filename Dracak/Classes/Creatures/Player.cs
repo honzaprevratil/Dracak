@@ -27,11 +27,19 @@ namespace Dracak.Classes.Creatures
             currentEnergy = SetAndReturnMaxEnergy();
             CurrentHealth = SetAndReturnMaxHealth();
             StatsPoints = statsPoints;
+
+            BackgroundOptionsIntTransparent = 89;
+            BackgroundOptionsIntBlue = 105;
         }
 
         public int InLocationId { get; set; }
         public bool InFight { get; set; }
         public int StatsPoints { get; set; }
+
+        /* OPTIONS */
+        /* BACKGROUND */
+        public double BackgroundOptionsIntTransparent { get; set; }
+        public double BackgroundOptionsIntBlue { get; set; }
 
         /* H U N G E R */
         /* CURRENT HUNGER */
@@ -101,7 +109,7 @@ namespace Dracak.Classes.Creatures
                 CurrentEnergy = value;
                 if (CurrentEnergy < 0)
                 {
-                    this.TakeDamage(CurrentEnergy / 1.5, false);
+                    this.TakeDamage(CurrentEnergy, false);
                 }
                 CurrentEnergy = CurrentEnergy > 0 ? value : 0;
                 CurrentEnergy = CurrentEnergy < MaxEnergy ? CurrentEnergy : MaxEnergy;

@@ -25,6 +25,7 @@ namespace Dracak.Pages
     public partial class GamePage : Page
     {
         private DispatcherTimer timer = new DispatcherTimer();
+
         public GamePage()
         {
             InitializeComponent();
@@ -39,10 +40,12 @@ namespace Dracak.Pages
             /* LOCATION IMAGE */
             Binding BindingImage = new Binding("CurrentLocationImage") { Source = App.LocationViewModel };
             StoryImage.SetBinding(Image.SourceProperty, BindingImage);
-            
+
             /* LOCATION FILTER */
-            Binding BindingFilter = new Binding("CurrentLocationFilter") { Source = App.LocationViewModel };
-            Filter.SetBinding(TextBlock.BackgroundProperty, BindingFilter);
+            Binding BindingSliderFilter = new Binding("BackgroundOptionsIntTransparent") { Source = App.PlayerViewModel.Player };
+            FilterSlider.SetBinding(Slider.ValueProperty, BindingSliderFilter);
+            Binding BindingSliderColor = new Binding("BackgroundOptionsIntBlue") { Source = App.PlayerViewModel.Player };
+            ColorSlider.SetBinding(Slider.ValueProperty, BindingSliderColor);
 
             /* PLAYER'S HEALTH BAR */
             Binding BindingHealth = new Binding("HealthBarValue") { Source = App.PlayerViewModel }; // value bind
@@ -128,6 +131,18 @@ namespace Dracak.Pages
         private void Click_Menu(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("Pages/MenuPage.xaml", UriKind.Relative));
+        }
+
+        private void Slider_Transparent_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var bc = new BrushConverter();
+            Filter.Background = (Brush)bc.ConvertFrom("#" + ((int)App.PlayerViewModel.Player.BackgroundOptionsIntTransparent).ToString("X2") + "FFF6" + ((int)App.PlayerViewModel.Player.BackgroundOptionsIntBlue).ToString("X2"));
+        }
+
+        private void Slider_Color_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var bc = new BrushConverter();
+            Filter.Background = (Brush)bc.ConvertFrom("#" + ((int)App.PlayerViewModel.Player.BackgroundOptionsIntTransparent).ToString("X2") + "FFF6" + ((int)App.PlayerViewModel.Player.BackgroundOptionsIntBlue).ToString("X2"));
         }
     }
 }

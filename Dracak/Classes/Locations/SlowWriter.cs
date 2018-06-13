@@ -11,10 +11,6 @@ namespace Dracak
     public class SlowWriter
     {
         private DispatcherTimer timer = new DispatcherTimer();
-        private Random randInt = new Random();
-
-        public int MsTimeMin { get; set; } = 5;
-        public int MsTimeMax { get; set; } = 10;
         public TextBlock Target { get; set; }
         public string StoryFull
         {
@@ -48,13 +44,14 @@ namespace Dracak
 
         private void InitTimer()
         {
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             timer.Tick += (sender, args) => { WriteStory(); };
         }
 
         private void WriteStory()
         {
-            timer.Interval = new TimeSpan(0, 0, 0, 0, randInt.Next(MsTimeMin, MsTimeMax));
+            //timer.Interval = new TimeSpan(0, 0, 0, 0, randInt.Next(MsTimeMin, MsTimeMax));
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
 
             if (Letter >= StoryFull.Length)
             {
